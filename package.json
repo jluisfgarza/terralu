@@ -1,0 +1,37 @@
+{
+  "name": "terralu",
+  "version": "1.0.0",
+  "description": "terralu ecommerce",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/terralu/website.git"
+  },
+  "keywords": [
+    "e-commerce",
+    "node",
+    "mongo",
+    "express",
+    "graphql",
+    "react"
+  ],
+  "author": "Juan Luis Flores",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/terralu/website/issues"
+  },
+  "homepage": "https://github.com/terralu/website#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "express-graphql": "^0.7.1",
+    "graphql": "^14.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}
