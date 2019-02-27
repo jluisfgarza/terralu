@@ -13,6 +13,7 @@ query {
 ```
 
 ```
+
 mutation {
   createProduct(
     productInput: {
