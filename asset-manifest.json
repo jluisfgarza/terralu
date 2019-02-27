@@ -1,14 +1,14 @@
 {
-  "main.css": "/terralu/website/static/css/main.266d5092.chunk.css",
-  "main.js": "/terralu/website/static/js/main.c8a72f3a.chunk.js",
-  "main.js.map": "/terralu/website/static/js/main.c8a72f3a.chunk.js.map",
-  "runtime~main.js": "/terralu/website/static/js/runtime~main.d4032cb1.js",
-  "runtime~main.js.map": "/terralu/website/static/js/runtime~main.d4032cb1.js.map",
-  "static/js/2.d16a2668.chunk.js": "/terralu/website/static/js/2.d16a2668.chunk.js",
-  "static/js/2.d16a2668.chunk.js.map": "/terralu/website/static/js/2.d16a2668.chunk.js.map",
-  "index.html": "/terralu/website/index.html",
-  "precache-manifest.39c6decdb33754d83f6d96c6b520dc59.js": "/terralu/website/precache-manifest.39c6decdb33754d83f6d96c6b520dc59.js",
-  "service-worker.js": "/terralu/website/service-worker.js",
-  "static/css/main.266d5092.chunk.css.map": "/terralu/website/static/css/main.266d5092.chunk.css.map",
-  "static/media/logo.svg": "/terralu/website/static/media/logo.5d5d9eef.svg"
+  "main.css": "/website/static/css/main.266d5092.chunk.css",
+  "main.js": "/website/static/js/main.af008213.chunk.js",
+  "main.js.map": "/website/static/js/main.af008213.chunk.js.map",
+  "runtime~main.js": "/website/static/js/runtime~main.738c5e76.js",
+  "runtime~main.js.map": "/website/static/js/runtime~main.738c5e76.js.map",
+  "static/js/2.d16a2668.chunk.js": "/website/static/js/2.d16a2668.chunk.js",
+  "static/js/2.d16a2668.chunk.js.map": "/website/static/js/2.d16a2668.chunk.js.map",
+  "index.html": "/website/index.html",
+  "precache-manifest.4716c6ecda78d3244bee68234bda5ba2.js": "/website/precache-manifest.4716c6ecda78d3244bee68234bda5ba2.js",
+  "service-worker.js": "/website/service-worker.js",
+  "static/css/main.266d5092.chunk.css.map": "/website/static/css/main.266d5092.chunk.css.map",
+  "static/media/logo.svg": "/website/static/media/logo.5d5d9eef.svg"
 }
