@@ -10,7 +10,7 @@ const dbProducts = mongoose.Schema({
     _id : {type : Number, required : true},
 });
 
-const Products = mongoose.model("Products", dbProducts);
+const Products = mongoose.model("Products", dbProducts, "terralu");
 
 const ListProducts = {
     get : function(resolve, reject){

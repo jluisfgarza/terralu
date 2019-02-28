@@ -1,9 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const graphqlHttp = require('express-graphql');
-const { buildSchema} = require('graphql');
+const {buildSchema} = require('graphql');
 const {router : productsRouter} = require('./routes/productsRouter');
 const {PORT, DATABASE_URL} = require('./config');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const users = require('./models/usersModel');
 
 const app = express();
 
@@ -12,6 +15,8 @@ mongoose.Promise = global.Promise;
 
 const products = [];
 
+app.use(express.static('public'));
+app.use('/api/', productsRouter);
 app.use(bodyParser.json());
 
 // app.get('/', (req, res, next) => {
@@ -70,8 +75,39 @@ app.use('/graphiql', graphqlHttp({
   graphiql: true
 }));
 
-app.use(express.static('public'));
-app.use('/api/', productsRouter);
+/*
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    Users.findOne({ username: username }, function(err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
+));
+
+passport.serializeUser(function(user, cb) {
+  cb(null, user.id);
+});
+
+passport.deserializeUser(function(id, cb) {
+  db.users.findById(id, function (err, user) {
+    if (err) { return cb(err); }
+    cb(null, user);
+  });
+});
+
+app.post('/login',
+  passport.authenticate('local', { successRedirect: '/',
+                                   failureRedirect: '/login',
+                                   failureFlash: true })
+);
+*/
 
 // this function connects to our database, then starts the server
 function runServer(databaseUrl, port = PORT) {
@@ -96,8 +132,6 @@ function runServer(databaseUrl, port = PORT) {
   });
 }
 
-// this function closes the server, and returns a promise. we'll
-// use it in our integration tests later.
 function closeServer() {
   return mongoose.disconnect().then(() => {
     return new Promise((resolve, reject) => {
@@ -112,8 +146,6 @@ function closeServer() {
   });
 }
 
-// if server.js is called directly (aka, with `node server.js`), this block
-// runs. but we also export the runServer command so other code (for instance, test code) can start the server as needed.
 if (require.main === module) {
   runServer(DATABASE_URL).catch(err => console.error(err));
 }
