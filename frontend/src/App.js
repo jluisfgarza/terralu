@@ -7,6 +7,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Header from "./components/Header/Header";
 import Hero from "./components/Hero/Hero";
 import Footer from "./components/Footer/Footer";
+import Catalog from "./components/Catalog/Catalog";
 
 const styles = theme => ({
   layout: {
@@ -26,11 +27,12 @@ class App extends Component {
     return (
       <Fragment>
         <CssBaseline />
+        <Header />
         <div className={classes.layout}>
-          <Header />
           <Hero />
-          <Footer />
+          <Catalog/>
         </div>
+        <Footer />
       </Fragment>
     );
   }
