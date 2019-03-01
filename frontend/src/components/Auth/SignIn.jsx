@@ -7,8 +7,8 @@ import {
   Paper,
   Button,
   FormControl,
-  Typography,
-  Avatar,
+  MuiThemeProvider,
+  createMuiTheme,
   CssBaseline,
   TextField
 } from "@material-ui/core";
@@ -20,6 +20,9 @@ import signinStyle from "./signinStyle";
 import { withStyles } from "@material-ui/core/styles";
 // Context API
 import { WithAppContext } from "../../appContext";
+// Images
+import Logo from "../../assets/logo.jpg";
+import { lightGreen } from "@material-ui/core/colors";
 
 const INITIAL_STATE = {
   email: "admin@gmail.com",
@@ -27,6 +30,14 @@ const INITIAL_STATE = {
   error: null,
   openDialog: false
 };
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#388e3c"
+    }
+  }
+});
 
 class SignInPage extends Component {
   constructor(props) {
@@ -59,10 +70,7 @@ class SignInPage extends Component {
         <div className={classes.root}>
           <div className={classes.container}>
             <Paper className={classes.paper}>
-              <Avatar className={classes.avatar}>
-                <LockIcon />
-              </Avatar>
-              <Typography variant="headline">Sign in</Typography>
+              <img src={Logo} alt="Logo" className={classes.heroLogo} />
               <form className={classes.form}>
                 <FormControl margin="normal" required fullWidth>
                   <TextField
@@ -87,17 +95,19 @@ class SignInPage extends Component {
                     value={this.state.password}
                   />
                 </FormControl>
-                <Button
-                  fullWidth
-                  className={classes.submit}
-                  // disabled={isInvalid}
-                  variant="contained"
-                  onClick={context.logIn}
-                  type=""
-                  color="primary"
-                >
-                  Sign in
-                </Button>
+                <MuiThemeProvider theme={theme}>
+                  <Button
+                    fullWidth
+                    className={classes.submit}
+                    // disabled={isInvalid}
+                    variant="contained"
+                    onClick={context.logIn}
+                    type=""
+                    color="primary"
+                  >
+                    Sign in
+                  </Button>
+                </MuiThemeProvider>
               </form>
             </Paper>
             <ErrorDialog

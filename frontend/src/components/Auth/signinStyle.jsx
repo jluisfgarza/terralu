@@ -1,6 +1,5 @@
 // SignIn Styles
-// import loginBg from "../../../assets/images/loginbg.jpg";
-// import loginBg2 from "../../../assets/images/reajustes-01.png";
+import loginBg from "../../assets/hero2.jpg";
 
 const signinStyle = theme => ({
   root: {
@@ -10,7 +9,7 @@ const signinStyle = theme => ({
     display: "flex",
     height: "100%",
     minHeight: "100vh",
-    // backgroundImage: "url(" + loginBg2 + ")",
+    backgroundImage: "url(" + loginBg + ")",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundPosition: "center"
@@ -53,6 +52,11 @@ const signinStyle = theme => ({
   avatar: {
     margin: theme.spacing.unit,
     backgroundColor: theme.palette.secondary.main
+  },
+  heroLogo: {
+    height: 200,
+    width: "auto",
+    borderRadius: 20
   }
 });
 
