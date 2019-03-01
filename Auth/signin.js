@@ -1,5 +1,7 @@
 const User = require('../../models/User')
 
+const UserSession = require('../../models/User')
+
 module.exports = (app) => {
     /*
     app.get('/api/counters', (req, res, next) => {
@@ -53,6 +55,52 @@ module.exports = (app) => {
         }
 
         email = email.toLowerCase();
+
+        User.find({
+            email: email
+        }, (err, users) => {
+            if(err){
+                return res.send({
+                    succes: false,
+                    message: 'Error' 
+                });
+            }
+            if(users.length != 1){
+                return res.send({
+                    succes: false,
+                    message: 'Error' 
+                });
+            }
+
+            const user = users[0];
+            if(!user.validPassword(password)) {
+                return res.send({
+                    succes: false,
+                    message: 'Error: Invalid'
+                });
+            }
+
+            //sino corregir el user
+            new userSession = new UserSession();
+            userSession.userId = user._id;
+            userSession,save((err, doc) => {
+                if(err){
+                    return res.send({
+                        succes: false,
+                        message: 'Error: server error'
+                    });
+                }
+
+                return res.send({
+                    succes: true,
+                    message: "Sign in Valido",
+                    //este token apunta a el user id asi es como el log in del user va funcionar
+                    token: doc._id
+                })
+
+            });
+
+        });
 
 
 
