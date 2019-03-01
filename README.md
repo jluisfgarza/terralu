@@ -1,30 +1,25 @@
-# Test Graphql
+# Terralú
 
-`http://localhost:3000/graphiql`
+## To-Do
+### Frontend Store UI
+- [ ] favicons
+- [ ] site meta
+- [ ] filter
+- [ ] view product photos
+- [ ] cart
+- [ ] register user
+- [ ] login user
+- [ ] view my orders
+- [ ] complete purchase
 
-```
-query {
-  products {
-  _id
-  title
-  price
-  }
-}
-```
+### Frontend Admin UI
+- [ ] View users
+- [ ] View Orders
+- [ ] Manage orders (delete, change status, etc.)
+- [ ] View sales
+- [ ] Add product
+- [ ] Manage stock
+- [ ] Delete product
 
-```
+### Backend
 
-mutation {
-  createProduct(
-    productInput: {
-      title: "Suculenta",
-      description: "Planta 1",
-      price: 9.99,
-      inStock: 10,
-      numBought: 0
-    }
-  ) {
-    title
-  }
-}
-```
