@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 // Router
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 // Material UI Components
 import {
   Paper,
@@ -18,6 +18,8 @@ import LockIcon from "@material-ui/icons/LockOutlined";
 //Style
 import signinStyle from "./signinStyle";
 import { withStyles } from "@material-ui/core/styles";
+// Context API
+import { WithAppContext } from "../../appContext";
 
 const INITIAL_STATE = {
   email: "admin@gmail.com",
@@ -25,10 +27,6 @@ const INITIAL_STATE = {
   error: null,
   openDialog: false
 };
-
-const byPropKey = (propertyName, value) => () => ({
-  [propertyName]: value
-});
 
 class SignInPage extends Component {
   constructor(props) {
@@ -52,7 +50,7 @@ class SignInPage extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, context } = this.props;
     // const isInvalid = this.state.password === "" || this.state.email === "";
 
     return (
@@ -94,22 +92,12 @@ class SignInPage extends Component {
                   className={classes.submit}
                   // disabled={isInvalid}
                   variant="contained"
-                  onClick={this.props.login}
-                  type="submit"
+                  onClick={context.logIn}
+                  type=""
                   color="primary"
                 >
                   Sign in
                 </Button>
-                <Link className={classes.noDeco} to="/signup">
-                  <Button
-                    fullWidth
-                    className={classes.submit}
-                    variant="contained"
-                    color="secondary"
-                  >
-                    Register
-                  </Button>
-                </Link>
               </form>
             </Paper>
             <ErrorDialog
@@ -128,4 +116,4 @@ SignInPage.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withRouter(withStyles(signinStyle)(SignInPage));
+export default WithAppContext(withRouter(withStyles(signinStyle)(SignInPage)));

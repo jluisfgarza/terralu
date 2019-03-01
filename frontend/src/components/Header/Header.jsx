@@ -15,10 +15,11 @@ import styles from "../styles";
 import { sections } from "../config";
 // Router
 import { Link } from "react-router-dom";
-
+// Context API
+import { WithAppContext } from "../../appContext";
 class Hero extends Component {
   render() {
-    const { classes } = this.props;
+    const { classes, context } = this.props;
     return (
       <Fragment>
         <Toolbar className={classes.toolbarMain}>
@@ -45,11 +46,29 @@ class Hero extends Component {
           <IconButton>
             <SearchIcon />
           </IconButton>
-          <Link to="/login">
-            <Button variant="outlined" size="small">
-              Log in
-            </Button>
-          </Link>
+          {!context.state.isUserSignedIn ? (
+            <Link to="/login">
+              <Button
+                key="logIn"
+                onClick={context.logIn}
+                variant="outlined"
+                size="small"
+              >
+                Log in
+              </Button>
+            </Link>
+          ) : (
+            <Link to="/">
+              <Button
+                key="logOut"
+                onClick={context.logoOut}
+                variant="outlined"
+                size="small"
+              >
+                Log out
+              </Button>
+            </Link>
+          )}
         </Toolbar>
         <Toolbar variant="dense" className={classes.toolbarSecondary}>
           {sections.map(section => (
@@ -62,8 +81,9 @@ class Hero extends Component {
     );
   }
 }
+
 Hero.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Hero);
+export default WithAppContext(withStyles(styles)(Hero));

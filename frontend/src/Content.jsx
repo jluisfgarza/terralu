@@ -9,6 +9,8 @@ import Header from "./components/Header/Header";
 import Hero from "./components/Hero/Hero";
 import Footer from "./components/Footer/Footer";
 import Catalog from "./components/Catalog/Catalog";
+// Context API
+import { WithAppContext } from "./appContext";
 
 const styles = theme => ({
   layout: {
@@ -24,13 +26,6 @@ const styles = theme => ({
 });
 
 class Content extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      // authUser: null,
-    };
-  }
-
   render() {
     const { classes } = this.props;
 
@@ -57,4 +52,4 @@ Content.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Content);
+export default WithAppContext(withStyles(styles)(Content));

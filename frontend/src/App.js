@@ -5,39 +5,43 @@ import SignIn from "./components/Auth/SignIn";
 import Content from "./Content";
 // Router
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
-
+// Context API
+import { WithAppContext } from "./appContext";
 
 class App extends Component {
   state = {
-    authUser: false
+    isUserSignedIn: this.props.context.isUserSignedIn
   };
 
   login = event => {
     const { history } = this.props;
     event.preventDefault();
-    this.setState({
-      authUser: true
-    })
+    this.props.context.logIn();
     history.push("/store");
   };
 
-  componentDidMount() {
-    // check if auth
-  }
+    logout = event => {
+    const { history } = this.props;
+    event.preventDefault();
+    this.props.context.logOut();
+    history.push("/store");
+  };
+
   render() {
-    const renderPlatform = this.state.authUser ? (
+    const renderPlatform = this.props.context.state.isUserSignedIn ? (
       <Fragment>
         <Switch>
           <Redirect from="/" to="/store"/>
           <Redirect from="/login" to="/store" />
         </Switch>
-        <Content />
+        <Content
+          isUserSignedIn={this.state.isUserSignedIn}/>
       </Fragment>
     ) : (
       <Fragment>
         <Switch>
           {/* <Route path="/" exact component={Content} /> */}
-          <Route path="/login" exact render={() => <SignIn login={this.login} />} />
+          <Route path="/login" exact render={() => <SignIn />} />
           <Redirect from="/" to="/login" />
           <Redirect from="/store" to="/login" />
         </Switch>
@@ -51,4 +55,4 @@ class App extends Component {
   }
 }
 
-export default withRouter(App);
+export default WithAppContext(withRouter(App));
