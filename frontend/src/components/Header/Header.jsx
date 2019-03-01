@@ -6,46 +6,18 @@ import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-// Icons
-import Icon, { Stack } from "@mdi/react";
-import { mdiFacebookBox, mdiInstagram } from "@mdi/js";
 // Styles
 import styles from "../styles";
 // Config
 import { sections } from "../config";
-// Router
-import { Link, withRouter } from "react-router-dom";
-// Context API
-import { WithAppContext } from "../../appContext";
 
 class Hero extends Component {
-  login = event => {
-    const { history } = this.props;
-    event.preventDefault();
-    history.push("/login");
-  };
-
-  logout = event => {
-    this.props.context.logOut();
-    const { history } = this.props;
-    event.preventDefault();
-    history.push("/store");
-  };
   render() {
-    const { classes, context } = this.props;
+    const { classes } = this.props;
     return (
       <Fragment>
         <Toolbar className={classes.toolbarMain}>
-          <IconButton aria-label="Facebook" className={classes.margin}>
-            <Stack color="#444">
-              <Icon path={mdiFacebookBox} color="red" />
-            </Stack>
-          </IconButton>
-          <IconButton aria-label="Instagramm" className={classes.margin}>
-            <Stack color="#444">
-              <Icon path={mdiInstagram} color="red" />
-            </Stack>
-          </IconButton>
+          <Button size="small">Iconos Sociales</Button>
           <Typography
             component="h2"
             variant="h5"
@@ -59,29 +31,12 @@ class Hero extends Component {
           <IconButton>
             <SearchIcon />
           </IconButton>
-          {!context.state.isUserSignedIn ? (
-            <Link to="/login">
-              <Button
-                key="logIn"
-                onClick={this.login}
-                variant="outlined"
-                size="small"
-              >
-                Log in
-              </Button>
-            </Link>
-          ) : (
-            <Link to="/">
-              <Button
-                key="logOut"
-                onClick={this.logout}
-                variant="outlined"
-                size="small"
-              >
-                Log out
-              </Button>
-            </Link>
-          )}
+          <Button variant="outlined" size="small">
+            Log in
+          </Button>
+          <Button variant="outlined" size="small">
+            Sign up
+          </Button>
         </Toolbar>
         <Toolbar variant="dense" className={classes.toolbarSecondary}>
           {sections.map(section => (
@@ -94,9 +49,8 @@ class Hero extends Component {
     );
   }
 }
-
 Hero.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default WithAppContext(withRouter(withStyles(styles)(Hero)));
+export default withStyles(styles)(Hero);
