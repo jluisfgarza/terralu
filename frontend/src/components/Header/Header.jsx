@@ -14,10 +14,24 @@ import styles from "../styles";
 // Config
 import { sections } from "../config";
 // Router
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 // Context API
 import { WithAppContext } from "../../appContext";
+
 class Hero extends Component {
+  login = event => {
+    this.props.context.logIn();
+    const { history } = this.props;
+    event.preventDefault();
+    history.push("/store");
+  };
+
+  logout = event => {
+    this.props.context.logOut();
+    const { history } = this.props;
+    event.preventDefault();
+    history.push("/store");
+  };
   render() {
     const { classes, context } = this.props;
     return (
@@ -50,7 +64,7 @@ class Hero extends Component {
             <Link to="/login">
               <Button
                 key="logIn"
-                onClick={context.logIn}
+                onClick={this.login}
                 variant="outlined"
                 size="small"
               >
@@ -61,7 +75,7 @@ class Hero extends Component {
             <Link to="/">
               <Button
                 key="logOut"
-                onClick={context.logoOut}
+                onClick={this.logout}
                 variant="outlined"
                 size="small"
               >
@@ -86,4 +100,4 @@ Hero.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default WithAppContext(withStyles(styles)(Hero));
+export default WithAppContext(withRouter(withStyles(styles)(Hero)));

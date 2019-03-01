@@ -13,25 +13,11 @@ class App extends Component {
     isUserSignedIn: this.props.context.isUserSignedIn
   };
 
-  login = event => {
-    const { history } = this.props;
-    event.preventDefault();
-    this.props.context.logIn();
-    history.push("/store");
-  };
-
-    logout = event => {
-    const { history } = this.props;
-    event.preventDefault();
-    this.props.context.logOut();
-    history.push("/store");
-  };
-
   render() {
     const renderPlatform = this.props.context.state.isUserSignedIn ? (
       <Fragment>
         <Switch>
-          <Redirect from="/" to="/store"/>
+          {/* <Redirect from="/" to="/store"/> */}
           <Redirect from="/login" to="/store" />
         </Switch>
         <Content
@@ -40,9 +26,9 @@ class App extends Component {
     ) : (
       <Fragment>
         <Switch>
-          {/* <Route path="/" exact component={Content} /> */}
+          <Route path="/" exact component={Content} />
           <Route path="/login" exact render={() => <SignIn />} />
-          <Redirect from="/" to="/login" />
+          {/* <Redirect from="/" to="/login" /> */}
           <Redirect from="/store" to="/login" />
         </Switch>
       </Fragment>

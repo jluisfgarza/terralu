@@ -67,6 +67,7 @@ const productSteps = [
 
 const productCatalog = [
   {
+    id: 1,
     name: "Planta 1",
     precio: 200,
     fotos: productSteps,
@@ -75,6 +76,7 @@ const productCatalog = [
     description: "Planta 1"
   },
   {
+    id: 2,
     name: "Planta 2",
     precio: 200,
     fotos: productSteps,
@@ -83,6 +85,7 @@ const productCatalog = [
     description: "Planta 2"
   },
   {
+    id: 3,
     name: "Planta 3",
     precio: 200,
     fotos: productSteps,

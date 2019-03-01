@@ -24,7 +24,7 @@ class Catalog extends React.Component {
       <div className={classNames(classes.layout, classes.cardGrid)}>
         <Grid container spacing={40}>
           {productCatalog.map(value => (
-            <Grid item key={value} sm={6} md={4} lg={3}>
+            <Grid item key={value.id} sm={6} md={4} lg={3}>
               <Card className={classes.card}>
                 <CardMedia
                   className={classes.cardMedia}
