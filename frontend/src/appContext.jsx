@@ -14,7 +14,7 @@ export default class AppProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isUserSignedIn: true,
+      isUserSignedIn: false,
       user: {}
     };
   }
