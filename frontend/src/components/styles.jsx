@@ -1,3 +1,5 @@
+import HeroImg from "../assets/hero3.jpg";
+
 const styles = theme => ({
   layout: {
     width: "auto",
@@ -13,8 +15,7 @@ const styles = theme => ({
     flexGrow: 1
   },
   socialIcons: {
-    margin: theme.spacing.unit * 0.5,
-    color: "grey"
+    margin: theme.spacing.unit * 0.5
   },
   toolbarMain: {
     borderBottom: `1px solid ${theme.palette.grey[300]}`
@@ -29,8 +30,16 @@ const styles = theme => ({
   toolbarSecondary: {
     justifyContent: "space-between"
   },
+  heroLogo: {
+    height: 200,
+    width: "auto",
+    borderRadius: 20
+  },
   mainFeaturedPost: {
-    backgroundColor: theme.palette.grey[800],
+    backgroundImage: "url('" + HeroImg + "')",
+    backgroundSize: "100%",
+    backgroundPosition: "center",
+    // backgroundColor: theme.palette.grey[800],
     color: theme.palette.common.white,
     marginBottom: theme.spacing.unit * 4
   },
@@ -63,7 +72,7 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 3
   },
   footer: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.grey[200],
     marginTop: theme.spacing.unit * 8,
     padding: `${theme.spacing.unit * 6}px 0`
   }

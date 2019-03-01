@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-import "./App.css";
 // Components
 import SignIn from "./components/Auth/SignIn";
 import Content from "./Content";
