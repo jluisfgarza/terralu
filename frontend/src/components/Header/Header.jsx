@@ -20,10 +20,9 @@ import { WithAppContext } from "../../appContext";
 
 class Hero extends Component {
   login = event => {
-    this.props.context.logIn();
     const { history } = this.props;
     event.preventDefault();
-    history.push("/store");
+    history.push("/login");
   };
 
   logout = event => {
