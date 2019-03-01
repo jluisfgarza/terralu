@@ -6,6 +6,9 @@ import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import Avatar from "@material-ui/core/Avatar";
+// Imgs
+import Logo from "../../assets/logo2.jpg";
 // Icons
 import Icon, { Stack } from "@mdi/react";
 import { mdiFacebookBox, mdiInstagram } from "@mdi/js";
@@ -36,29 +39,12 @@ class Hero extends Component {
     return (
       <Fragment>
         <Toolbar className={classes.toolbarMain}>
-          <IconButton aria-label="Facebook" className={classes.margin}>
-            <Stack color="#444">
-              <Icon path={mdiFacebookBox} color="red" />
-            </Stack>
-          </IconButton>
-          <IconButton aria-label="Instagramm" className={classes.margin}>
-            <Stack color="#444">
-              <Icon path={mdiInstagram} color="red" />
-            </Stack>
-          </IconButton>
-          <Typography
-            component="h2"
-            variant="h5"
-            color="inherit"
-            align="center"
-            noWrap
-            className={classes.toolbarTitle}
-          >
-            Terralú
-          </Typography>
-          <IconButton>
-            <SearchIcon />
-          </IconButton>
+          <Icon path={mdiFacebookBox} size={1} color="grey" />
+          <Icon path={mdiInstagram} size={1} color="grey" />
+
+          <div className={classes.grow} />
+          <Avatar alt="Logo" src={Logo} className={classes.toolbarTitle} />
+          <div className={classes.grow} />
           {!context.state.isUserSignedIn ? (
             <Link to="/login">
               <Button
