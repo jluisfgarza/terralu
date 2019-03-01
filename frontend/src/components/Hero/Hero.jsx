@@ -4,14 +4,14 @@ import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Hidden from "@material-ui/core/Hidden";
+// import Card from "@material-ui/core/Card";
+// import CardContent from "@material-ui/core/CardContent";
+// import CardMedia from "@material-ui/core/CardMedia";
+// import Hidden from "@material-ui/core/Hidden";
 // Styles
 import styles from "../styles";
 // Config
-import { featuredPosts } from "../config";
+// import { featuredPosts } from "../config";
 
 class Hero extends Component {
   render() {
@@ -42,8 +42,7 @@ class Hero extends Component {
               </Grid>
             </Grid>
           </Paper>
-          {/* End main featured post */}
-          {/* Sub featured posts */}
+          {/*
           <Grid container spacing={40} className={classes.cardGrid}>
             {featuredPosts.map(post => (
               <Grid item key={post.title} xs={12} md={6}>
@@ -74,7 +73,7 @@ class Hero extends Component {
                 </Card>
               </Grid>
             ))}
-          </Grid>
+          </Grid> */}
         </main>
       </Fragment>
     );
