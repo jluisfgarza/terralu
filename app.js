@@ -75,7 +75,7 @@ app.use('/graphiql', graphqlHttp({
   graphiql: true
 }));
 
-
+//Auth
 passport.use(new LocalStrategy(
   function(username, password, done) {
     Users.findOne({ username: username }, function(err, user) {
@@ -107,6 +107,7 @@ app.post('/login',
                                    failureRedirect: '/login',
                                    failureFlash: true })
 );
+//Auth
 
 
 // this function connects to our database, then starts the server

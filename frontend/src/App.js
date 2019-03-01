@@ -1,44 +1,43 @@
 import React, { Component, Fragment } from "react";
 import "./App.css";
 // Components
-import SignIn from "./components/Auth/SignIn";
-import Content from "./Content";
-// Router
-import { Switch, Route, Redirect, withRouter } from "react-router-dom";
-// Context API
-import { WithAppContext } from "./appContext";
+import { withStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Header from "./components/Header/Header";
+import Hero from "./components/Hero/Hero";
+import Footer from "./components/Footer/Footer";
 
+const styles = theme => ({
+  layout: {
+    width: "auto",
+    marginLeft: theme.spacing.unit * 3,
+    marginRight: theme.spacing.unit * 3,
+    [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
+      width: 1100,
+      marginLeft: "auto",
+      marginRight: "auto"
+    }
+  }
+});
 class App extends Component {
-  state = {
-    isUserSignedIn: this.props.context.isUserSignedIn
-  };
-
   render() {
-    const renderPlatform = this.props.context.state.isUserSignedIn ? (
-      <Fragment>
-        <Switch>
-          {/* <Redirect from="/" to="/store"/> */}
-          <Redirect from="/login" to="/store" />
-        </Switch>
-        <Content
-          isUserSignedIn={this.state.isUserSignedIn}/>
-      </Fragment>
-    ) : (
-      <Fragment>
-        <Switch>
-          <Route path="/" exact component={Content} />
-          <Route path="/login" exact render={() => <SignIn />} />
-          {/* <Redirect from="/" to="/login" /> */}
-          <Redirect from="/store" to="/login" />
-        </Switch>
-      </Fragment>
-    );
+    const { classes } = this.props;
     return (
       <Fragment>
-        {renderPlatform}
+        <CssBaseline />
+        <div className={classes.layout}>
+          <Header />
+          <Hero />
+          <Footer />
+        </div>
       </Fragment>
     );
   }
 }
 
-export default WithAppContext(withRouter(App));
+App.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(App);
