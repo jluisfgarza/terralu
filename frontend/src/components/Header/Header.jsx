@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
 // Imgs
@@ -12,8 +11,6 @@ import Icon from "@mdi/react";
 import { mdiFacebookBox, mdiInstagram } from "@mdi/js";
 // Styles
 import styles from "../styles";
-// Config
-import { sections } from "../config";
 // Router
 import { Link, withRouter } from "react-router-dom";
 // Context API
@@ -37,9 +34,22 @@ class Hero extends Component {
     return (
       <Fragment>
         <Toolbar className={classes.toolbarMain}>
-          <Icon path={mdiFacebookBox} size={1} color="grey" />
-          <Icon path={mdiInstagram} size={1} color="grey" />
-
+          <a href="https://www.facebook.com/terralumx/" target="blank">
+            <Icon
+              className={classes.socialIcons}
+              path={mdiFacebookBox}
+              size={1.3}
+              color="grey"
+            />
+          </a>
+          <a href="https://www.instagram.com/terralumx/" target="blank">
+            <Icon
+              className={classes.socialIcons}
+              path={mdiInstagram}
+              size={1.3}
+              color="grey"
+            />
+          </a>
           <div className={classes.grow} />
           <Avatar alt="Logo" src={Logo} className={classes.toolbarTitle} />
           <div className={classes.grow} />
@@ -67,13 +77,7 @@ class Hero extends Component {
             </Link>
           )}
         </Toolbar>
-        <Toolbar variant="dense" className={classes.toolbarSecondary}>
-          {sections.map(section => (
-            <Typography color="inherit" noWrap key={section}>
-              {section}
-            </Typography>
-          ))}
-        </Toolbar>
+        <br />
       </Fragment>
     );
   }

@@ -41,8 +41,8 @@ class Content extends Component {
             <Route path="/cart" exact render={() => <h1>cart</h1>} />
             <Route path="/payment" exact render={() => <h1>payment</h1>} />
           </Switch>
-          <Footer />
         </div>
+        <Footer />
       </Fragment>
     );
   }

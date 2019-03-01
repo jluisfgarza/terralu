@@ -32,13 +32,17 @@ class Catalog extends React.Component {
                   title={value.name}
                 />
                 <CardContent className={classes.cardContent}>
-                  <Typography gutterBottom variant="h5" component="h2">
+                  {/* <Typography gutterBottom variant="h5" component="h2">
                     {value.name}
-                  </Typography>
+                  </Typography> */}
                   {/* <Typography>{value.description}</Typography> */}
                 </CardContent>
                 <CardActions className={classes.CardActions}>
-                  <Button variant="outlined" size="medium" color="primary">
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    className={classes.button}
+                  >
                     Ver
                   </Button>
                   <Button

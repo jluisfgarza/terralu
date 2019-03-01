@@ -12,6 +12,8 @@ import Grid from "@material-ui/core/Grid";
 import styles from "../styles";
 // Config
 // import { featuredPosts } from "../config";
+// Images
+import Logo from "../../assets/logo.jpg";
 
 class Hero extends Component {
   render() {
@@ -25,18 +27,10 @@ class Hero extends Component {
             <Grid container>
               <Grid item md={6}>
                 <div className={classes.mainFeaturedPostContent}>
-                  <Typography
-                    component="h1"
-                    variant="h3"
-                    color="inherit"
-                    gutterBottom
-                  >
-                    Title of a longer featured blog post
-                  </Typography>
+                  <img src={Logo} alt="Logo" className={classes.heroLogo} />
                   <Typography variant="h5" color="inherit" paragraph>
-                    Multiple lines of text that form the lede, informing new
-                    readers quickly and efficiently about what&apos;s most
-                    interesting in this post&apos;s contents…
+                    Boutique de terrarios y suculentas. Producidas en casa y
+                    garantizadas.
                   </Typography>
                 </div>
               </Grid>

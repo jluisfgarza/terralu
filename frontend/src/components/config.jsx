@@ -2,8 +2,6 @@ import post1 from "../Blog/blog-post.1.md";
 import post2 from "../Blog/blog-post.1.md";
 import post3 from "../Blog/blog-post.1.md";
 
-const sections = ["Plantas", "Suculentas"];
-
 const featuredPosts = [
   {
     title: "Featured post",
@@ -20,21 +18,6 @@ const featuredPosts = [
 ];
 
 const posts = [post1, post2, post3];
-
-const archives = [
-  "March 2020",
-  "February 2020",
-  "January 2020",
-  "December 2019",
-  "November 2019",
-  "October 2019",
-  "September 2019",
-  "August 2019",
-  "July 2019",
-  "June 2019",
-  "May 2019",
-  "April 2019"
-];
 
 const social = [
   {
@@ -92,7 +75,34 @@ const productCatalog = [
     thumb:
       "https://images.unsplash.com/photo-1531668897726-0338038642f2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60",
     description: "Planta 3"
+  },
+  {
+    id: 4,
+    name: "Planta 4",
+    precio: 200,
+    fotos: productSteps,
+    thumb:
+      "https://images.unsplash.com/photo-1513664831196-c7f22ba6e25f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60",
+    description: "Planta 1"
+  },
+  {
+    id: 5,
+    name: "Planta 5",
+    precio: 200,
+    fotos: productSteps,
+    thumb:
+      "https://images.unsplash.com/photo-1513664657915-00012fd1e1d1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60",
+    description: "Planta 2"
+  },
+  {
+    id: 6,
+    name: "Planta 6",
+    precio: 200,
+    fotos: productSteps,
+    thumb:
+      "https://images.unsplash.com/photo-1531668897726-0338038642f2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60",
+    description: "Planta 3"
   }
 ];
 
-export { sections, featuredPosts, posts, archives, social, productCatalog };
+export { featuredPosts, posts, social, productCatalog };
