@@ -20,6 +20,7 @@ module.exports = (app) => {
     });
     */
 
+    //SIGN IN
     app.post('/api/account/signin', (req, res, next) => {
         const { body } = req;
         const {
@@ -141,5 +142,63 @@ module.exports = (app) => {
             });
         });
     });
+
+    //VERIFY
+    app.post('/api/account/verify', (req, res, next) => {
+        //get the token
+        const { query } = req;
+        const { token } = req;
+
+        UserSession.find({
+            _id: token,
+            isDeleted: false
+        }, (err, sessions) => {
+            return res.send({
+                succes = false,
+                message: 'Error'
+            });
+        });
+
+        if (sessions.length != 1){
+            return res.send({
+                succes = false,
+                message: 'Error'
+            });
+        }else {
+            return res.send({
+                succes = succes,
+                message: ''
+            });
+        }
+    });
+
+    app.get('/api/account/logout', (req, res, next) => {
+        // Get the token
+        const { query } = req;
+        const { token } = query;
+        // ?token=test
+        // Verify the token is one of a kind and it's not deleted.
+        UserSession.findOneAndUpdate({
+          _id: token,
+          isDeleted: false
+        }, {
+          $set: {
+            isDeleted:true
+          }
+        }, null, (err, sessions) => {
+          if (err) {
+            console.log(err);
+            return res.send({
+              success: false,
+              message: 'Error'
+            });
+          }
+          return res.send({
+            success: true,
+            message: ''
+          });
+        });
+      });
+
 };
 
