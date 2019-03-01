@@ -9,6 +9,10 @@ const styles = theme => ({
       marginRight: "auto"
     }
   },
+  socialIcons: {
+    margin: theme.spacing.unit * 0.5,
+    color: "grey"
+  },
   toolbarMain: {
     borderBottom: `1px solid ${theme.palette.grey[300]}`
   },

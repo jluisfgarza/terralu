@@ -6,10 +6,15 @@ import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+// Icons
+import Icon, { Stack } from "@mdi/react";
+import { mdiFacebookBox, mdiInstagram } from "@mdi/js";
 // Styles
 import styles from "../styles";
 // Config
 import { sections } from "../config";
+// Router
+import { Link } from "react-router-dom";
 
 class Hero extends Component {
   render() {
@@ -17,7 +22,16 @@ class Hero extends Component {
     return (
       <Fragment>
         <Toolbar className={classes.toolbarMain}>
-          <Button size="small">Iconos Sociales</Button>
+          <IconButton aria-label="Facebook" className={classes.margin}>
+            <Stack color="#444">
+              <Icon path={mdiFacebookBox} color="red" />
+            </Stack>
+          </IconButton>
+          <IconButton aria-label="Instagramm" className={classes.margin}>
+            <Stack color="#444">
+              <Icon path={mdiInstagram} color="red" />
+            </Stack>
+          </IconButton>
           <Typography
             component="h2"
             variant="h5"
@@ -31,12 +45,11 @@ class Hero extends Component {
           <IconButton>
             <SearchIcon />
           </IconButton>
-          <Button variant="outlined" size="small">
-            Log in
-          </Button>
-          <Button variant="outlined" size="small">
-            Sign up
-          </Button>
+          <Link to="/login">
+            <Button variant="outlined" size="small">
+              Log in
+            </Button>
+          </Link>
         </Toolbar>
         <Toolbar variant="dense" className={classes.toolbarSecondary}>
           {sections.map(section => (
