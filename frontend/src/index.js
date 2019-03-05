@@ -10,7 +10,7 @@ import AppProvider from "./appContext";
 
 ReactDOM.render(
   <AppProvider>
-    <BrowserRouter>
+    <BrowserRouter basename={"/website/"}>
       <App />
     </BrowserRouter>
   </AppProvider>,
