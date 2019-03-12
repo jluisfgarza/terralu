@@ -1,36 +1,36 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const router = express.Router();
-const {ListProducts} = require('./../models/productsModel');
+const Products = require('./../../models/productsModel');
 
 let jsonParser = bodyParser.json();
 
-router.get('/list-products', jsonParser, (req, res) => {
+router.get('/products', jsonParser, (req, res) => {
     let promise = new Promise(function(resolve, reject){
-        ListProducts.get(resolve, reject);
+        Products.get(resolve, reject);
     })
-    .then(listProducts => {
-        res.json(listProducts);
+    .then(products => {
+        res.json(products);
     })
     .catch(err => {
         return res.status(500).json(err);
     })
 });
 
-router.get('/list-products/:_id', jsonParser, (req, res) => {
+router.get('/products/:_id', jsonParser, (req, res) => {
     let promise = new Promise(function(resolve, reject){
         console.log(req.params._id);
-        ListProducts.getOne(resolve, reject, req.params._id);
+        Products.getOne(resolve, reject, req.params._id);
     })
-    .then(listProducts => {
-        res.json(listProducts);
+    .then(products => {
+        res.json(products);
     })
     .catch(err => {
         return res.status(500).json(err);
     })
 });
 
-router.post('/list-products', jsonParser, (req, res) => {
+router.post('/products', jsonParser, (req, res) => {
     const requiredFields = ["title", "description", "price", "inStock", "numbBought", "_id"];
     for(let i = 0; i < requiredFields.length; i++){
         if (!(requiredFields[i] in req.body)){
@@ -39,7 +39,7 @@ router.post('/list-products', jsonParser, (req, res) => {
         }
     }
     let promise = new Promise(function(resolve, reject){
-        ListProducts.create(resolve, reject, {
+        Products.create(resolve, reject, {
             _id : req.body._id,
             title : req.body.title,
             description : req.body.description,
@@ -54,7 +54,7 @@ router.post('/list-products', jsonParser, (req, res) => {
     });
 });
 
-router.put('/list-products/:_id', jsonParser, (req, res) => {
+router.put('/products/:_id', jsonParser, (req, res) => {
     let idParam = req.params._id;
     let idBody = req.body._id;
     console.log(idParam);
@@ -69,7 +69,7 @@ router.put('/list-products/:_id', jsonParser, (req, res) => {
                 inStock : req.body.inStock,
                 numbBought : req.body.numbBought,
             }
-            ListProducts.update(resolve, reject, idBody, updatedProduct);
+            Products.update(resolve, reject, idBody, updatedProduct);
         }).then(result=> {
             res.status(204).end();
         }).catch(err => {
@@ -82,10 +82,10 @@ router.put('/list-products/:_id', jsonParser, (req, res) => {
     }
 });
 
-router.delete('/list-products/:_id', jsonParser, (req, res) => {
+router.delete('/products/:_id', jsonParser, (req, res) => {
     if (req.params._id == req.body._id){
         let promise = new Promise(function(resolve, reject){
-            ListProducts.delete(resolve, reject, req.body._id);
+            Products.delete(resolve, reject, req.body._id);
         }).then(result=> {
             res.status(204).end();
         }).catch(err => {
@@ -97,7 +97,5 @@ router.delete('/list-products/:_id', jsonParser, (req, res) => {
     }
 });
 
-module.exports = {
-    router
-};
+module.exports = router;
 
