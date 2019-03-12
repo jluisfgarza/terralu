@@ -11,20 +11,26 @@
     "@material-ui/lab": "^3.0.0-alpha.30",
     "@mdi/js": "^3.5.95",
     "@mdi/react": "^1.1.0",
+    "axios": "^0.18.0",
     "classnames": "^2.2.6",
+    "jwt-decode": "^2.2.0",
     "markdown-to-jsx": "^6.9.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
+    "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.4"
+    "react-scripts": "2.1.4",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "proxy": "http://localhost:5000"
   },
   "eslintConfig": {
     "extends": "react-app"

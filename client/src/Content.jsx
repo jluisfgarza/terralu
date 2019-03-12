@@ -9,8 +9,8 @@ import Header from "./components/Header/Header";
 import Hero from "./components/Hero/Hero";
 import Footer from "./components/Footer/Footer";
 import Catalog from "./components/Catalog/Catalog";
-// Context API
-import { WithAppContext } from "./appContext";
+import { connect } from "react-redux";
+import { logoutUser } from "./actions/authActions";
 
 const styles = theme => ({
   layout: {
@@ -26,11 +26,22 @@ const styles = theme => ({
 });
 
 class Content extends Component {
+  componentDidMount = () => {
+    console.log(this.props.usr);
+  };
+
+  onLogoutClick = e => {
+    e.preventDefault();
+    this.props.logoutUser();
+  };
+
   render() {
     const { classes } = this.props;
+    const { user } = this.props.auth;
 
     return (
       <Fragment>
+        <b>Hey there,</b> {user.name}
         <CssBaseline />
         <Header />
         <div className={classes.layout}>
@@ -49,7 +60,14 @@ class Content extends Component {
 }
 
 Content.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired
 };
-
-export default WithAppContext(withStyles(styles)(Content));
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+export default connect(
+  mapStateToProps,
+  { logoutUser }
+)(withStyles(styles)(Content));

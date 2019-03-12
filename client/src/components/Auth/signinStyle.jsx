@@ -15,7 +15,7 @@ const signinStyle = theme => ({
     backgroundPosition: "center"
   },
   container: {
-    marginTop: "10%",
+    marginTop: "5%",
     width: "auto",
     display: "block", // Fix IE11 issue.
     marginRight: theme.spacing.unit * 3,
@@ -25,6 +25,9 @@ const signinStyle = theme => ({
       marginLeft: "auto",
       marginRight: "auto"
     }
+  },
+  green: {
+    color: "#388e3c"
   },
   form: {
     width: "100%", // Fix IE11 issue.
@@ -42,12 +45,18 @@ const signinStyle = theme => ({
     width: "auto"
   },
   paper: {
+    position: "relative",
     marginTop: theme.spacing.unit * 8,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme
       .spacing.unit * 3}px`
+  },
+  backBtn: {
+    position: "absolute",
+    left: 20,
+    color: "#388e3c"
   },
   avatar: {
     margin: theme.spacing.unit,

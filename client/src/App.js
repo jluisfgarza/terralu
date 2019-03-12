@@ -1,43 +1,53 @@
 import React, { Component, Fragment } from "react";
 // Components
-import SignIn from "./components/Auth/SignIn";
+import Login from "./components/Auth/Login";
+import Register from "./components/Auth/Register";
 import Content from "./Content";
+import PrivateRoute from "./components/private-route/PrivateRoute";
 // Router
-import { Switch, Route, Redirect, withRouter } from "react-router-dom";
-// Context API
-import { WithAppContext } from "./appContext";
+import { Switch, Route, withRouter } from "react-router-dom";
+
+import jwt_decode from "jwt-decode";
+import setAuthToken from "./utils/setAuthToken";
+import { setCurrentUser, logoutUser } from "./actions/authActions";
+
+import { Provider } from "react-redux";
+import store from "./store";
+
+// Check for token to keep user logged in
+if (localStorage.jwtToken) {
+  // Set auth token header auth
+  const token = localStorage.jwtToken;
+  setAuthToken(token);
+  // Decode token and get user info and exp
+  const decoded = jwt_decode(token);
+  // Set user and isAuthenticated
+  store.dispatch(setCurrentUser(decoded));
+  // Check for expired token
+  const currentTime = Date.now() / 1000; // to get in milliseconds
+  if (decoded.exp < currentTime) {
+    // Logout user
+    store.dispatch(logoutUser());
+    // Redirect to login
+    window.location.href = "./login";
+  }
+}
 
 class App extends Component {
-  state = {
-    isUserSignedIn: this.props.context.isUserSignedIn
-  };
-
   render() {
-    const renderPlatform = this.props.context.state.isUserSignedIn ? (
-      <Fragment>
-        <Switch>
-          {/* <Redirect from="/" to="/store"/> */}
-          <Redirect from="/login" to="/store" />
-        </Switch>
-        <Content
-          isUserSignedIn={this.state.isUserSignedIn}/>
-      </Fragment>
-    ) : (
-      <Fragment>
-        <Switch>
-          <Route path="/" exact component={Content} />
-          <Route path="/login" exact render={() => <SignIn />} />
-          {/* <Redirect from="/" to="/login" /> */}
-          <Redirect from="/store" to="/login" />
-        </Switch>
-      </Fragment>
-    );
     return (
       <Fragment>
-        {renderPlatform}
+        <Provider store={store}>
+          <Route path="/" exact component={Content} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
+          {/* <Switch>
+            <PrivateRoute exact path="/dashboard" component={Dashboard} />
+          </Switch> */}
+        </Provider>
       </Fragment>
     );
   }
 }
 
-export default WithAppContext(withRouter(App));
+export default withRouter(App);
