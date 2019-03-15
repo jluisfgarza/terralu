@@ -1,7 +1,7 @@
 const mongoose =  require('mongoose');
-mongoose.Promise = global.Promise;
+const Schema = mongoose.Schema;
 
-const dbProducts = mongoose.Schema({
+const ProductSchema = new Schema({
     title : {type : String, required : true},
     description : {type : String, required : true},
     price : {type : Number, required : true},
@@ -10,11 +10,11 @@ const dbProducts = mongoose.Schema({
     _id : {type : Number, required : true},
 });
 
-const Products = mongoose.model("Products", dbProducts, "terralu");
+const Product = mongoose.model("products", ProductSchema);
 
-const ListProducts = {
+const Products = {
     get : function(resolve, reject){
-        Products.find()
+        Product.find()
             .then(products => {
                 resolve(products);
             })
@@ -24,7 +24,7 @@ const ListProducts = {
     },
 
     getOne : function(resolve, reject, ProductId){
-        Products.findById(ProductId)
+        Product.findById(ProductId)
             .then(product => {
                 resolve(product);
             })
@@ -34,7 +34,7 @@ const ListProducts = {
     },
 
     create : function(resolve, reject, newProduct){
-        Products.create(newProduct)
+        Product.create(newProduct)
             .then(result => {
                 resolve(result);
             })
@@ -44,7 +44,7 @@ const ListProducts = {
     },
 
     update : function (resolve, reject, ProductId, updatedProduct){
-        Products.findByIdAndUpdate(ProductId, {$set : updatedProduct}, {new : true})
+        Product.findByIdAndUpdate(ProductId, {$set : updatedProduct}, {new : true})
         .then(result => {
             resolve(result);
         })
@@ -54,7 +54,7 @@ const ListProducts = {
     },
 
     delete : function (resolve, reject, ProductId){
-        Products.findByIdAndRemove(ProductId)
+        Product.findByIdAndRemove(ProductId)
         .then(result => {
             resolve(result);
         })
@@ -66,6 +66,4 @@ const ListProducts = {
 }
 
 
-module.exports = {
-    ListProducts : ListProducts
-}
+module.exports = Products
