@@ -24,6 +24,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import classnames from "classnames";
+import compose from "recompose/compose";
 
 const theme = createMuiTheme({
   palette: {
@@ -82,7 +83,7 @@ class Register extends Component {
   };
 
   render() {
-    const { classes, context } = this.props;
+    const { classes } = this.props;
     const { errors } = this.state;
 
     return (
@@ -111,9 +112,10 @@ class Register extends Component {
                       label="Name"
                       id="name"
                       type="text"
+                      helperText={errors.name}
                       onChange={this.onChange}
                       value={this.state.name}
-                      error={errors.name}
+                      error={errors.name ? true : false}
                       className={classnames("", {
                         invalid: errors.name
                       })}
@@ -127,9 +129,10 @@ class Register extends Component {
                       label="Email"
                       id="email"
                       type="email"
+                      helperText={errors.email}
                       onChange={this.onChange}
                       value={this.state.email}
-                      error={errors.email}
+                      error={errors.email ? true : false}
                       className={classnames("", {
                         invalid: errors.email
                       })}
@@ -143,9 +146,10 @@ class Register extends Component {
                       label="Password"
                       id="password"
                       type="password"
+                      helperText={errors.password}
                       onChange={this.onChange}
                       value={this.state.password}
-                      error={errors.password}
+                      error={errors.password ? true : false}
                       className={classnames("", {
                         invalid: errors.password
                       })}
@@ -159,9 +163,10 @@ class Register extends Component {
                       label="Confirm Password"
                       id="password2"
                       type="password"
+                      helperText={errors.password2}
                       onChange={this.onChange}
                       value={this.state.password2}
-                      error={errors.password2}
+                      error={errors.password2 ? true : false}
                       className={classnames("", {
                         invalid: errors.password2
                       })}
@@ -172,7 +177,6 @@ class Register extends Component {
                     fullWidth
                     className={classes.submit}
                     variant="contained"
-                    onClick={context.logIn}
                     type="submit"
                     color="primary"
                   >
@@ -182,7 +186,7 @@ class Register extends Component {
               </form>
             </Paper>
             <ErrorDialog
-              error={this.state.error}
+              error={this.state.errors}
               openDialog={this.state.openDialog}
               dialogClose={this.dialogClose}
             />
@@ -203,7 +207,9 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(
-  mapStateToProps,
-  { registerUser }
-)(withRouter(withStyles(signinStyle)(Register)));
+export default withStyles(signinStyle)(
+  connect(
+    mapStateToProps,
+    { registerUser }
+  )(withRouter(Register))
+);

@@ -21,13 +21,17 @@ class ErrorDialog extends Component {
           <DialogTitle id="alert-dialog-title">{"Erorr!"}</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              {this.props.error}
+              {this.props.error.email}
+              {"\n"}
+              {this.props.error.emailnotfound}
+              {"\n"}
+              {this.props.error.password}
+              {"\n"}
+              {this.props.error.passwordincorrect}
+              {"\n"}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.props.dialogClose} color="primary">
-              Cancel
-            </Button>
             <Button onClick={this.props.dialogClose} color="primary" autoFocus>
               OK
             </Button>

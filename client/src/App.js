@@ -1,16 +1,17 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 // Components
 import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import Content from "./Content";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 // Router
-import { Switch, Route, withRouter } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
-
+// Router
+import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
 
@@ -36,18 +37,18 @@ if (localStorage.jwtToken) {
 class App extends Component {
   render() {
     return (
-      <Fragment>
-        <Provider store={store}>
-          <Route path="/" exact component={Content} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={Login} />
-          {/* <Switch>
-            <PrivateRoute exact path="/dashboard" component={Dashboard} />
-          </Switch> */}
-        </Provider>
-      </Fragment>
+      <Provider store={store}>
+        <BrowserRouter basename={"/website/"}>
+          <Switch>
+            <Route exact path="/" component={Content} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+            <PrivateRoute exact path="/store" component={Content} />
+          </Switch>
+        </BrowserRouter>
+      </Provider>
     );
   }
 }
 
-export default withRouter(App);
+export default App;

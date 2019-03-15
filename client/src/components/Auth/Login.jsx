@@ -11,7 +11,7 @@ import {
   CssBaseline,
   TextField
 } from "@material-ui/core";
-import ErrorDialog from "./ErrorDialog";
+// import ErrorDialog from "./ErrorDialog";
 // Icons
 import ArrowBack from "@material-ui/icons/ArrowBack";
 //Style
@@ -23,7 +23,6 @@ import Logo from "../../assets/logo.jpg";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
-import classnames from "classnames";
 
 const theme = createMuiTheme({
   palette: {
@@ -46,7 +45,7 @@ class Login extends Component {
 
   componentDidMount() {
     /* If logged in and user navigates to Login page,
-      should redirect them to dashboard
+      should redirect them to store
     */
     if (this.props.auth.isAuthenticated) {
       this.props.history.push("/store");
@@ -61,16 +60,10 @@ class Login extends Component {
     if (nextProps.errors) {
       this.setState({
         errors: nextProps.errors
+        // openDialog: true
       });
     }
   }
-
-  dialogPromptOpen = message => {
-    this.setState({
-      openDialog: true,
-      error: message
-    });
-  };
 
   dialogClose = () => {
     this.setState({ openDialog: false });
@@ -94,7 +87,7 @@ class Login extends Component {
   };
 
   render() {
-    const { classes, context } = this.props;
+    const { classes } = this.props;
     const { errors } = this.state;
 
     return (
@@ -113,7 +106,11 @@ class Login extends Component {
                   Register
                 </Link>
               </p>
-              <form className={classes.form}>
+              <form
+                className={classes.form}
+                noValidate
+                onSubmit={this.onSubmit}
+              >
                 <MuiThemeProvider theme={theme}>
                   <FormControl margin="normal" required fullWidth>
                     <TextField
@@ -122,35 +119,34 @@ class Login extends Component {
                       type="email"
                       name="email"
                       id="email"
-                      label="Email"
+                      label={"Email"}
+                      helperText={errors.email || errors.emailnotfound}
                       onChange={this.onChange}
-                      value={this.state.name}
-                      error={errors.name}
-                      className={classnames("", {
-                        invalid: errors.email || errors.emailnotfound
-                      })}
+                      value={this.state.email}
+                      error={errors.email ? true : false}
                     />
                   </FormControl>
                   <FormControl margin="normal" required fullWidth>
                     <TextField
                       autoComplete="current-password"
                       id="password"
-                      label="Password"
+                      label={"Password"}
                       name="password"
                       type="password"
+                      helperText={errors.password || errors.passwordincorrect}
                       onChange={this.onChange}
                       value={this.state.password}
-                      error={errors.password}
-                      className={classnames("", {
-                        invalid: errors.password || errors.passwordincorrect
-                      })}
+                      error={
+                        errors.password || errors.passwordincorrect
+                          ? true
+                          : false
+                      }
                     />
                   </FormControl>
                   <Button
                     fullWidth
                     className={classes.submit}
                     variant="contained"
-                    onClick={context.logIn}
                     type="submit"
                     color="primary"
                   >
@@ -159,11 +155,11 @@ class Login extends Component {
                 </MuiThemeProvider>
               </form>
             </Paper>
-            <ErrorDialog
-              error={this.state.error}
+            {/* <ErrorDialog
+              error={this.state.errors}
               openDialog={this.state.openDialog}
               dialogClose={this.dialogClose}
-            />
+            /> */}
           </div>
         </div>
       </Fragment>
@@ -185,4 +181,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { loginUser }
-)(withRouter(withStyles(signinStyle)(Login)));
+)(withStyles(signinStyle)(withRouter(Login)));

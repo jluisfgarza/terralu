@@ -27,7 +27,13 @@ const styles = theme => ({
 
 class Content extends Component {
   componentDidMount = () => {
-    console.log(this.props.usr);
+    /* If logged in and user navigates to Login page,
+      should redirect them to store
+    */
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/store");
+      console.log(this.props.auth);
+    }
   };
 
   onLogoutClick = e => {
@@ -41,7 +47,7 @@ class Content extends Component {
 
     return (
       <Fragment>
-        <b>Hey there,</b> {user.name}
+        <b>Hey there:</b> {user.name}
         <CssBaseline />
         <Header />
         <div className={classes.layout}>
@@ -64,9 +70,11 @@ Content.propTypes = {
   auth: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired
 };
+
 const mapStateToProps = state => ({
   auth: state.auth
 });
+
 export default connect(
   mapStateToProps,
   { logoutUser }

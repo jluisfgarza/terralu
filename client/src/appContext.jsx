@@ -13,23 +13,20 @@ export const WithAppContext = Component => {
 export default class AppProvider extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isUserSignedIn: false,
-      user: {}
-    };
+    this.state = {};
   }
 
   render() {
     return (
       <AppContext.Provider
         value={{
-          state: this.state,
-          logIn: () => {
-            this.setState({ isUserSignedIn: true });
-          },
-          logOut: () => {
-            this.setState({ isUserSignedIn: false });
-          }
+          state: this.state
+          // logIn: () => {
+          //   this.setState({ isUserSignedIn: true });
+          // },
+          // logOut: () => {
+          //   this.setState({ isUserSignedIn: false });
+          // }
         }}
       >
         {this.props.children}

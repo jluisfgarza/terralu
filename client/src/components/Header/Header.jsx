@@ -13,24 +13,32 @@ import { mdiFacebookBox, mdiInstagram } from "@mdi/js";
 import styles from "../styles";
 // Router
 import { Link, withRouter } from "react-router-dom";
-// Context API
-import { WithAppContext } from "../../appContext";
+import { connect } from "react-redux";
+import { logoutUser } from "../../actions/authActions";
 
 class Hero extends Component {
-  login = event => {
-    const { history } = this.props;
-    event.preventDefault();
-    history.push("/login");
+  // login = event => {
+  //   const { history } = this.props;
+  //   event.preventDefault();
+  //   history.push("/login");
+  // };
+
+  // logout = event => {
+  //   this.props.context.logOut();
+  //   const { history } = this.props;
+  //   event.preventDefault();
+  //   history.push("/store");
+  // };
+
+  onLogoutClick = e => {
+    e.preventDefault();
+    this.props.logoutUser();
   };
 
-  logout = event => {
-    this.props.context.logOut();
-    const { history } = this.props;
-    event.preventDefault();
-    history.push("/store");
-  };
   render() {
-    const { classes, context } = this.props;
+    const { classes } = this.props;
+    const { user } = this.props.auth;
+
     return (
       <Fragment>
         <Toolbar className={classes.toolbarMain}>
@@ -53,26 +61,21 @@ class Hero extends Component {
           <div className={classes.grow} />
           <Avatar alt="Logo" src={Logo} className={classes.toolbarTitle} />
           <div className={classes.grow} />
-          {!context.state.isUserSignedIn ? (
+          {this.props.auth.isAuthenticated ? (
             <Link to="/login">
               <Button
-                key="logIn"
-                onClick={this.login}
+                key="logout"
+                onClick={this.onLogoutClick}
                 variant="outlined"
                 size="small"
               >
-                Log in
+                Log Out
               </Button>
             </Link>
           ) : (
-            <Link to="/">
-              <Button
-                key="logOut"
-                onClick={this.logout}
-                variant="outlined"
-                size="small"
-              >
-                Log out
+            <Link to="/login">
+              <Button key="login" variant="outlined" size="small">
+                Log In / Register
               </Button>
             </Link>
           )}
@@ -84,7 +87,18 @@ class Hero extends Component {
 }
 
 Hero.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
-export default WithAppContext(withRouter(withStyles(styles)(Hero)));
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { logoutUser }
+  )(withStyles(styles)(Hero))
+);
