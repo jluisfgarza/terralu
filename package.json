@@ -1,0 +1,48 @@
+{
+  "name": "terralu",
+  "version": "1.0.0",
+  "description": "terralu ecommerce",
+  "main": "index.js",
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/terralu/website.git"
+  },
+  "keywords": [
+    "e-commerce",
+    "node",
+    "mongo",
+    "express",
+    "graphql",
+    "react"
+  ],
+  "author": "Juan Luis Flores",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/terralu/website/issues"
+  },
+  "homepage": "https://github.com/terralu/website#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.4",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "concurrently": "^4.1.0",
+    "express": "^4.16.4",
+    "is-empty": "^1.2.0",
+    "jsonwebtoken": "^8.5.0",
+    "mongoose": "^5.4.18",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "validator": "^10.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}
