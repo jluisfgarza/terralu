@@ -16,20 +16,7 @@ import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 
-class Hero extends Component {
-  // login = event => {
-  //   const { history } = this.props;
-  //   event.preventDefault();
-  //   history.push("/login");
-  // };
-
-  // logout = event => {
-  //   this.props.context.logOut();
-  //   const { history } = this.props;
-  //   event.preventDefault();
-  //   history.push("/store");
-  // };
-
+class Header extends Component {
   onLogoutClick = e => {
     e.preventDefault();
     this.props.logoutUser();
@@ -37,7 +24,6 @@ class Hero extends Component {
 
   render() {
     const { classes } = this.props;
-    const { user } = this.props.auth;
 
     return (
       <Fragment>
@@ -62,16 +48,19 @@ class Hero extends Component {
           <Avatar alt="Logo" src={Logo} className={classes.toolbarTitle} />
           <div className={classes.grow} />
           {this.props.auth.isAuthenticated ? (
-            <Link to="/login">
-              <Button
-                key="logout"
-                onClick={this.onLogoutClick}
-                variant="outlined"
-                size="small"
-              >
-                Log Out
-              </Button>
-            </Link>
+            <Fragment>
+              <h6>{"Benvnid@: " + this.props.auth.user.name + "\t"}</h6>
+              <Link to="/login">
+                <Button
+                  key="logout"
+                  onClick={this.onLogoutClick}
+                  variant="outlined"
+                  size="small"
+                >
+                  Log Out
+                </Button>
+              </Link>
+            </Fragment>
           ) : (
             <Link to="/login">
               <Button key="login" variant="outlined" size="small">
@@ -86,7 +75,7 @@ class Hero extends Component {
   }
 }
 
-Hero.propTypes = {
+Header.propTypes = {
   classes: PropTypes.object.isRequired,
   logoutUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
@@ -100,5 +89,5 @@ export default withRouter(
   connect(
     mapStateToProps,
     { logoutUser }
-  )(withStyles(styles)(Hero))
+  )(withStyles(styles)(Header))
 );

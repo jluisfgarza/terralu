@@ -36,18 +36,10 @@ class Content extends Component {
     }
   };
 
-  onLogoutClick = e => {
-    e.preventDefault();
-    this.props.logoutUser();
-  };
-
   render() {
     const { classes } = this.props;
-    const { user } = this.props.auth;
-
     return (
       <Fragment>
-        <b>Hey there:</b> {user.name}
         <CssBaseline />
         <Header />
         <div className={classes.layout}>
@@ -66,7 +58,6 @@ class Content extends Component {
 }
 
 Content.propTypes = {
-  logoutUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired
 };
@@ -75,7 +66,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(
-  mapStateToProps,
-  { logoutUser }
-)(withStyles(styles)(Content));
+export default connect(mapStateToProps)(withStyles(styles)(Content));

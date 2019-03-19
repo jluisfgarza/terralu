@@ -3,7 +3,6 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
-const passport = require("passport");
 
 // Load input validation
 const validateRegisterInput = require("../../validation/register");
@@ -32,7 +31,11 @@ router.post("/register", (req, res) => {
       const newUser = new User({
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        telephone: req.body.telephone,
+        address: req.body.address,
+        type: 'customer',
+        orders: [],
       });
 
       // Hash password before saving in database
