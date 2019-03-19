@@ -15,9 +15,25 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
+  telephone: {
+    type: Number,
+    required: true
+  },
+  address: {
+    type: String,
+    required: true
+  },
   date: {
     type: Date,
     default: Date.now
+  },
+  type: {
+    type: String,
+    required: false
+  },
+  orders: {
+    type: Array,
+    required: false
   }
 });
 

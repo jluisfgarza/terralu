@@ -23,8 +23,6 @@ import Logo from "../../assets/logo.jpg";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
-import classnames from "classnames";
-import compose from "recompose/compose";
 
 const theme = createMuiTheme({
   palette: {
@@ -42,6 +40,8 @@ class Register extends Component {
       email: "",
       password: "",
       password2: "",
+      telephone: "",
+      address: "",
       errors: {},
       openDialog: false
     };
@@ -76,7 +76,9 @@ class Register extends Component {
       name: this.state.name,
       email: this.state.email,
       password: this.state.password,
-      password2: this.state.password2
+      password2: this.state.password2,
+      telephone: this.state.telephone,
+      address: this.state.address
     };
     console.log(newUser);
     this.props.registerUser(newUser, this.props.history);
@@ -116,9 +118,6 @@ class Register extends Component {
                       onChange={this.onChange}
                       value={this.state.name}
                       error={errors.name ? true : false}
-                      className={classnames("", {
-                        invalid: errors.name
-                      })}
                     />
                   </FormControl>
                   <FormControl margin="normal" required fullWidth>
@@ -133,9 +132,34 @@ class Register extends Component {
                       onChange={this.onChange}
                       value={this.state.email}
                       error={errors.email ? true : false}
-                      className={classnames("", {
-                        invalid: errors.email
-                      })}
+                    />
+                  </FormControl>
+                  <FormControl margin="normal" required fullWidth>
+                    <TextField
+                      autoFocus
+                      autoComplete="telephone"
+                      name="telephone"
+                      label="Telephone"
+                      id="telephone"
+                      type="number"
+                      helperText={errors.telephone}
+                      onChange={this.onChange}
+                      value={this.state.telephone}
+                      error={errors.telephone ? true : false}
+                    />
+                  </FormControl>
+                  <FormControl margin="normal" required fullWidth>
+                    <TextField
+                      autoFocus
+                      autoComplete="address"
+                      name="address"
+                      label="Address"
+                      id="address"
+                      type="text"
+                      helperText={errors.address}
+                      onChange={this.onChange}
+                      value={this.state.address}
+                      error={errors.address ? true : false}
                     />
                   </FormControl>
                   <FormControl margin="normal" required fullWidth>
@@ -150,9 +174,6 @@ class Register extends Component {
                       onChange={this.onChange}
                       value={this.state.password}
                       error={errors.password ? true : false}
-                      className={classnames("", {
-                        invalid: errors.password
-                      })}
                     />
                   </FormControl>
                   <FormControl margin="normal" required fullWidth>
@@ -167,9 +188,6 @@ class Register extends Component {
                       onChange={this.onChange}
                       value={this.state.password2}
                       error={errors.password2 ? true : false}
-                      className={classnames("", {
-                        invalid: errors.password2
-                      })}
                     />
                   </FormControl>
 
