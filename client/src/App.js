@@ -46,6 +46,7 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <PrivateRoute exact path="/store" component={Content} />
+            <PrivateRoute exact path="/profile" component={Content} />
             <AdminPrivateRoute exact path="/admin" component={() => <Admin url="dashboard" />} />
             <AdminPrivateRoute exact path="/admin/dashboard" component={() => <Admin url="dashboard" />} />
             <AdminPrivateRoute exact path="/admin/products" component={() => <Admin url="products" />} />

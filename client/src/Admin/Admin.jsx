@@ -13,7 +13,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Badge from "@material-ui/core/Badge";
 // Icons
 import MenuIcon from "@material-ui/icons/Menu";
-import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
@@ -24,6 +23,8 @@ import style from "./adminStyle";
 // Redux
 import { connect } from "react-redux";
 import { logoutUser } from "../actions/authActions";
+// Router
+import { Link } from "react-router-dom";
 
 class Admin extends Component {
   state = {
@@ -64,12 +65,6 @@ class Admin extends Component {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
-        <MenuItem onClick={this.handleMenuClose}>
-          Profile
-          <IconButton color="inherit">
-            <AccountCircle />
-          </IconButton>
-        </MenuItem>
         <MenuItem onClick={this.onLogoutClick}>Log Out</MenuItem>
       </Menu>
     );
