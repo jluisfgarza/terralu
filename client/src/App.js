@@ -4,9 +4,11 @@ import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import Content from "./Content";
 import PrivateRoute from "./components/private-route/PrivateRoute";
+import AdminPrivateRoute from "./components/private-route/AdminPrivateRoute";
+import Admin from "./Admin/Admin";
 // Router
 import { Switch, Route } from "react-router-dom";
-
+// Auth
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
@@ -44,6 +46,11 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <PrivateRoute exact path="/store" component={Content} />
+            <AdminPrivateRoute exact path="/admin" component={() => <Admin url="dashboard" />} />
+            <AdminPrivateRoute exact path="/admin/dashboard" component={() => <Admin url="dashboard" />} />
+            <AdminPrivateRoute exact path="/admin/products" component={() => <Admin url="products" />} />
+            <AdminPrivateRoute exact path="/admin/orders" component={() => <Admin url="orders" />} />
+            <AdminPrivateRoute exact path="/admin/users" component={() => <Admin url="users" />} />
           </Switch>
         </BrowserRouter>
       </Provider>

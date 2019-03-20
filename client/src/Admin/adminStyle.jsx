@@ -1,12 +1,10 @@
-// Config
-import drawerWidth from "./config";
-
 const styles = theme => ({
   root: {
     display: "flex",
     width: "100%"
   },
   appBar: {
+    backgroundColor: "#388e3c",
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
@@ -14,8 +12,8 @@ const styles = theme => ({
     })
   },
   appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: 240,
+    width: `calc(100% - ${240}px)`,
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen
@@ -29,12 +27,12 @@ const styles = theme => ({
     display: "none"
   },
   drawer: {
-    width: drawerWidth,
+    width: 240,
     flexShrink: 0,
     whiteSpace: "nowrap"
   },
   drawerOpen: {
-    width: drawerWidth,
+    width: 240,
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen
@@ -65,16 +63,10 @@ const styles = theme => ({
     flexGrow: 1
   },
   sectionDesktop: {
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "flex"
-    }
-  },
-  sectionMobile: {
-    display: "flex",
-    [theme.breakpoints.up("md")]: {
-      display: "none"
-    }
+    // display: "none",
+    // [theme.breakpoints.up("md")]: {
+    display: "flex"
+    // }
   }
 });
 
