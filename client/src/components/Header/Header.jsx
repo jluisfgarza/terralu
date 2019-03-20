@@ -47,11 +47,29 @@ class Header extends Component {
           <div className={classes.grow} />
           <Avatar alt="Logo" src={Logo} className={classes.toolbarTitle} />
           <div className={classes.grow} />
+          {this.props.auth.isAuthenticated &&
+          this.props.auth.user.type === "admin" ? (
+            <Fragment>
+              <h5>{"Benvnid@: " + this.props.auth.user.name}</h5>
+              <Link to="/admin">
+                <Button
+                  className={classes.button}
+                  key="admin"
+                  variant="outlined"
+                  size="small"
+                >
+                  Admin Panel
+                </Button>
+              </Link>
+            </Fragment>
+          ) : (
+            <Fragment />
+          )}
           {this.props.auth.isAuthenticated ? (
             <Fragment>
-              <h6>{"Benvnid@: " + this.props.auth.user.name + "\t"}</h6>
               <Link to="/login">
                 <Button
+                  className={classes.button}
                   key="logout"
                   onClick={this.onLogoutClick}
                   variant="outlined"

@@ -2,31 +2,38 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 // Components
 import Sidebar from "./Sidebar";
-import Content from "./Content";
+import AdminContent from "./AdminContent";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
-import MenuIcon from "@material-ui/icons/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import AccountCircle from "@material-ui/icons/AccountCircle";
 import Badge from "@material-ui/core/Badge";
 // Icons
+import MenuIcon from "@material-ui/icons/Menu";
+import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 // Styles
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
-import style from "./style";
+import style from "./adminStyle";
+// Redux
+import { connect } from "react-redux";
+import { logoutUser } from "../actions/authActions";
 
 class Admin extends Component {
   state = {
     open: this.props.open,
-    anchorEl: null,
-    mobileMoreAnchorEl: null
+    anchorEl: null
+  };
+
+  onLogoutClick = e => {
+    e.preventDefault();
+    this.props.logoutUser();
   };
 
   handleDrawerOpen = () => {
@@ -43,23 +50,12 @@ class Admin extends Component {
 
   handleMenuClose = () => {
     this.setState({ anchorEl: null });
-    this.handleMobileMenuClose();
-  };
-
-  handleMobileMenuOpen = event => {
-    this.setState({ mobileMoreAnchorEl: event.currentTarget });
-  };
-
-  handleMobileMenuClose = () => {
-    this.setState({ mobileMoreAnchorEl: null });
   };
 
   render() {
-    const { anchorEl, mobileMoreAnchorEl } = this.state;
+    const { anchorEl } = this.state;
     const { classes } = this.props;
     const isMenuOpen = Boolean(anchorEl);
-    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
     const renderMenu = (
       <Menu
         anchorEl={anchorEl}
@@ -68,41 +64,13 @@ class Admin extends Component {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
-        <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
-      </Menu>
-    );
-
-    const renderMobileMenu = (
-      <Menu
-        anchorEl={mobileMoreAnchorEl}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        transformOrigin={{ vertical: "top", horizontal: "right" }}
-        open={isMobileMenuOpen}
-        onClose={this.handleMenuClose}
-      >
-        <MenuItem onClick={this.handleMobileMenuClose}>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <MailIcon />
-            </Badge>
-          </IconButton>
-          <p>Messages</p>
-        </MenuItem>
-        <MenuItem onClick={this.handleMobileMenuClose}>
-          <IconButton color="inherit">
-            <Badge badgeContent={11} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-          <p>Notifications</p>
-        </MenuItem>
-        <MenuItem onClick={this.handleProfileMenuOpen}>
+        <MenuItem onClick={this.handleMenuClose}>
+          Profile
           <IconButton color="inherit">
             <AccountCircle />
           </IconButton>
-          <p>Profile</p>
         </MenuItem>
+        <MenuItem onClick={this.onLogoutClick}>Log Out</MenuItem>
       </Menu>
     );
 
@@ -127,7 +95,7 @@ class Admin extends Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" color="inherit" noWrap>
-              Invoicing
+              Terralú
             </Typography>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
@@ -147,28 +115,19 @@ class Admin extends Component {
                 onClick={this.handleProfileMenuOpen}
                 color="inherit"
               >
-                <AccountCircle />
-              </IconButton>
-            </div>
-            <div className={classes.sectionMobile}>
-              <IconButton
-                aria-haspopup="true"
-                onClick={this.handleMobileMenuOpen}
-                color="inherit"
-              >
                 <MoreIcon />
               </IconButton>
             </div>
           </Toolbar>
         </AppBar>
         {renderMenu}
-        {renderMobileMenu}
         <Sidebar
+          handleLogOut={this.onLogoutClick}
           open={this.state.open}
           handleDrawerClose={this.handleDrawerClose}
           handleDrawerOpen={this.handleDrawerOpen}
         />
-        <Content />
+        <AdminContent url={this.props.url} />
       </div>
     );
   }
@@ -176,7 +135,16 @@ class Admin extends Component {
 
 Admin.propTypes = {
   classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired
+  theme: PropTypes.object.isRequired,
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
-export default withStyles(style, { withTheme: true })(Admin);
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  { logoutUser }
+)(withStyles(style, { withTheme: true })(Admin));
