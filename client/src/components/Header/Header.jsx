@@ -4,9 +4,13 @@ import { withStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
+import IconButton from "@material-ui/core/IconButton";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 // Imgs
 import Logo from "../../assets/logo2.jpg";
 // Icons
+import MoreIcon from "@material-ui/icons/MoreVert";
 import Icon from "@mdi/react";
 import { mdiFacebookBox, mdiInstagram } from "@mdi/js";
 // Styles
@@ -17,13 +21,55 @@ import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 
 class Header extends Component {
+  state = {
+    anchorEl: null
+  };
+
+  handleMenuOpen = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleMenuClose = () => {
+    this.setState({ anchorEl: null });
+  };
+
   onLogoutClick = e => {
     e.preventDefault();
     this.props.logoutUser();
   };
 
   render() {
+    const { anchorEl } = this.state;
     const { classes } = this.props;
+    const isMenuOpen = Boolean(anchorEl);
+    const adminMenu =
+      this.props.auth.user.type === "admin" ? (
+        <MenuItem>
+          <Link to="/admin" style={{ textDecoration: "none" }}>
+            Admin Panel
+          </Link>
+        </MenuItem>
+      ) : (
+        <Fragment />
+      );
+
+    const renderMenu = (
+      <Menu
+        anchorEl={anchorEl}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        transformOrigin={{ vertical: "top", horizontal: "right" }}
+        open={isMenuOpen}
+        onClose={this.handleMenuClose}
+      >
+        <MenuItem onClick={this.handleMenuClose}>
+          <Link to="/profile" style={{ textDecoration: "none" }}>
+            Profile
+          </Link>
+        </MenuItem>
+        {adminMenu}
+        <MenuItem onClick={this.onLogoutClick}>Log Out</MenuItem>
+      </Menu>
+    );
 
     return (
       <Fragment>
@@ -47,37 +93,17 @@ class Header extends Component {
           <div className={classes.grow} />
           <Avatar alt="Logo" src={Logo} className={classes.toolbarTitle} />
           <div className={classes.grow} />
-          {this.props.auth.isAuthenticated &&
-          this.props.auth.user.type === "admin" ? (
-            <Fragment>
-              <h5>{"Benvnid@: " + this.props.auth.user.name}</h5>
-              <Link to="/admin">
-                <Button
-                  className={classes.button}
-                  key="admin"
-                  variant="outlined"
-                  size="small"
-                >
-                  Admin Panel
-                </Button>
-              </Link>
-            </Fragment>
-          ) : (
-            <Fragment />
-          )}
           {this.props.auth.isAuthenticated ? (
             <Fragment>
-              <Link to="/login">
-                <Button
-                  className={classes.button}
-                  key="logout"
-                  onClick={this.onLogoutClick}
-                  variant="outlined"
-                  size="small"
-                >
-                  Log Out
-                </Button>
-              </Link>
+              <h5>{"Hola! " + this.props.auth.user.name}</h5>
+              <IconButton
+                aria-owns={isMenuOpen ? "material-appbar" : undefined}
+                aria-haspopup="true"
+                onClick={this.handleMenuOpen}
+                color="inherit"
+              >
+                <MoreIcon />
+              </IconButton>
             </Fragment>
           ) : (
             <Link to="/login">
@@ -88,6 +114,7 @@ class Header extends Component {
           )}
         </Toolbar>
         <br />
+        {renderMenu}
       </Fragment>
     );
   }

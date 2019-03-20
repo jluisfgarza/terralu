@@ -9,6 +9,7 @@ import Header from "./components/Header/Header";
 import Hero from "./components/Hero/Hero";
 import Footer from "./components/Footer/Footer";
 import Catalog from "./components/Catalog/Catalog";
+import Profile from "./components/Profile/Profile";
 import { connect } from "react-redux";
 import { logoutUser } from "./actions/authActions";
 
@@ -49,6 +50,11 @@ class Content extends Component {
             <Route path="/store" exact component={Catalog} />
             <Route path="/cart" exact render={() => <h1>cart</h1>} />
             <Route path="/payment" exact render={() => <h1>payment</h1>} />
+            <Route
+              path="/profile"
+              exact
+              component={() => <Profile user={this.props.auth.user} />}
+            />
           </Switch>
         </div>
         <Footer />
