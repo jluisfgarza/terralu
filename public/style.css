@@ -1,0 +1,24 @@
+body{
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.container{
+  width: auto;
+  max-width: 900px;
+  padding: 0 15px;
+}
+.container .footer-text{
+  margin: 20px 0;
+}
+.badge{
+  background-color: #e4aa49;
+}
+button.link{
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 3;
+  outline: none;
+  outline-offset: 0;
+  color: white;
+}
