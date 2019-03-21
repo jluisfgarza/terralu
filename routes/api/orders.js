@@ -1,51 +1,46 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const router = express.Router();
-const Products = require('../../models/productsModel');
+const Orders = require('../../models/ordersModel');
 
 let jsonParser = bodyParser.json();
 
-router.get('/products', jsonParser, (req, res) => {
+router.get('/orders', jsonParser, (req, res) => {
     let promise = new Promise(function (resolve, reject) {
-            Products.get(resolve, reject);
+            Orders.get(resolve, reject);
         })
-        .then(products => {
-            res.json(products);
+        .then(orders => {
+            res.json(orders);
         })
         .catch(err => {
             return res.status(500).json(err);
         })
 });
 
-router.get('/products/:_id', jsonParser, (req, res) => {
+router.get('/orders/:_id', jsonParser, (req, res) => {
     let promise = new Promise(function (resolve, reject) {
-            Products.getOne(resolve, reject, req.params._id);
+            Orders.getOne(resolve, reject, req.params._id);
         })
-        .then(products => {
-            res.json(products);
+        .then(orders => {
+            res.json(orders);
         })
         .catch(err => {
             return res.status(500).json(err);
         })
 });
 
-router.post('/products', jsonParser, (req, res) => {
-    const requiredFields = ["title", "description", "price", "inStock", "numbBought", "image","_id"];
+router.post('/orders', jsonParser, (req, res) => {
+    const requiredFields = ["products", "price", "_id"];
     for (let i = 0; i < requiredFields.length; i++) {
         if (!(requiredFields[i] in req.body)) {
-            console.log(`Missing field ${requiredFields[i]}`);
             return res.status(400).send(`Missing field ${requiredFields[i]}`);
         }
     }
     let promise = new Promise(function (resolve, reject) {
-        Products.create(resolve, reject, {
+        Orders.create(resolve, reject, {
             _id: req.body._id,
-            title: req.body.title,
-            description: req.body.description,
+            products: req.body.products,
             price: req.body.price,
-            inStock: req.body.inStock,
-            numbBought: req.body.numbBought,
-            image: req.body.image,
         });
     }).then(result => {
         res.status(201).json(result);
@@ -54,21 +49,17 @@ router.post('/products', jsonParser, (req, res) => {
     });
 });
 
-router.put('/products/:_id', jsonParser, (req, res) => {
+router.put('/orders/:_id', jsonParser, (req, res) => {
     let idParam = req.params._id;
     let idBody = req.body._id;
     if (idParam && idBody && idParam == idBody) {
         let promise = new Promise(function (resolve, reject) {
-            let updatedProduct = {
+            let updatedOrder = {
                 _id: idBody,
-                title: req.body.title,
-                description: req.body.description,
+                products: req.body.products,
                 price: req.body.price,
-                inStock: req.body.inStock,
-                numbBought: req.body.numbBought,
-                image: req.body.image,
             }
-            Products.update(resolve, reject, idBody, updatedProduct);
+            Orders.update(resolve, reject, idBody, updatedOrder);
         }).then(result => {
             res.status(204).end();
         }).catch(err => {
@@ -82,14 +73,14 @@ router.put('/products/:_id', jsonParser, (req, res) => {
     }
 });
 
-router.delete('/products/:_id', jsonParser, (req, res) => {
+router.delete('/orders/:_id', jsonParser, (req, res) => {
     if (req.params._id == req.body._id) {
         let promise = new Promise(function (resolve, reject) {
-            Products.delete(resolve, reject, req.body._id);
+            Orders.delete(resolve, reject, req.body._id);
         }).then(result => {
             res.status(204).end();
         }).catch(err => {
-            return res.status(400).send('Id not found in Products');
+            return res.status(400).send('Id not found in Orders');
         });
     } else {
         return res.status(400).send('Parameter does not coincide with body');
