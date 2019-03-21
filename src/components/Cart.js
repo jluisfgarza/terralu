@@ -32,9 +32,9 @@ class Cart extends Component{
                                     <div className="item-desc">
                                         <span className="title">{item.title}</span>
                                         <p>{item.desc}</p>
-                                        <p><b>Price: {item.price}$</b></p> 
+                                        <p><b>Precio: {item.price}$</b></p> 
                                         <p>
-                                            <b>Quantity: {item.quantity}</b> 
+                                            <b>Cantidad: {item.quantity}</b> 
                                         </p>
                                         <div className="add-remove">
                                             <Link to="/cart"><i className="material-icons" onClick={()=>{this.handleAddQuantity(item.id)}}>arrow_drop_up</i></Link>
@@ -55,7 +55,7 @@ class Cart extends Component{
        return(
             <div className="container">
                 <div className="cart">
-                    <h5>You have ordered:</h5>
+                    <h5>Gracias por Ordenar en Terralu tu has ordenado:</h5>
                     <ul className="collection">
                         {addedItems}
                     </ul>
