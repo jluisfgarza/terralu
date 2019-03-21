@@ -1,30 +1,29 @@
-# Reactjs Redux Nodejs Shopping Cart
-A full fledged shopping cart developed using React.js (Redux), Node.js, Express.js, MongoDB (Mongoose).
+# Basic e-commerce cart application built with React & Redux
 
-### Getting Started
+This simple application prototype shows how we can use React and Redux to build a friendly user experience with instant visual updates.
 
-An API has been written and axios is doing the API calls. API is running on proxy server having port of 3001 (e.g. http://localhost:3001/books/).
+## Demo
+[Here](https://my-shopping-cart-leawwzhsmf.now.sh/)
 
-### Getting Started
+## Features
+* Add and remove items 
+* Remove items
+* Edit the quantity of the items in real time
+* Calculate automatically the total including the shipping (if chosen)
 
-There are two methods for getting started with this repo.
+# Getting started
+### Requirements
 
-#### Familiar with Git?
-Checkout this repo, install dependencies, then start the gulp process with the following:
+* Node.js
+* NPM
 
+### Package installation
+```bash
+npm install
 ```
-> git clone https://github.com/owaiskhan772/reactjs-redux-shopping-cart.git
-> cd reactjs-redux-shopping-cart
-> npm install
-> npm start
-> localhost:3000
+ ### Start the React App
+ Excute the following command: 
+```bash
+npm start
 ```
-
-#### Not Familiar with Git?
-Click [here](https://github.com/owaiskhan772/reactjs-redux-shopping-cart) then download the .zip file.  Extract the contents of the zip file, then open your terminal, change to the project directory, and:
-
-```
-> npm install
-> npm start
-> localhost:3000
-```
+The application will start automatically in your browser on http://localhost:3000
