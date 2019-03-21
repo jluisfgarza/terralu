@@ -20,7 +20,7 @@ import { addToCart } from './actions/cartActions'
 
                         <div className="card-content">
                             <p>{item.desc}</p>
-                            <p><b>Price: {item.price}$</b></p>
+                            <p><b>Precio: {item.price}$</b></p>
                         </div>
                  </div>
 
