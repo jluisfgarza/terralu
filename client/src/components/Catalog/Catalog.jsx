@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import styles from "./style";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -31,12 +30,7 @@ class Catalog extends React.Component {
                   image={value.thumb}
                   title={value.name}
                 />
-                <CardContent className={classes.cardContent}>
-                  {/* <Typography gutterBottom variant="h5" component="h2">
-                    {value.name}
-                  </Typography> */}
-                  {/* <Typography>{value.description}</Typography> */}
-                </CardContent>
+                <CardContent className={classes.cardContent} />
                 <CardActions className={classes.CardActions}>
                   <Button
                     variant="outlined"

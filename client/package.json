@@ -15,6 +15,7 @@
     "classnames": "^2.2.6",
     "jwt-decode": "^2.2.0",
     "markdown-to-jsx": "^6.9.1",
+    "material-table": "^1.25.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",

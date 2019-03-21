@@ -23,8 +23,6 @@ import style from "./adminStyle";
 // Redux
 import { connect } from "react-redux";
 import { logoutUser } from "../actions/authActions";
-// Router
-import { Link } from "react-router-dom";
 
 class Admin extends Component {
   state = {

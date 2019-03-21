@@ -11,7 +11,6 @@ import Footer from "./components/Footer/Footer";
 import Catalog from "./components/Catalog/Catalog";
 import Profile from "./components/Profile/Profile";
 import { connect } from "react-redux";
-import { logoutUser } from "./actions/authActions";
 
 const styles = theme => ({
   layout: {
