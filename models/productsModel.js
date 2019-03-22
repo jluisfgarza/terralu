@@ -6,6 +6,7 @@ const ProductSchema = new Schema({
     description : {type : String, required : true},
     price : {type : Number, required : true},
     inStock : {type : Number, required : true},
+    numbBought : {type : Number, required : true},
     image : {data : Buffer, contentType : String},
     _id : {type : mongoose.Types.ObjectId, default: new mongoose.Types.ObjectId()},
 });
