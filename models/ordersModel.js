@@ -5,7 +5,7 @@ const OrderSchema = new Schema({
     products: {type: Array, required: true},
     price : {type : Number, required : true},
     date: { type: Date, default: Date.now },
-    _id : {type : Number, required : true},
+    _id : {type : mongoose.Types.ObjectId, default: new mongoose.Types.ObjectId()},
 }, {timestamps: true});
 
 const Order = mongoose.model("orders", OrderSchema);

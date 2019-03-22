@@ -30,7 +30,7 @@ router.get('/orders/:_id', jsonParser, (req, res) => {
 });
 
 router.post('/orders', jsonParser, (req, res) => {
-    const requiredFields = ["products", "price", "_id"];
+    const requiredFields = ["products", "price"];
     for (let i = 0; i < requiredFields.length; i++) {
         if (!(requiredFields[i] in req.body)) {
             return res.status(400).send(`Missing field ${requiredFields[i]}`);
