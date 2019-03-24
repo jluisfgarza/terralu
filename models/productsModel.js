@@ -8,7 +8,6 @@ const ProductSchema = new Schema({
     inStock : {type : Number, required : true},
     numBought : {type : Number, required : true},
     image : {data : Buffer, contentType : String},
-    _id : {type : mongoose.Types.ObjectId, default: new mongoose.Types.ObjectId()},
 });
 
 const Product = mongoose.model("products", ProductSchema);
