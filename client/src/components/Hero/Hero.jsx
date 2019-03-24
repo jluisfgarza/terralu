@@ -27,6 +27,9 @@ class Hero extends Component {
             <Grid container>
               <Grid item md={6}>
                 <div className={classes.mainFeaturedPostContent}>
+                  <Typography variant="h4" color="inherit" paragraph>
+                    &#9888; En construcción / Under construction &#9888;
+                  </Typography>
                   <img src={Logo} alt="Logo" className={classes.heroLogo} />
                   <Typography variant="h5" color="inherit" paragraph>
                     Boutique de terrarios y suculentas. Producidas en casa y

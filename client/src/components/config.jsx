@@ -1,6 +1,6 @@
-import post1 from "../Blog/blog-post.1.md";
-import post2 from "../Blog/blog-post.1.md";
-import post3 from "../Blog/blog-post.1.md";
+import post1 from "./Blog/blog-post.1.md";
+import post2 from "./Blog/blog-post.1.md";
+import post3 from "./Blog/blog-post.1.md";
 
 const featuredPosts = [
   {
