@@ -5,12 +5,14 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
+import Badge from "@material-ui/core/Badge";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 // Imgs
 import Logo from "../../assets/logo2.jpg";
 // Icons
 import MoreIcon from "@material-ui/icons/MoreVert";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Icon from "@mdi/react";
 import { mdiFacebookBox, mdiInstagram } from "@mdi/js";
 // Styles
@@ -19,6 +21,7 @@ import styles from "../styles";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+import { Divider } from "@material-ui/core";
 
 class Header extends Component {
   state = {
@@ -61,9 +64,13 @@ class Header extends Component {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
+        <MenuItem>
+          <h5>{this.props.auth.user.name + " "}</h5>
+        </MenuItem>
+        <Divider />
         <MenuItem onClick={this.handleMenuClose}>
           <Link to="/profile" style={{ textDecoration: "none" }}>
-            Profile
+            Perfil
           </Link>
         </MenuItem>
         {adminMenu}
@@ -95,7 +102,15 @@ class Header extends Component {
           <div className={classes.grow} />
           {this.props.auth.isAuthenticated ? (
             <Fragment>
-              <h5>{"Hola! " + this.props.auth.user.name}</h5>
+              <IconButton aria-label="Cart">
+                <Badge
+                  badgeContent={4}
+                  color="primary"
+                  classes={{ badge: classes.badge }}
+                >
+                  <ShoppingCartIcon />
+                </Badge>
+              </IconButton>
               <IconButton
                 aria-owns={isMenuOpen ? "material-appbar" : undefined}
                 aria-haspopup="true"
