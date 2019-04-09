@@ -30,7 +30,7 @@ router.get('/products/:_id', jsonParser, (req, res) => {
 });
 
 router.post('/products', jsonParser, (req, res) => {
-    const requiredFields = ["title", "description", "price", "inStock", "numBought", "image"];
+    const requiredFields = ["title", "description", "price", "inStock", "numBought", "image", "photos"];
     for (let i = 0; i < requiredFields.length; i++) {
         if (!(requiredFields[i] in req.body)) {
             console.log(`Missing field ${requiredFields[i]}`);
@@ -67,6 +67,7 @@ router.put('/products/:_id', jsonParser, (req, res) => {
                 inStock: req.body.inStock,
                 numBought: req.body.numBought,
                 image: req.body.image,
+                photos: req.body.photos,
             }
             Products.update(resolve, reject, idBody, updatedProduct);
         }).then(result => {
