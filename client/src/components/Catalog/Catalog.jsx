@@ -1,21 +1,37 @@
 import React from "react";
 import PropTypes from "prop-types";
-// Styles
-import styles from "./style";
-import classNames from "classnames";
-import { withStyles } from "@material-ui/core/styles";
+// Components
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid";
+import Notification from "../Notification/Notification";
+// Styles
+import styles from "./style";
+import classNames from "classnames";
+import { withStyles } from "@material-ui/core/styles";
 // Icons
 import CartIcon from "@material-ui/icons/ShoppingCart";
 // Config
 import { productCatalog } from "../config";
 
 class Catalog extends React.Component {
+  state = {
+    notif: false
+  };
+
+  handleNotif = () => {
+    this.setState({ notif: true });
+  };
+
+  handleCloseNotif = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+  };
+
   render() {
     const { classes } = this.props;
 
@@ -43,6 +59,7 @@ class Catalog extends React.Component {
                     variant="contained"
                     color="primary"
                     className={classes.button}
+                    onClick={this.handleNotif}
                   >
                     <CartIcon />
                   </Button>
@@ -51,6 +68,11 @@ class Catalog extends React.Component {
             </Grid>
           ))}
         </Grid>
+        <Notification
+          msg="Agregado a Carrito"
+          open={this.state.notif}
+          handleCloseNotif={this.handleCloseNotif}
+        />
       </div>
     );
   }
