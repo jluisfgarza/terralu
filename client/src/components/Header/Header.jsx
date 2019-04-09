@@ -98,19 +98,23 @@ class Header extends Component {
             />
           </a>
           <div className={classes.grow} />
-          <Avatar alt="Logo" src={Logo} className={classes.toolbarTitle} />
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <Avatar alt="Logo" src={Logo} className={classes.toolbarTitle} />
+          </Link>
           <div className={classes.grow} />
           {this.props.auth.isAuthenticated ? (
             <Fragment>
-              <IconButton aria-label="Cart">
-                <Badge
-                  badgeContent={4}
-                  color="primary"
-                  classes={{ badge: classes.badge }}
-                >
-                  <ShoppingCartIcon />
-                </Badge>
-              </IconButton>
+              <Link to="/cart" style={{ textDecoration: "none" }}>
+                <IconButton aria-label="Cart">
+                  <Badge
+                    badgeContent={4}
+                    color="primary"
+                    classes={{ badge: classes.badge }}
+                  >
+                    <ShoppingCartIcon />
+                  </Badge>
+                </IconButton>
+              </Link>
               <IconButton
                 aria-owns={isMenuOpen ? "material-appbar" : undefined}
                 aria-haspopup="true"

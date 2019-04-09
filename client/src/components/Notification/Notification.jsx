@@ -35,7 +35,7 @@ class Notification extends React.Component {
               aria-label="Close"
               color="inherit"
               className={classes.close}
-              onClick={this.handleClose}
+              onClick={this.props.handleCloseNotif}
             >
               <CloseIcon />
             </IconButton>
