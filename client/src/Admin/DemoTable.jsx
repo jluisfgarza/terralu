@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from "react";
-import MaterialTable from "material-table";
 import ProductDialog from "./ProductDialog.jsx";
-
+import ProductData from "./ProductData.jsx";
+import OrderData from "./OrderData.jsx";
+import UserData from "./UserData.jsx";
+/*
 const users = [
   { title: "Name", field: "name" },
   { title: "Surename", field: "surname" },
@@ -51,7 +53,7 @@ const productsData = [
     numbBought: "5"
   }
 ];
-
+*/
 export default class DemoTable extends Component {
   render() {
     return (
@@ -61,17 +63,9 @@ export default class DemoTable extends Component {
             case "dashboard":
               return (
                 <Fragment>
-                  <MaterialTable
-                    columns={users}
-                    data={usersData}
-                    title="Users"
-                  />
+                  <UserData/>
                   <br />
-                  <MaterialTable
-                    columns={products}
-                    data={productsData}
-                    title="Products"
-                  />
+                  <ProductData/>
                 </Fragment>
               );
             case "products":
@@ -79,18 +73,18 @@ export default class DemoTable extends Component {
                 <Fragment>
                   <ProductDialog />
                   <br />
-                  <MaterialTable
-                    columns={products}
-                    data={productsData}
-                    title="Products"
-                  />
+                  <ProductData/>
                 </Fragment>
               );
             case "orders":
-              return null;
+            return (
+              <Fragment>
+                <OrderData/>
+              </Fragment>
+            );
             case "users":
               return (
-                <MaterialTable columns={users} data={usersData} title="Users" />
+                <UserData/>
               );
             default:
               return null;
