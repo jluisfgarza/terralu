@@ -12,6 +12,7 @@ import { Switch, Route } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
+import { getAllProducts} from "./actions/cartActions";
 // Router
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
@@ -26,6 +27,7 @@ if (localStorage.jwtToken) {
   const decoded = jwt_decode(token);
   // Set user and isAuthenticated
   store.dispatch(setCurrentUser(decoded));
+  store.dispatch(getAllProducts());
   // Check for expired token
   const currentTime = Date.now() / 1000; // to get in milliseconds
   if (decoded.exp < currentTime) {
@@ -47,6 +49,7 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <PrivateRoute exact path="/store" component={Content} />
             <PrivateRoute exact path="/profile" component={Content} />
+            <PrivateRoute exact path="/cart" component={Content} />
             <AdminPrivateRoute exact path="/admin" component={() => <Admin url="Dashboard" />} />
             <AdminPrivateRoute exact path="/admin/dashboard" component={() => <Admin url="dashboard" />} />
             <AdminPrivateRoute exact path="/admin/products" component={() => <Admin url="products" />} />
