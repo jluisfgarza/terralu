@@ -11,6 +11,7 @@ import Footer from "./components/Footer/Footer";
 import Catalog from "./components/Catalog/Catalog";
 import Profile from "./components/Profile/Profile";
 import { connect } from "react-redux";
+import Cart from "./components/Cart/Cart";
 
 const styles = theme => ({
   layout: {
@@ -47,7 +48,7 @@ class Content extends Component {
           <Switch>
             <Route path="/" exact component={Catalog} />
             <Route path="/store" exact component={Catalog} />
-            <Route path="/cart" exact render={() => <h1>cart</h1>} />
+            <Route path="/cart" exact component={Cart} />
             <Route path="/payment" exact render={() => <h1>payment</h1>} />
             <Route
               path="/profile"

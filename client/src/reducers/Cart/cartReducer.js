@@ -26,7 +26,7 @@ const quantityById = (state = initialState.quantityById, action) => {
     case ADD_TO_CART:
       const { productId } = action
       return { ...state,
-        [productId]: (state[productId] || 0) + 1
+        [productId]: (state[productId] || 0) + 1,
       }
     default:
       return state

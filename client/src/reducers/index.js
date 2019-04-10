@@ -7,8 +7,8 @@ import products, * as fromProducts from './Cart/productsReducer'
 export default combineReducers({
   auth: authReducer,
   errors: errorReducer,
-  cart: cart,
-  products: products
+  cart,
+  products
 })
 
 const getAddedIds = state => fromCart.getAddedIds(state.cart)

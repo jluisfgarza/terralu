@@ -21,25 +21,49 @@ import { addToCart } from "../../actions/cartActions";
 import { getVisibleProducts } from "../../reducers/Cart/productsReducer";
 
 class Catalog extends React.Component {
+  queue = [];
   state = {
     notif: false,
-    clickedItem: ""
+    messageInfo: {}
   };
 
   addCart = item => {
-    this.handleNotif();
-    this.setState({ clickedItem: item.title });
+    console.log(item);
+    this.handleClick(item.title);
     this.props.addToCart(item.id);
   };
 
-  handleNotif = () => {
-    this.setState({ notif: true });
+  handleClick = message => {
+    this.queue.push({
+      message,
+      key: new Date().getTime()
+    });
+
+    if (this.state.notif) {
+      this.setState({ notif: false });
+    } else {
+      this.processQueue();
+    }
   };
 
-  handleCloseNotif = (event, reason) => {
-    // if (reason === "clickaway") {
-    // }
+  processQueue = () => {
+    if (this.queue.length > 0) {
+      this.setState({
+        messageInfo: this.queue.shift(),
+        notif: true
+      });
+    }
+  };
+
+  handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
     this.setState({ notif: false });
+  };
+
+  handleExited = () => {
+    this.processQueue();
   };
 
   render() {
@@ -72,7 +96,8 @@ class Catalog extends React.Component {
                     color="primary"
                     className={classes.button}
                     onClick={this.addCart.bind(this, node)}
-                    disabled={node.inStock > 0 ? "" : "disabled"}
+                    // onClick={() => this.props.addToCart(node.id)}
+                    disabled={node.inStock > 0 ? false : true}
                   >
                     <CartIcon />
                   </Button>
@@ -89,9 +114,10 @@ class Catalog extends React.Component {
           ))}
         </Grid>
         <Notification
-          msg={"Agregado a Carrito: " + this.state.clickedItem}
+          msg={this.state.messageInfo}
           open={this.state.notif}
-          handleCloseNotif={this.handleCloseNotif}
+          handleClose={this.handleClose}
+          handleExited={this.handleExited}
         />
       </div>
     );
@@ -107,8 +133,7 @@ Catalog.propTypes = {
       title: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
-      inStock: PropTypes.number.isRequired,
-      numBought: PropTypes.number.isRequired
+      inStock: PropTypes.number.isRequired
     })
   ).isRequired,
   addToCart: PropTypes.func.isRequired

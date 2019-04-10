@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
@@ -19,13 +18,24 @@ import { mdiFacebookBox, mdiInstagram } from "@mdi/js";
 import styles from "../styles";
 // Router
 import { Link, withRouter } from "react-router-dom";
-import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import { Divider } from "@material-ui/core";
+// Redux
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { getCartProducts } from "../../reducers";
 
 class Header extends Component {
   state = {
     anchorEl: null
+  };
+
+  itemsInCar = products => {
+    var total = 0;
+    for (var i = 0; i < products.length; i++) {
+      total += products[i].quantity;
+    }
+    return total;
   };
 
   handleMenuOpen = event => {
@@ -78,6 +88,24 @@ class Header extends Component {
       </Menu>
     );
 
+    const cartIcon = (
+      <Fragment>
+        <Badge
+          badgeContent={
+            this.props.products.length > 0
+              ? this.props.products.reduce(function(tot, record) {
+                  return tot + record.quantity;
+                }, 0)
+              : 0
+          }
+          color="primary"
+          classes={{ badge: this.props.classes.badge }}
+        >
+          <ShoppingCartIcon />
+        </Badge>
+      </Fragment>
+    );
+
     return (
       <Fragment>
         <Toolbar className={classes.toolbarMain}>
@@ -105,15 +133,7 @@ class Header extends Component {
           {this.props.auth.isAuthenticated ? (
             <Fragment>
               <Link to="/cart" style={{ textDecoration: "none" }}>
-                <IconButton aria-label="Cart">
-                  <Badge
-                    badgeContent={4}
-                    color="primary"
-                    classes={{ badge: classes.badge }}
-                  >
-                    <ShoppingCartIcon />
-                  </Badge>
-                </IconButton>
+                <IconButton aria-label="Cart">{cartIcon}</IconButton>
               </Link>
               <IconButton
                 aria-owns={isMenuOpen ? "material-appbar" : undefined}
@@ -142,11 +162,20 @@ class Header extends Component {
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
   logoutUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  products: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      quantity: PropTypes.number.isRequired
+    })
+  ).isRequired
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  products: getCartProducts(state)
 });
 
 export default withRouter(

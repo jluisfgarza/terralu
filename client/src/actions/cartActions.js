@@ -1,5 +1,5 @@
 import shop from '../api/shop'
-import * as types from '../actions/types'
+import * as types from './types'
 
 const receiveProducts = products => ({
   type: types.RECEIVE_PRODUCTS,
@@ -18,7 +18,7 @@ const addToCartUnsafe = productId => ({
 })
 
 export const addToCart = productId => (dispatch, getState) => {
-  if (getState().products.byId[productId].inventory > 0) {
+  if (getState().products.byId[productId].inStock > 0) {
     dispatch(addToCartUnsafe(productId))
   }
 }

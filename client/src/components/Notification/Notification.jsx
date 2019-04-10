@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
@@ -18,24 +17,30 @@ class Notification extends React.Component {
     return (
       <div>
         <Snackbar
+          key={this.props.msg.key}
           anchorOrigin={{
             vertical: "bottom",
             horizontal: "left"
           }}
           open={this.props.open}
           autoHideDuration={6000}
-          onClose={this.props.handleCloseNotif}
+          onClose={this.props.handleClose}
+          onExited={this.props.handleExited}
           ContentProps={{
             "aria-describedby": "message-id"
           }}
-          message={<span id="message-id">{this.props.msg}</span>}
+          message={
+            <span id="message-id">
+              Agregado a Carrito: {this.props.msg.message}
+            </span>
+          }
           action={[
             <IconButton
               key="close"
               aria-label="Close"
               color="inherit"
               className={classes.close}
-              onClick={this.props.handleCloseNotif}
+              onClick={this.props.handleClose}
             >
               <CloseIcon />
             </IconButton>

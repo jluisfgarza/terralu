@@ -1,10 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { checkout } from "../../actions/cartActions";
+import { getTotal, getCartProducts } from "../../reducers";
 
-const Cart = ({ products, total, onCheckoutClicked }) => {
-  const hasProducts = products.length > 0;
+const Cart = props => {
+  const hasProducts = props.products.length > 0;
   const nodes = hasProducts ? (
-    products.map(product => (
+    props.products.map(product => (
       <div key={product.id}>
         {product.title} - &#36;{product.price}
         {product.quantity ? ` x ${product.quantity}` : null}
@@ -18,9 +21,9 @@ const Cart = ({ products, total, onCheckoutClicked }) => {
     <div>
       <h3>Your Cart</h3>
       <div>{nodes}</div>
-      <p>Total: &#36;{total}</p>
+      <p>Total: &#36;{props.total}</p>
       <button
-        onClick={onCheckoutClicked}
+        onClick={checkout(props.products)}
         disabled={hasProducts ? "" : "disabled"}
       >
         Checkout
@@ -30,9 +33,24 @@ const Cart = ({ products, total, onCheckoutClicked }) => {
 };
 
 Cart.propTypes = {
-  products: PropTypes.array,
+  products: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      quantity: PropTypes.number.isRequired
+    })
+  ).isRequired,
   total: PropTypes.string,
-  onCheckoutClicked: PropTypes.func
+  checkout: PropTypes.func.isRequired
 };
 
-export default Cart;
+const mapStateToProps = state => ({
+  products: getCartProducts(state),
+  total: getTotal(state)
+});
+
+export default connect(
+  mapStateToProps,
+  { checkout }
+)(Cart);
