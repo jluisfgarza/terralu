@@ -1,5 +1,4 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { Component } from "react";
 // Components
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
@@ -16,11 +15,12 @@ import { withStyles } from "@material-ui/core/styles";
 // Icons
 import CartIcon from "@material-ui/icons/ShoppingCart";
 // Redux
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { addToCart } from "../../actions/cartActions";
 import { getVisibleProducts } from "../../reducers/Cart/productsReducer";
 
-class Catalog extends React.Component {
+class Catalog extends Component {
   queue = [];
   state = {
     notif: false,
@@ -28,14 +28,15 @@ class Catalog extends React.Component {
   };
 
   addCart = item => {
-    console.log(item);
-    this.handleClick(item.title);
+    //console.log(item);
+    this.handleClick(item.title, "a");
     this.props.addToCart(item.id);
   };
 
-  handleClick = message => {
+  handleClick = (message, c) => {
     this.queue.push({
       message,
+      c,
       key: new Date().getTime()
     });
 
@@ -96,7 +97,6 @@ class Catalog extends React.Component {
                     color="primary"
                     className={classes.button}
                     onClick={this.addCart.bind(this, node)}
-                    // onClick={() => this.props.addToCart(node.id)}
                     disabled={node.inStock > 0 ? false : true}
                   >
                     <CartIcon />

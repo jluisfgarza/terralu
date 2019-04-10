@@ -31,7 +31,10 @@ class Notification extends React.Component {
           }}
           message={
             <span id="message-id">
-              Agregado a Carrito: {this.props.msg.message}
+              {this.props.msg.c === "a"
+                ? "Agregado a Carrito: "
+                : "Removido de Carrito: "}
+              {this.props.msg.message}
             </span>
           }
           action={[

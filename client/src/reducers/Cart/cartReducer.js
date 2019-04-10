@@ -1,5 +1,6 @@
 import {
   ADD_TO_CART,
+  REMOVE_FROM_CART,
   CHECKOUT_REQUEST,
   CHECKOUT_FAILURE
 } from '../../actions/types'
@@ -11,11 +12,18 @@ const initialState = {
 
 const addedIds = (state = initialState.addedIds, action) => {
   switch (action.type) {
-    case ADD_TO_CART:
+    case ADD_TO_CART: {
       if (state.indexOf(action.productId) !== -1) {
         return state
       }
       return [ ...state, action.productId ]
+    }
+    case REMOVE_FROM_CART: {
+      if (state.indexOf(action.productId) !== -1) {
+        return state
+      }
+      return [ ...state, action.productId ]
+    }
     default:
       return state
   }
@@ -23,11 +31,18 @@ const addedIds = (state = initialState.addedIds, action) => {
 
 const quantityById = (state = initialState.quantityById, action) => {
   switch (action.type) {
-    case ADD_TO_CART:
-      const { productId } = action
+    case ADD_TO_CART: {
+        const { productId } = action
       return { ...state,
         [productId]: (state[productId] || 0) + 1,
       }
+    }
+    case REMOVE_FROM_CART: {
+      const { productId } = action
+      return { ...state,
+        [productId]: (state[productId] || 0) - 1,
+      }
+    }
     default:
       return state
   }

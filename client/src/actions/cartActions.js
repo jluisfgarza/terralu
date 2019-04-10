@@ -23,6 +23,17 @@ export const addToCart = productId => (dispatch, getState) => {
   }
 }
 
+const removeFromCartUnsafe = productId => ({
+  type: types.REMOVE_FROM_CART,
+  productId
+})
+
+export const removeFromCart = productId => (dispatch, getState) => {
+  // if (getState().products.byId[productId].inStock > 0) {
+    dispatch(removeFromCartUnsafe(productId))
+  // }
+}
+
 export const checkout = products => (dispatch, getState) => {
   const { cart } = getState()
 
