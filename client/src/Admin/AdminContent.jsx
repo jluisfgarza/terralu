@@ -26,7 +26,7 @@ class AdminContent extends Component {
                 <Fragment>
                   <UserData />
                   <br />
-                  <ProductData />
+                  <ProductData sizeNum={5} actions={false} />
                 </Fragment>
               );
             case "Products":
@@ -34,7 +34,8 @@ class AdminContent extends Component {
                 <Fragment>
                   <ProductDialog />
                   <br />
-                  <ProductData />
+                  <br />
+                  <ProductData sizeNum={10} actions={true} />
                 </Fragment>
               );
             case "Orders":
