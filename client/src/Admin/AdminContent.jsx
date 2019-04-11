@@ -1,10 +1,13 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 // Components
 import Typography from "@material-ui/core/Typography";
+import ProductDialog from "./ProductDialog.jsx";
+import ProductData from "./TableViews/ProductData";
+import OrderData from "./TableViews/OrderData";
+import UserData from "./TableViews/UserData";
 // Styles
 import { withStyles } from "@material-ui/core/styles";
 import style from "./adminStyle";
-import DemoTable from "./DemoTable";
 
 class AdminContent extends Component {
   render() {
@@ -16,7 +19,36 @@ class AdminContent extends Component {
           {this.props.url}
         </Typography>
         <br />
-        <DemoTable url={this.props.url} />
+        {(() => {
+          switch (this.props.url) {
+            case "Dashboard":
+              return (
+                <Fragment>
+                  <UserData />
+                  <br />
+                  <ProductData />
+                </Fragment>
+              );
+            case "Products":
+              return (
+                <Fragment>
+                  <ProductDialog />
+                  <br />
+                  <ProductData />
+                </Fragment>
+              );
+            case "Orders":
+              return (
+                <Fragment>
+                  <OrderData />
+                </Fragment>
+              );
+            case "Users":
+              return <UserData />;
+            default:
+              return null;
+          }
+        })()}
       </main>
     );
   }
