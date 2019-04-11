@@ -1,28 +1,41 @@
 import React, { Component, Fragment } from "react";
-import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
+import Badge from "@material-ui/core/Badge";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 // Imgs
 import Logo from "../../assets/logo2.jpg";
 // Icons
 import MoreIcon from "@material-ui/icons/MoreVert";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Icon from "@mdi/react";
 import { mdiFacebookBox, mdiInstagram } from "@mdi/js";
 // Styles
 import styles from "../styles";
 // Router
 import { Link, withRouter } from "react-router-dom";
-import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+import { Divider } from "@material-ui/core";
+// Redux
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { getCartProducts } from "../../reducers";
 
 class Header extends Component {
   state = {
     anchorEl: null
+  };
+
+  itemsInCar = products => {
+    var total = 0;
+    for (var i = 0; i < products.length; i++) {
+      total += products[i].quantity;
+    }
+    return total;
   };
 
   handleMenuOpen = event => {
@@ -61,14 +74,36 @@ class Header extends Component {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
+        <MenuItem>
+          <h5>{this.props.auth.user.name + " "}</h5>
+        </MenuItem>
+        <Divider />
         <MenuItem onClick={this.handleMenuClose}>
           <Link to="/profile" style={{ textDecoration: "none" }}>
-            Profile
+            Perfil
           </Link>
         </MenuItem>
         {adminMenu}
         <MenuItem onClick={this.onLogoutClick}>Log Out</MenuItem>
       </Menu>
+    );
+
+    const cartIcon = (
+      <Fragment>
+        <Badge
+          badgeContent={
+            this.props.products.length > 0
+              ? this.props.products.reduce(function(tot, record) {
+                  return tot + record.quantity;
+                }, 0)
+              : 0
+          }
+          color="primary"
+          classes={{ badge: this.props.classes.badge }}
+        >
+          <ShoppingCartIcon />
+        </Badge>
+      </Fragment>
     );
 
     return (
@@ -91,11 +126,15 @@ class Header extends Component {
             />
           </a>
           <div className={classes.grow} />
-          <Avatar alt="Logo" src={Logo} className={classes.toolbarTitle} />
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <Avatar alt="Logo" src={Logo} className={classes.toolbarTitle} />
+          </Link>
           <div className={classes.grow} />
           {this.props.auth.isAuthenticated ? (
             <Fragment>
-              <h5>{"Hola! " + this.props.auth.user.name}</h5>
+              <Link to="/cart" style={{ textDecoration: "none" }}>
+                <IconButton aria-label="Cart">{cartIcon}</IconButton>
+              </Link>
               <IconButton
                 aria-owns={isMenuOpen ? "material-appbar" : undefined}
                 aria-haspopup="true"
@@ -123,11 +162,20 @@ class Header extends Component {
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
   logoutUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  products: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      quantity: PropTypes.number.isRequired
+    })
+  ).isRequired
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  products: getCartProducts(state)
 });
 
 export default withRouter(

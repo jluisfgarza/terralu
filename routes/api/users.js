@@ -131,6 +131,21 @@ router.post("/login", (req, res) => {
   });
 });
 
+router.get('', jsonParser, (req, res) => {
+  let promise = new Promise(function (resolve, reject) {
+        User.find({}).select('name email address telephone orders').then(function (users) {
+          res.send(users);
+        });
+      })
+      .then(products => {
+          res.json(products);
+      })
+      .catch(err => {
+          return res.status(500).json(err);
+      })
+});
+
+
 // TODO
 // router.get('', jsonParser, (req, res) => {
 //   let promise = new Promise(function (resolve, reject) {
