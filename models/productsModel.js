@@ -8,6 +8,7 @@ const ProductSchema = new Schema({
     inStock : {type : Number, required : true},
     numBought : {type : Number, required : true},
     image : {data : Buffer, contentType : String},
+    photos: {type: Array, required: true},
 });
 
 const Product = mongoose.model("products", ProductSchema);
