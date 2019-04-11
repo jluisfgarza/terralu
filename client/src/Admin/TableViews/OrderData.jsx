@@ -8,25 +8,41 @@ const orders = [
 ];
 
 class OrderData extends Component {
-  constructor(){
+  constructor() {
     super();
-    this.state ={ordersData: []};
+    this.state = { ordersData: [] };
   }
-  componentDidMount(){
-    axios.get("/api/orders")
-    .then((res)=>{
-      const ordersData = res.data;
-      this.setState({ordersData});
-    }).catch((error)=>{
-      alert("Error could not fetch Orders");
-    });
+  componentDidMount() {
+    axios
+      .get("/api/orders")
+      .then(res => {
+        const ordersData = res.data;
+        this.setState({ ordersData });
+      })
+      .catch(error => {
+        alert("Error could not fetch Orders");
+      });
   }
-  render(){
-    return(
+  render() {
+    return (
       <MaterialTable
         columns={orders}
         data={this.state.ordersData}
         title="Orders"
+        // editable={{
+        //   onRowUpdate: (newData, oldData) =>
+        //     new Promise((resolve, reject) => {
+        //       setTimeout(() => {
+        //         {
+        //           /* const data = this.state.data;
+        //   const index = data.indexOf(oldData);
+        //   data[index] = newData;
+        //   this.setState({ data }, () => resolve()); */
+        //         }
+        //         resolve();
+        //       }, 1000);
+        //     })
+        // }}
       />
     );
   }
