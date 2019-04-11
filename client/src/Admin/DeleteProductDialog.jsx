@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import axios from "axios";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -14,6 +15,20 @@ class DeleteProductDialog extends React.Component {
 
   handleInit() {
     console.log("FilePond instance has initialised", this.pond);
+  }
+
+  handleSubmit = event => {
+    event.preventDefault();
+    const product = {
+      _id: this.props.product["_id"]
+    };
+    axios
+      .delete(`/api/products/${this.props.product["_id"]}`,  { data: product })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      });
+    this.props.handleCloseDelete();
   }
 
   render() {
@@ -40,7 +55,7 @@ class DeleteProductDialog extends React.Component {
             <Button onClick={this.props.handleCloseDelete} color="primary">
               Cancelar
             </Button>
-            <Button onClick={this.props.handleCloseDelete} color="primary">
+            <Button onClick={this.handleSubmit} color="primary">
               Confirmar
             </Button>
           </DialogActions>

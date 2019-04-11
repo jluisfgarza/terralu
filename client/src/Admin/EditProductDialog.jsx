@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import axios from "axios";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -45,6 +46,7 @@ function Transition(props) {
 
 class EditProductDialog extends React.Component {
   state = {
+    _id: "",
     title: "",
     description: "",
     price: 0,
@@ -57,6 +59,7 @@ class EditProductDialog extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.product !== this.props.product) {
       this.setState({
+        _id: this.props.product._id,
         title: this.props.product.title,
         description: this.props.product.description,
         price: this.props.product.price,
@@ -76,6 +79,16 @@ class EditProductDialog extends React.Component {
 
   handleInit() {
     console.log("FilePond instance has initialised", this.pond);
+  }
+
+  handleSubmit = event => {
+    event.preventDefault();
+    axios
+      .put(`/api/products/${this.props.product["_id"]}`, this.state)
+      .then(res => {
+        console.log(res);
+      });
+    this.props.handleClose();
   }
 
   render() {
@@ -199,7 +212,7 @@ class EditProductDialog extends React.Component {
             <Button onClick={this.props.handleClose} color="primary">
               Cancelar
             </Button>
-            <Button onClick={this.props.handleClose} color="primary">
+            <Button onClick={this.handleSubmit} color="primary">
               Agregar
             </Button>
           </DialogActions>

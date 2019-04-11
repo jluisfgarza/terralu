@@ -46,6 +46,7 @@ router.post('/products', jsonParser, (req, res) => {
             inStock: req.body.inStock,
             numBought: req.body.numBought,
             image: req.body.image,
+            photos: req.body.photos,
         });
     }).then(result => {
         res.status(201).json(result);
