@@ -5,7 +5,6 @@ import EditProductDialog from "../EditProductDialog";
 import DeleteProductDialog from "../DeleteProductDialog";
 
 const products = [
-  { title: "ID", field: "ID" },
   {
     title: "Image",
     field: "image",

@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import axios from "axios";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -71,6 +72,25 @@ class ProductDialog extends React.Component {
 
   handleInit() {
     console.log("FilePond instance has initialised", this.pond);
+  }
+
+  handleSubmit = event => {
+    event.preventDefault();
+    const product = {
+      title: this.state.title,
+      description: this.state.description,
+      price: this.state.price,
+      inStock: this.state.inStock,
+      numBought: this.state.inStock,
+      image: this.state.inStock,
+      photos: this.state.photos
+    }
+    axios
+      .post('/api/products', product)
+      .then(res => {
+        console.log(res);
+      });
+    this.handleClose();
   }
 
   render() {
@@ -202,7 +222,7 @@ class ProductDialog extends React.Component {
             <Button onClick={this.handleClose} color="primary">
               Cancelar
             </Button>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.handleSubmit} color="primary">
               Agregar
             </Button>
           </DialogActions>
