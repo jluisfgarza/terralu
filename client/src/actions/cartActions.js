@@ -1,4 +1,4 @@
-import shop from '../api/shop'
+import shop from '../Store/api/shop'
 import * as types from './types'
 
 const receiveProducts = products => ({

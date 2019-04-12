@@ -15,9 +15,13 @@ import Remove from "@material-ui/icons/Remove";
 // Redux
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { checkout, addToCart, removeFromCart } from "../../actions/cartActions";
-import { getVisibleProducts } from "../../reducers/Cart/productsReducer";
-import { getTotal, getCartProducts } from "../../reducers";
+import {
+  checkout,
+  addToCart,
+  removeFromCart
+} from "../../../actions/cartActions";
+import { getVisibleProducts } from "../../../reducers/Cart/productsReducer";
+import { getTotal, getCartProducts } from "../../../reducers";
 
 const styles = theme => ({
   card: {

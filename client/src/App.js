@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 // Components
-import Login from "./components/Auth/Login";
-import Register from "./components/Auth/Register";
-import Content from "./Content";
-import PrivateRoute from "./components/private-route/PrivateRoute";
-import AdminPrivateRoute from "./components/private-route/AdminPrivateRoute";
+import Login from "./Store/components/Auth/Login";
+import Register from "./Store/components/Auth/Register";
+import Content from "./Store/Content";
+import PrivateRoute from "./Store/components/private-route/PrivateRoute";
+import AdminPrivateRoute from "./Store/components/private-route/AdminPrivateRoute";
 import Admin from "./Admin/Admin";
 // Router
 import { Switch, Route } from "react-router-dom";
