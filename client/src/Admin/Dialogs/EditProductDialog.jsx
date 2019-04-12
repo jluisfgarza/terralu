@@ -77,10 +77,6 @@ class EditProductDialog extends React.Component {
     });
   };
 
-  handleInit() {
-    console.log("FilePond instance has initialised", this.pond);
-  }
-
   handleSubmit = event => {
     event.preventDefault();
     axios
@@ -88,18 +84,18 @@ class EditProductDialog extends React.Component {
       .then(res => {
         console.log(res);
       });
-    this.props.handleClose();
-  }
+    this.props.handleReload();
+    this.props.handleCloseEdit();
+  };
 
   render() {
     const { classes } = this.props;
     return (
       <Fragment>
         <Dialog
-          open={this.props.open}
+          open={this.props.openEdit}
           TransitionComponent={Transition}
-          keepMounted
-          onClose={this.handleClose}
+          onClose={this.handleCloseEdit}
           aria-labelledby="EditProductDialog"
         >
           <DialogTitle id="EditProductDialog">Editar producto</DialogTitle>
@@ -177,8 +173,6 @@ class EditProductDialog extends React.Component {
                   files={this.state.image}
                   allowMultiple={true}
                   maxFiles={1}
-                  // server="/api"
-                  oninit={() => this.handleInit()}
                   onupdatefiles={fileItems => {
                     this.setState({
                       image: fileItems.map(fileItem => fileItem.file)
@@ -196,8 +190,6 @@ class EditProductDialog extends React.Component {
                   files={this.state.photos}
                   allowMultiple={true}
                   maxFiles={3}
-                  // server="/api"
-                  oninit={() => this.handleInit()}
                   onupdatefiles={fileItems => {
                     this.setState({
                       photos: fileItems.map(fileItem => fileItem.file)
@@ -209,7 +201,7 @@ class EditProductDialog extends React.Component {
             </Grid>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.props.handleClose} color="primary">
+            <Button onClick={this.props.handleCloseEdit} color="primary">
               Cancelar
             </Button>
             <Button onClick={this.handleSubmit} color="primary">

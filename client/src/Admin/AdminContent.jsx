@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 // Components
 import Typography from "@material-ui/core/Typography";
-import ProductDialog from "./ProductDialog.jsx";
 import ProductData from "./TableViews/ProductData";
 import OrderData from "./TableViews/OrderData";
 import UserData from "./TableViews/UserData";
@@ -18,7 +17,6 @@ class AdminContent extends Component {
         <Typography variant="h4" gutterBottom>
           {this.props.url}
         </Typography>
-        <br />
         {(() => {
           switch (this.props.url) {
             case "Dashboard":
@@ -26,16 +24,13 @@ class AdminContent extends Component {
                 <Fragment>
                   <UserData />
                   <br />
-                  <ProductData sizeNum={5} actions={false} />
+                  <ProductData sizeNum={5} actions={false} hideAdd={true} />
                 </Fragment>
               );
             case "Products":
               return (
                 <Fragment>
-                  <ProductDialog />
-                  <br />
-                  <br />
-                  <ProductData sizeNum={10} actions={true} />
+                  <ProductData sizeNum={10} actions={true} hideAdd={false} />
                 </Fragment>
               );
             case "Orders":

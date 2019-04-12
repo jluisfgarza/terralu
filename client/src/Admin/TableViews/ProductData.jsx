@@ -1,10 +1,20 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
 import MaterialTable from "material-table";
-import EditProductDialog from "../EditProductDialog";
-import DeleteProductDialog from "../DeleteProductDialog";
+import Button from "@material-ui/core/Button";
+import { withStyles } from "@material-ui/core/styles";
+import AddProductDialog from "../Dialogs/AddProductDialog";
+import EditProductDialog from "../Dialogs/EditProductDialog";
+import DeleteProductDialog from "../Dialogs/DeleteProductDialog";
+
+const styles = theme => ({
+  button: {
+    margin: 10
+  }
+});
 
 const products = [
+  { title: "ID", field: "_id", hidden: true },
   {
     title: "Image",
     field: "image",
@@ -40,16 +50,17 @@ const products = [
 class ProductData extends Component {
   state = {
     product: null,
-    open: false,
-    openDelete: false
+    openEdit: false,
+    openDelete: false,
+    openAdd: false
   };
 
   editDialog = product => {
     this.setState({
-      open: true,
+      openEdit: true,
       product: product
     });
-    console.log(product);
+    // console.log(product);
   };
 
   deleteDialog = product => {
@@ -57,26 +68,34 @@ class ProductData extends Component {
       openDelete: true,
       product: product
     });
-    console.log(product);
+    // console.log(product);
   };
 
-  handleClickOpen = () => {
-    this.setState({ open: true });
+  handleClickOpenAdd = () => {
+    this.setState({ openAdd: true });
+  };
+
+  handleCloseAdd = () => {
+    this.setState({ openAdd: false });
+  };
+
+  handleClickOpenEdit = () => {
+    this.setState({ openEdit: true });
+  };
+
+  handleCloseEdit = () => {
+    this.setState({ openEdit: false });
   };
 
   handleClickOpenDelete = () => {
     this.setState({ openDelete: true });
   };
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
-
   handleCloseDelete = () => {
     this.setState({ openDelete: false });
   };
 
-  componentDidMount() {
+  handleReload = () => {
     axios
       .get("/api/products")
       .then(res => {
@@ -87,10 +106,14 @@ class ProductData extends Component {
       .catch(error => {
         alert("Error could not fetch Products");
       });
+  };
+
+  componentDidMount() {
+    this.handleReload();
   }
 
   render() {
-    const { sizeNum } = this.props;
+    const { sizeNum, classes } = this.props;
 
     var actionsConfig = [
       {
@@ -123,6 +146,26 @@ class ProductData extends Component {
 
     return (
       <Fragment>
+        {!this.props.hideAdd ? (
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={this.handleClickOpenAdd}
+            className={classes.button}
+          >
+            Agregar Producto
+          </Button>
+        ) : (
+          <Fragment />
+        )}
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={this.handleReload}
+          className={classes.button}
+        >
+          Refresh
+        </Button>
         <MaterialTable
           columns={products}
           data={this.state.productsData}
@@ -150,23 +193,33 @@ class ProductData extends Component {
           options={{
             actionsColumnIndex: -1,
             pageSize: sizeNum,
-            doubleHorizontalScroll: false
+            doubleHorizontalScroll: false,
+            columnsButton: true,
+            exportButton: true
           }}
         />
+        <AddProductDialog
+          openAdd={this.state.openAdd}
+          handleClickOpenAdd={this.handleClickOpenAdd}
+          handleCloseAdd={this.handleCloseAdd}
+          handleReload={this.handleReload}
+        />
         <EditProductDialog
-          open={this.state.open}
+          openEdit={this.state.openEdit}
           product={this.state.product}
-          handleClickOpen={this.handleClickOpen}
-          handleClose={this.handleClose}
+          handleClickOpenEdit={this.handleClickOpenEdit}
+          handleCloseEdit={this.handleCloseEdit}
+          handleReload={this.handleReload}
         />
         <DeleteProductDialog
           openDelete={this.state.openDelete}
           product={this.state.product}
           handleClickOpenDelete={this.handleClickOpenDelete}
           handleCloseDelete={this.handleCloseDelete}
+          handleReload={this.handleReload}
         />
       </Fragment>
     );
   }
 }
-export default ProductData;
+export default withStyles(styles)(ProductData);

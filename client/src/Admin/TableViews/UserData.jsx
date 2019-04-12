@@ -3,33 +3,36 @@ import axios from "axios";
 import MaterialTable from "material-table";
 
 const users = [
-    { title: "Name", field: "name" },
-    { title: "Surename", field: "surname" },
-    { title: "Email", field: "email" },
-    { title: "Telephone", field: "telephone", type: "numeric" },
-    { title: "Address", field: "address" }
+  { title: "Name", field: "name" },
+  { title: "Surename", field: "surname" },
+  { title: "Email", field: "email" },
+  { title: "Telephone", field: "telephone", type: "numeric" },
+  { title: "Address", field: "address" }
 ];
 
 class UserData extends Component {
-  constructor(){
+  constructor() {
     super();
-    this.state ={usersData: []};
+    this.state = { usersData: [] };
   }
-  componentDidMount(){
-    axios.get("/api/users")
-    .then((res)=>{
-      const usersData = res.data;
-      this.setState({usersData});
-    }).catch((error)=>{
-      alert("Error could not fetch Users");
-    });
+  componentDidMount() {
+    axios
+      .get("/api/users")
+      .then(res => {
+        const usersData = res.data;
+        this.setState({ usersData });
+      })
+      .catch(error => {
+        alert("Error could not fetch Users");
+      });
   }
-  render(){
-    return(
+  render() {
+    return (
       <MaterialTable
         columns={users}
         data={this.state.usersData}
         title="Users"
+        options={{ columnsButton: true, exportButton: true }}
       />
     );
   }

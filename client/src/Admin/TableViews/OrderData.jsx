@@ -29,6 +29,7 @@ class OrderData extends Component {
         columns={orders}
         data={this.state.ordersData}
         title="Orders"
+        options={{ columnsButton: true, exportButton: true }}
         // editable={{
         //   onRowUpdate: (newData, oldData) =>
         //     new Promise((resolve, reject) => {
