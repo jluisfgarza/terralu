@@ -15,7 +15,7 @@ const styles = theme => ({
     flexGrow: 1
   },
   socialIcons: {
-    margin: theme.spacing.unit * 0.5
+    margin: 6.5
   },
   toolbarMain: {
     borderBottom: `1px solid ${theme.palette.grey[300]}`
@@ -24,8 +24,7 @@ const styles = theme => ({
     flexGrow: 0,
     margin: 10,
     width: 60,
-    height: 60,
-    marginLeft: 15
+    height: 60
   },
   toolbarSecondary: {
     justifyContent: "space-between"

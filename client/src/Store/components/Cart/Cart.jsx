@@ -143,7 +143,11 @@ class Cart extends Component {
         </Grid>
       ))
     ) : (
-      <em>Please add some products to cart.</em>
+      <Grid item xs={12} md={12}>
+        <Typography variant="subtitle1" color="primary">
+          Please add some products to cart.
+        </Typography>
+      </Grid>
     );
 
     return (

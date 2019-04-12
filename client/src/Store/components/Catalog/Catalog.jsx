@@ -76,17 +76,15 @@ class Catalog extends Component {
           {this.props.products.map(node => (
             <Grid item key={node.id} xs={12} sm={6} md={4} lg={3}>
               <Card className={classes.card}>
-                <CardContent className={classes.cardContent}>
-                  <Typography variant="h5" className={classes.button}>
-                    {node.title}
-                  </Typography>
-                </CardContent>
                 <CardMedia
                   className={classes.cardMedia}
                   image={node.thumb}
                   title={node.title}
                 />
                 <CardContent className={classes.cardContent}>
+                  <Typography variant="h5" className={classes.button}>
+                    {node.title}
+                  </Typography>
                   <Typography className={classes.pos} color="textSecondary">
                     {node.description}
                   </Typography>

@@ -62,9 +62,7 @@ class Header extends Component {
             Admin Panel
           </Link>
         </MenuItem>
-      ) : (
-        <Fragment />
-      );
+      ) : null;
 
     const renderMenu = (
       <Menu
