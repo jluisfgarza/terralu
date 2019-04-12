@@ -205,7 +205,7 @@ class EditProductDialog extends React.Component {
               Cancelar
             </Button>
             <Button onClick={this.handleSubmit} color="primary">
-              Agregar
+              Actualizar
             </Button>
           </DialogActions>
         </Dialog>
