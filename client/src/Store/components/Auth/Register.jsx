@@ -80,7 +80,7 @@ class Register extends Component {
       telephone: this.state.telephone,
       address: this.state.address
     };
-    console.log(newUser);
+    // console.log(newUser);
     this.props.registerUser(newUser, this.props.history);
   };
 

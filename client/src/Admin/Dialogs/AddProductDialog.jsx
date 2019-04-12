@@ -73,7 +73,7 @@ class AddProductDialog extends React.Component {
       photos: this.state.photos
     };
     axios.post("/api/products", product).then(res => {
-      console.log(res);
+      // console.log(res);
     });
     this.props.handleReload();
     this.props.handleCloseAdd();

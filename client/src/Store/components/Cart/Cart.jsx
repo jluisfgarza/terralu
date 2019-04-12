@@ -46,13 +46,13 @@ class Cart extends Component {
   };
 
   addCart = item => {
-    console.log(item);
+    // console.log(item);
     this.handleClick(item.title, "a");
     this.props.addToCart(item.id);
   };
 
   removeCart = item => {
-    console.log(item);
+    // console.log(item);
     this.handleClick(item.title, "r");
     this.props.removeFromCart(item.id);
   };
