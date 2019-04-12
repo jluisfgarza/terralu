@@ -82,7 +82,7 @@ class EditProductDialog extends React.Component {
     axios
       .put(`/api/products/${this.props.product["_id"]}`, this.state)
       .then(res => {
-        console.log(res);
+        // console.log(res);
       });
     this.props.handleReload();
     this.props.handleCloseEdit();
