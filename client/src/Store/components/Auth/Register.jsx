@@ -6,8 +6,6 @@ import {
   Paper,
   Button,
   FormControl,
-  MuiThemeProvider,
-  createMuiTheme,
   CssBaseline,
   TextField
 } from "@material-ui/core";
@@ -23,14 +21,6 @@ import Logo from "../../assets/logo.jpg";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../../../actions/authActions";
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#388e3c"
-    }
-  }
-});
 
 class Register extends Component {
   constructor() {
@@ -105,102 +95,100 @@ class Register extends Component {
                 </Link>
               </p>
               <form noValidate onSubmit={this.onSubmit}>
-                <MuiThemeProvider theme={theme}>
-                  <FormControl margin="normal" required fullWidth>
-                    <TextField
-                      autoFocus
-                      autoComplete="name"
-                      name="name"
-                      label="Name"
-                      id="name"
-                      type="text"
-                      helperText={errors.name}
-                      onChange={this.onChange}
-                      value={this.state.name}
-                      error={errors.name ? true : false}
-                    />
-                  </FormControl>
-                  <FormControl margin="normal" required fullWidth>
-                    <TextField
-                      autoFocus
-                      autoComplete="email"
-                      name="email"
-                      label="Email"
-                      id="email"
-                      type="email"
-                      helperText={errors.email}
-                      onChange={this.onChange}
-                      value={this.state.email}
-                      error={errors.email ? true : false}
-                    />
-                  </FormControl>
-                  <FormControl margin="normal" required fullWidth>
-                    <TextField
-                      autoFocus
-                      autoComplete="telephone"
-                      name="telephone"
-                      label="Telephone"
-                      id="telephone"
-                      type="number"
-                      helperText={errors.telephone}
-                      onChange={this.onChange}
-                      value={this.state.telephone}
-                      error={errors.telephone ? true : false}
-                    />
-                  </FormControl>
-                  <FormControl margin="normal" required fullWidth>
-                    <TextField
-                      autoFocus
-                      autoComplete="address"
-                      name="address"
-                      label="Address"
-                      id="address"
-                      type="text"
-                      helperText={errors.address}
-                      onChange={this.onChange}
-                      value={this.state.address}
-                      error={errors.address ? true : false}
-                    />
-                  </FormControl>
-                  <FormControl margin="normal" required fullWidth>
-                    <TextField
-                      autoFocus
-                      autoComplete="password"
-                      name="password"
-                      label="Password"
-                      id="password"
-                      type="password"
-                      helperText={errors.password}
-                      onChange={this.onChange}
-                      value={this.state.password}
-                      error={errors.password ? true : false}
-                    />
-                  </FormControl>
-                  <FormControl margin="normal" required fullWidth>
-                    <TextField
-                      autoFocus
-                      autoComplete="password"
-                      name="password2"
-                      label="Confirm Password"
-                      id="password2"
-                      type="password"
-                      helperText={errors.password2}
-                      onChange={this.onChange}
-                      value={this.state.password2}
-                      error={errors.password2 ? true : false}
-                    />
-                  </FormControl>
+                <FormControl margin="normal" required fullWidth>
+                  <TextField
+                    autoFocus
+                    autoComplete="name"
+                    name="name"
+                    label="Name"
+                    id="name"
+                    type="text"
+                    helperText={errors.name}
+                    onChange={this.onChange}
+                    value={this.state.name}
+                    error={errors.name ? true : false}
+                  />
+                </FormControl>
+                <FormControl margin="normal" required fullWidth>
+                  <TextField
+                    autoFocus
+                    autoComplete="email"
+                    name="email"
+                    label="Email"
+                    id="email"
+                    type="email"
+                    helperText={errors.email}
+                    onChange={this.onChange}
+                    value={this.state.email}
+                    error={errors.email ? true : false}
+                  />
+                </FormControl>
+                <FormControl margin="normal" required fullWidth>
+                  <TextField
+                    autoFocus
+                    autoComplete="telephone"
+                    name="telephone"
+                    label="Telephone"
+                    id="telephone"
+                    type="number"
+                    helperText={errors.telephone}
+                    onChange={this.onChange}
+                    value={this.state.telephone}
+                    error={errors.telephone ? true : false}
+                  />
+                </FormControl>
+                <FormControl margin="normal" required fullWidth>
+                  <TextField
+                    autoFocus
+                    autoComplete="address"
+                    name="address"
+                    label="Address"
+                    id="address"
+                    type="text"
+                    helperText={errors.address}
+                    onChange={this.onChange}
+                    value={this.state.address}
+                    error={errors.address ? true : false}
+                  />
+                </FormControl>
+                <FormControl margin="normal" required fullWidth>
+                  <TextField
+                    autoFocus
+                    autoComplete="password"
+                    name="password"
+                    label="Password"
+                    id="password"
+                    type="password"
+                    helperText={errors.password}
+                    onChange={this.onChange}
+                    value={this.state.password}
+                    error={errors.password ? true : false}
+                  />
+                </FormControl>
+                <FormControl margin="normal" required fullWidth>
+                  <TextField
+                    autoFocus
+                    autoComplete="password"
+                    name="password2"
+                    label="Confirm Password"
+                    id="password2"
+                    type="password"
+                    helperText={errors.password2}
+                    onChange={this.onChange}
+                    value={this.state.password2}
+                    error={errors.password2 ? true : false}
+                  />
+                </FormControl>
 
-                  <Button
-                    fullWidth
-                    className={classes.submit}
-                    variant="contained"
-                    type="submit"
-                    color="primary"
-                  >
-                    Sign Up
-                  </Button>
-                </MuiThemeProvider>
+                <Button
+                  fullWidth
+                  className={classes.submit}
+                  variant="contained"
+                  type="submit"
+                  color="primary"
+                >
+                  Sign Up
+                </Button>
               </form>
             </Paper>
             <ErrorDialog

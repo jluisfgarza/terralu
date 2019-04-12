@@ -1,10 +1,9 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
+import Avatar from "@material-ui/core/Avatar";
 import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-// Icons
-import Icon from "@mdi/react";
-import { mdiFacebookBox, mdiInstagram } from "@mdi/js";
+// Imgs
+import Logo from "../../assets/logo2.jpg";
 // Styles
 import styles from "../styles";
 
@@ -15,25 +14,7 @@ class Footer extends Component {
       <Fragment>
         <footer className={classes.footer}>
           <center>
-            <Typography variant="h6" gutterBottom>
-              TerralúMX
-            </Typography>
-            <a href="https://www.facebook.com/terralumx/" target="blank">
-              <Icon
-                className={classes.socialIcons}
-                path={mdiFacebookBox}
-                size={1.3}
-                color="grey"
-              />
-            </a>
-            <a href="https://www.instagram.com/terralumx/" target="blank">
-              <Icon
-                className={classes.socialIcons}
-                path={mdiInstagram}
-                size={1.3}
-                color="grey"
-              />
-            </a>
+            <Avatar alt="Logo" src={Logo} className={classes.toolbarTitle} />
           </center>
         </footer>
       </Fragment>

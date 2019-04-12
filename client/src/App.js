@@ -6,6 +6,10 @@ import Content from "./Store/Content";
 import PrivateRoute from "./Store/components/private-route/PrivateRoute";
 import AdminPrivateRoute from "./Store/components/private-route/AdminPrivateRoute";
 import Admin from "./Admin/Admin";
+import {
+  MuiThemeProvider,
+  createMuiTheme,
+} from "@material-ui/core";
 // Router
 import { Switch, Route } from "react-router-dom";
 // Auth
@@ -38,15 +42,27 @@ if (localStorage.jwtToken) {
   }
 }
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#388e3c"
+    }
+  },
+  typography: {
+    useNextVariants: true
+  }
+});
+
 class App extends Component {
   render() {
     return (
+      <MuiThemeProvider theme={theme}>
       <Provider store={store}>
         <BrowserRouter basename={"/website/"}>
           <Switch>
-            <Route exact path="/" component={Content} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/" component={Content} />
             <PrivateRoute exact path="/store" component={Content} />
             <PrivateRoute exact path="/profile" component={Content} />
             <PrivateRoute exact path="/cart" component={Content} />
@@ -58,6 +74,7 @@ class App extends Component {
           </Switch>
         </BrowserRouter>
       </Provider>
+      </MuiThemeProvider>
     );
   }
 }

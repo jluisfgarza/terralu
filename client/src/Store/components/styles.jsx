@@ -72,8 +72,8 @@ const styles = theme => ({
   },
   footer: {
     backgroundColor: theme.palette.grey[200],
-    marginTop: theme.spacing.unit * 8,
-    padding: `${theme.spacing.unit * 6}px 0`
+    marginTop: theme.spacing.unit * 4,
+    padding: `${theme.spacing.unit * 1}px 0`
   },
   button: {
     marginLeft: 10

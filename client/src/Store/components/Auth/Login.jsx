@@ -6,8 +6,6 @@ import {
   Paper,
   Button,
   FormControl,
-  MuiThemeProvider,
-  createMuiTheme,
   CssBaseline,
   TextField
 } from "@material-ui/core";
@@ -23,14 +21,6 @@ import Logo from "../../assets/logo.jpg";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../../actions/authActions";
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#388e3c"
-    }
-  }
-});
 
 class Login extends Component {
   constructor(props) {
@@ -111,55 +101,46 @@ class Login extends Component {
                 noValidate
                 onSubmit={this.onSubmit}
               >
-                <MuiThemeProvider theme={theme}>
-                  <FormControl margin="normal" required fullWidth>
-                    <TextField
-                      autoFocus
-                      autoComplete="email"
-                      type="email"
-                      name="email"
-                      id="email"
-                      label={"Email"}
-                      helperText={errors.email || errors.emailnotfound}
-                      onChange={this.onChange}
-                      value={this.state.email}
-                      error={errors.email ? true : false}
-                    />
-                  </FormControl>
-                  <FormControl margin="normal" required fullWidth>
-                    <TextField
-                      autoComplete="current-password"
-                      id="password"
-                      label={"Password"}
-                      name="password"
-                      type="password"
-                      helperText={errors.password || errors.passwordincorrect}
-                      onChange={this.onChange}
-                      value={this.state.password}
-                      error={
-                        errors.password || errors.passwordincorrect
-                          ? true
-                          : false
-                      }
-                    />
-                  </FormControl>
-                  <Button
-                    fullWidth
-                    className={classes.submit}
-                    variant="contained"
-                    type="submit"
-                    color="primary"
-                  >
-                    Sign in
-                  </Button>
-                </MuiThemeProvider>
+                <FormControl margin="normal" required fullWidth>
+                  <TextField
+                    autoFocus
+                    autoComplete="email"
+                    type="email"
+                    name="email"
+                    id="email"
+                    label={"Email"}
+                    helperText={errors.email || errors.emailnotfound}
+                    onChange={this.onChange}
+                    value={this.state.email}
+                    error={errors.email ? true : false}
+                  />
+                </FormControl>
+                <FormControl margin="normal" required fullWidth>
+                  <TextField
+                    autoComplete="current-password"
+                    id="password"
+                    label={"Password"}
+                    name="password"
+                    type="password"
+                    helperText={errors.password || errors.passwordincorrect}
+                    onChange={this.onChange}
+                    value={this.state.password}
+                    error={
+                      errors.password || errors.passwordincorrect ? true : false
+                    }
+                  />
+                </FormControl>
+                <Button
+                  fullWidth
+                  className={classes.submit}
+                  variant="contained"
+                  type="submit"
+                  color="primary"
+                >
+                  Sign in
+                </Button>
               </form>
             </Paper>
-            {/* <ErrorDialog
-              error={this.state.errors}
-              openDialog={this.state.openDialog}
-              dialogClose={this.dialogClose}
-            /> */}
           </div>
         </div>
       </Fragment>
