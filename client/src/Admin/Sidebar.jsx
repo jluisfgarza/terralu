@@ -95,14 +95,12 @@ class Sidebar extends Component {
           </List>
           <Divider />
           <List>
-            {/* <Link to="/login"> */}
             <ListItem button key="LogOut" onClick={this.props.handleLogOut}>
               <ListItemIcon>
                 <ExitToApp />
               </ListItemIcon>
               <ListItemText primary="Log Out" />
             </ListItem>
-            {/* </Link> */}
           </List>
         </Drawer>
       </div>

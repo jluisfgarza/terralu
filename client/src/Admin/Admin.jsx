@@ -20,6 +20,8 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import style from "./adminStyle";
+// Router
+import { Link, withRouter } from "react-router-dom";
 // Redux
 import { connect } from "react-redux";
 import { logoutUser } from "../actions/authActions";
@@ -63,6 +65,9 @@ class Admin extends Component {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
+        <Link to="/store" style={{ textDecoration: "none" }}>
+          <MenuItem onClick={this.handleMenuClose}>Tienda</MenuItem>
+        </Link>
         <MenuItem onClick={this.onLogoutClick}>Log Out</MenuItem>
       </Menu>
     );
@@ -137,7 +142,9 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(
-  mapStateToProps,
-  { logoutUser }
-)(withStyles(style, { withTheme: true })(Admin));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { logoutUser }
+  )(withStyles(style, { withTheme: true })(Admin))
+);

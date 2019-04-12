@@ -57,11 +57,9 @@ class Header extends Component {
     const isMenuOpen = Boolean(anchorEl);
     const adminMenu =
       this.props.auth.user.type === "admin" ? (
-        <MenuItem>
-          <Link to="/admin" style={{ textDecoration: "none" }}>
-            Admin Panel
-          </Link>
-        </MenuItem>
+        <Link to="/admin" style={{ textDecoration: "none" }}>
+          <MenuItem>Admin Panel</MenuItem>
+        </Link>
       ) : null;
 
     const renderMenu = (
@@ -76,11 +74,9 @@ class Header extends Component {
           <h5>{this.props.auth.user.name + " "}</h5>
         </MenuItem>
         <Divider />
-        <MenuItem onClick={this.handleMenuClose}>
-          <Link to="/profile" style={{ textDecoration: "none" }}>
-            Perfil
-          </Link>
-        </MenuItem>
+        <Link to="/profile" style={{ textDecoration: "none" }}>
+          <MenuItem onClick={this.handleMenuClose}>Perfil</MenuItem>
+        </Link>
         {adminMenu}
         <MenuItem onClick={this.onLogoutClick}>Log Out</MenuItem>
       </Menu>
