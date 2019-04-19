@@ -48,13 +48,13 @@ class Cart extends Component {
   addCart = item => {
     // console.log(item);
     this.handleClick(item.title, "a");
-    this.props.addToCart(item.id);
+    this.props.addToCart(item._id);
   };
 
   removeCart = item => {
     // console.log(item);
     this.handleClick(item.title, "r");
-    this.props.removeFromCart(item.id);
+    this.props.removeFromCart(item._id);
   };
 
   handleClick = (message, c) => {
@@ -96,7 +96,7 @@ class Cart extends Component {
     const hasProducts = this.props.cartProducts.length > 0;
     const nodes = hasProducts ? (
       this.props.cartProducts.map(product => (
-        <Grid item key={product.id} xs={12} md={6}>
+        <Grid item key={product._id} xs={12} md={6}>
           <Card className={classes.card}>
             <div className={classes.cardDetails}>
               <CardContent>
@@ -114,11 +114,6 @@ class Cart extends Component {
                   variant="contained"
                   className={classes.button}
                   onClick={this.addCart.bind(this, product)}
-                  disabled={
-                    this.props.storeProducts[product.id - 1].inStock > 0
-                      ? false
-                      : true
-                  }
                 >
                   <AddIcon />
                 </Button>
@@ -132,13 +127,13 @@ class Cart extends Component {
                 </Button>
               </CardContent>
             </div>
-            <Hidden xsDown>
+            {/* <Hidden xsDown>
               <CardMedia
                 className={classes.cardMedia}
-                image={product.thumb}
+                image={product.image}
                 title={product.title}
               />
-            </Hidden>
+            </Hidden> */}
           </Card>
         </Grid>
       ))
@@ -179,7 +174,7 @@ Cart.propTypes = {
   theme: PropTypes.object.isRequired,
   cartProducts: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      _id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
       quantity: PropTypes.number.isRequired
@@ -187,7 +182,7 @@ Cart.propTypes = {
   ).isRequired,
   storeProducts: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      _id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,

@@ -20,7 +20,7 @@ const addToCartUnsafe = productId => ({
 export const addToCart = productId => (dispatch, getState) => {
   if (getState().products.byId[productId].inStock > 0) {
     dispatch(addToCartUnsafe(productId))
-  }
+  } else alert ("Ya no hay inventario!")
 }
 
 const removeFromCartUnsafe = productId => ({

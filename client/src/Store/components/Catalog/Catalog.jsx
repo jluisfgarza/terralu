@@ -89,11 +89,11 @@ class Catalog extends Component {
       this.props.products.map(node => (
         <Grid item key={node._id} xs={12} sm={6} md={4} lg={3}>
           <Card className={classes.card}>
-            <CardMedia
+            {/* <CardMedia
               className={classes.cardMedia}
               image={node.image}
               title={node.title}
-            />
+            /> */}
             <CardContent className={classes.cardContent}>
               <Typography variant="h5" className={classes.button}>
                 {node.title}
