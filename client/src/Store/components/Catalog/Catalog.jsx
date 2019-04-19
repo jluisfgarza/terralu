@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import axios from "axios";
 // Components
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from "@material-ui/core/Grid";
 import Notification from "../Notification/Notification";
 import Typography from "@material-ui/core/Typography";
@@ -24,13 +26,14 @@ class Catalog extends Component {
   queue = [];
   state = {
     notif: false,
-    messageInfo: {}
+    messageInfo: {},
+    loading: true
   };
 
   addCart = item => {
     //console.log(item);
     this.handleClick(item.title, "a");
-    this.props.addToCart(item.id);
+    this.props.addToCart(item._id);
   };
 
   handleClick = (message, c) => {
@@ -67,49 +70,65 @@ class Catalog extends Component {
     this.processQueue();
   };
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.products !== this.props.products) {
+      this.setState({
+        loading: false
+      });
+      console.log(this.props.products);
+    }
+  }
+
   render() {
     const { classes } = this.props;
+
+    const render = this.state.loading ? (
+      <CircularProgress disableShrink className={classes.center} />
+    ) : (
+      this.props.products &&
+      this.props.products.map(node => (
+        <Grid item key={node._id} xs={12} sm={6} md={4} lg={3}>
+          <Card className={classes.card}>
+            <CardMedia
+              className={classes.cardMedia}
+              image={node.image}
+              title={node.title}
+            />
+            <CardContent className={classes.cardContent}>
+              <Typography variant="h5" className={classes.button}>
+                {node.title}
+              </Typography>
+              <Typography className={classes.pos} color="textSecondary">
+                {node.description}
+              </Typography>
+            </CardContent>
+            <CardActions className={classes.CardActions}>
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.button}
+                onClick={this.addCart.bind(this, node)}
+                disabled={node.inStock > 0 ? false : true}
+              >
+                <CartIcon />
+              </Button>
+              <Typography
+                variant="h6"
+                color="textSecondary"
+                className={classes.button}
+              >
+                {node.inStock > 0 ? `$${node.price} MXN` : "Out of Stock"}
+              </Typography>
+            </CardActions>
+          </Card>
+        </Grid>
+      ))
+    );
 
     return (
       <div className={classNames(classes.layout, classes.cardGrid)}>
         <Grid container spacing={40}>
-          {this.props.products.map(node => (
-            <Grid item key={node.id} xs={12} sm={6} md={4} lg={3}>
-              <Card className={classes.card}>
-                <CardMedia
-                  className={classes.cardMedia}
-                  image={node.thumb}
-                  title={node.title}
-                />
-                <CardContent className={classes.cardContent}>
-                  <Typography variant="h5" className={classes.button}>
-                    {node.title}
-                  </Typography>
-                  <Typography className={classes.pos} color="textSecondary">
-                    {node.description}
-                  </Typography>
-                </CardContent>
-                <CardActions className={classes.CardActions}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    className={classes.button}
-                    onClick={this.addCart.bind(this, node)}
-                    disabled={node.inStock > 0 ? false : true}
-                  >
-                    <CartIcon />
-                  </Button>
-                  <Typography
-                    variant="h6"
-                    color="textSecondary"
-                    className={classes.button}
-                  >
-                    {node.inStock > 0 ? `$${node.price} MXN` : "Out of Stock"}
-                  </Typography>
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
+          {render}
         </Grid>
         <Notification
           msg={this.state.messageInfo}
@@ -127,7 +146,7 @@ Catalog.propTypes = {
   theme: PropTypes.object.isRequired,
   products: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      _id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,

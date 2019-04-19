@@ -12,19 +12,19 @@ export default combineReducers({
 })
 
 const getAddedIds = state => fromCart.getAddedIds(state.cart)
-const getQuantity = (state, id) => fromCart.getQuantity(state.cart, id)
-const getProduct = (state, id) => fromProducts.getProduct(state.products, id)
+const getQuantity = (state, _id) => fromCart.getQuantity(state.cart, _id)
+const getProduct = (state, _id) => fromProducts.getProduct(state.products, _id)
 
 export const getTotal = state =>
   getAddedIds(state)
-    .reduce((total, id) =>
-      total + getProduct(state, id).price * getQuantity(state, id),
+    .reduce((total, _id) =>
+      total + getProduct(state, _id).price * getQuantity(state, _id),
       0
     )
     .toFixed(2)
 
 export const getCartProducts = state =>
-  getAddedIds(state).map(id => ({
-    ...getProduct(state, id),
-    quantity: getQuantity(state, id)
+  getAddedIds(state).map(_id => ({
+    ...getProduct(state, _id),
+    quantity: getQuantity(state, _id)
   }))

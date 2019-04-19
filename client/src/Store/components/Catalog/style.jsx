@@ -35,6 +35,10 @@ const styles = theme => ({
     margin: theme.spacing.unit,
     marginLeft: "auto",
     marginRight: "auto"
+  },
+  center: {
+    marginLeft: "auto",
+    marginRight: "auto"
   }
 });
 
