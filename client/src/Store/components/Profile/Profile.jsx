@@ -1,43 +1,58 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
 
 const styles = theme => ({
   root: {
     flexGrow: 1
   },
-  paper: {
-    padding: theme.spacing.unit * 2,
-    textAlign: "center",
-    color: theme.palette.text.secondary
+  card: {
+    minWidth: 275
+  },
+  bullet: {
+    display: "inline-block",
+    margin: "0 2px",
+    transform: "scale(0.8)"
+  },
+  title: {
+    fontSize: 14
+  },
+  pos: {
+    marginBottom: 12
   }
 });
 
 class Profile extends Component {
   render() {
     const { classes } = this.props;
+    const bull = <span className={classes.bullet}>•</span>;
     return (
       <div className={classes.root}>
-        <Grid container spacing={24}>
-          <Grid item xs={12}>
-            <Paper className={classes.paper}>
+        <Card className={classes.card}>
+          <CardContent>
+            <Typography
+              className={classes.title}
+              color="textSecondary"
+              gutterBottom
+            >
+              Perfil
+            </Typography>
+            <Typography variant="h5" component="h2">
               {"Nombre: " + this.props.user.name}
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={3}>
-            <Paper className={classes.paper}>
+            </Typography>
+            <Typography className={classes.pos} color="textSecondary">
+              <br />
               {"Email: " + this.props.user.email} <br />
-              {"Telephone: " + this.props.user.telephone}
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={9}>
-            <Paper className={classes.paper}>
-              Orders: <br />
-            </Paper>
-          </Grid>
-        </Grid>
+            </Typography>
+            <Typography className={classes.pos} color="textSecondary">
+              {"Teléfono: " + this.props.user.telephone}
+            </Typography>
+            <Typography variant="p">Ordenes:</Typography>
+          </CardContent>
+        </Card>
       </div>
     );
   }
