@@ -1,4 +1,4 @@
-import shop from '../Store/api/shop'
+import axios from "axios";
 import * as types from './types'
 
 const receiveProducts = products => ({
@@ -7,9 +7,15 @@ const receiveProducts = products => ({
 })
 
 export const getAllProducts = () => dispatch => {
-  shop.getProducts(products => {
-    dispatch(receiveProducts(products))
-  })
+  axios
+    .get("/api/products")
+    .then(res => { 
+      // products = res.data
+      dispatch(receiveProducts(res.data))
+    })
+    .catch(err => {
+      console.log("Could not fetch Products");
+    });
 }
 
 const addToCartUnsafe = productId => ({
@@ -40,12 +46,14 @@ export const checkout = products => (dispatch, getState) => {
   dispatch({
     type: types.CHECKOUT_REQUEST
   })
-  shop.buyProducts(products, () => {
-    dispatch({
-      type: types.CHECKOUT_SUCCESS,
-      cart
-    })
+
+  // buyProducts: (payload, cb, timeout) => setTimeout(() => cb(), timeout || TIMEOUT)
+  // buyProducts(products, () => {
+  //   dispatch({
+  //     type: types.CHECKOUT_SUCCESS,
+  //     cart
+  //   })
     // Replace the line above with line below to rollback on failure:
     // dispatch({ type: types.CHECKOUT_FAILURE, cart })
-  })
+  // })
 }
