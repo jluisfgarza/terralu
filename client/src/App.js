@@ -31,7 +31,6 @@ if (localStorage.jwtToken) {
   const decoded = jwt_decode(token);
   // Set user and isAuthenticated
   store.dispatch(setCurrentUser(decoded));
-  store.dispatch(getAllProducts());
   // Check for expired token
   const currentTime = Date.now() / 1000; // to get in milliseconds
   if (decoded.exp < currentTime) {
@@ -41,6 +40,7 @@ if (localStorage.jwtToken) {
     window.location.href = "./login";
   }
 }
+store.dispatch(getAllProducts());
 
 const theme = createMuiTheme({
   palette: {

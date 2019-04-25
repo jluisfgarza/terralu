@@ -46,8 +46,16 @@ class Content extends Component {
         <div className={classes.layout}>
           <Hero />
           <Switch>
-            <Route path="/" exact component={Catalog} />
-            <Route path="/store" exact component={Catalog} />
+            <Route
+              path="/"
+              exact
+              component={() => <Catalog user={this.props.auth} />}
+            />
+            <Route
+              path="/store"
+              exact
+              component={() => <Catalog user={this.props.auth} />}
+            />
             <Route path="/cart" exact component={Cart} />
             <Route path="/payment" exact render={() => <h1>payment</h1>} />
             <Route

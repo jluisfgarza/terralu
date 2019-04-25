@@ -13,6 +13,7 @@ router.get('/products', jsonParser, (req, res) => {
             res.json(products);
         })
         .catch(err => {
+            console.log(err);
             return res.status(500).json(err);
         })
 });

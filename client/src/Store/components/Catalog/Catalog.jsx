@@ -31,8 +31,13 @@ class Catalog extends Component {
 
   addCart = item => {
     //console.log(item);
-    this.handleClick(item.title, "a");
-    this.props.addToCart(item._id);
+    if (this.props.user.isAuthenticated) {
+      this.handleClick(item.title, "a");
+      this.props.addToCart(item._id);
+    } else {
+      alert("Para poder comprar se necesita crear una cuenta!");
+      window.location.href = "./register";
+    }
   };
 
   handleClick = (message, c) => {
