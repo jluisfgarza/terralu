@@ -24,7 +24,7 @@ import { getVisibleProducts } from "../../../reducers/Cart/productsReducer";
 import { getTotal, getCartProducts } from "../../../reducers";
 
 //import paypal button
-import PayPalButton from 'react-paypal-button'
+import { PayPalButton } from 'react-paypal-button'
 
 const styles = theme => ({
   card: {
@@ -149,6 +149,7 @@ class Cart extends Component {
       </Grid>
     );
 
+    /* Agrego paypal button */
     return (
       <div>
         <h3>Your Cart</h3>
@@ -167,7 +168,6 @@ class Cart extends Component {
           onClick={checkout(this.props.cartProducts)}
           disabled={hasProducts ? "" : "disabled"}
         >
-          Paypal
         </button>
         <Notification
           msg={this.state.messageInfo}
