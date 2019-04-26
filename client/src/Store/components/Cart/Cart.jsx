@@ -27,6 +27,9 @@ import {
 import { getVisibleProducts } from "../../../reducers/Cart/productsReducer";
 import { getTotal, getCartProducts } from "../../../reducers";
 
+//import paypal button
+import PayPalButton from "react-paypal-button";
+
 const styles = theme => ({
   card: {
     position: "relative",
@@ -54,6 +57,7 @@ class Cart extends Component {
     messageInfo: {}
   };
 
+  //toma el item y lo convierte
   addCart = item => {
     // console.log(item);
     this.handleClick(item.title, "a");
@@ -201,7 +205,6 @@ class Cart extends Component {
             </Button>
           </Grid>
         </Grid>
-
         <Notification
           msg={this.state.messageInfo}
           open={this.state.notif}
