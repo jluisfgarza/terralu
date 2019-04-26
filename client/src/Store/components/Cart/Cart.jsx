@@ -159,7 +159,7 @@ class Cart extends Component {
         <p>Total: &#36;{this.props.total}</p>
         <PayPalButton
         env='production'
-        productionID='abcdef123456'
+        productionID= {product._id}
         amount={0.01}
         currency='USD'
         commit={true}
