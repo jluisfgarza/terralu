@@ -23,6 +23,9 @@ import {
 import { getVisibleProducts } from "../../../reducers/Cart/productsReducer";
 import { getTotal, getCartProducts } from "../../../reducers";
 
+//import paypal button
+import PayPalButton from 'react-paypal-button'
+
 const styles = theme => ({
   card: {
     display: "flex"
@@ -45,6 +48,7 @@ class Cart extends Component {
     messageInfo: {}
   };
 
+  //toma el item y lo convierte
   addCart = item => {
     // console.log(item);
     this.handleClick(item.title, "a");
@@ -152,11 +156,18 @@ class Cart extends Component {
           {nodes}
         </Grid>
         <p>Total: &#36;{this.props.total}</p>
+        <PayPalButton
+        env='production'
+        productionID='abcdef123456'
+        amount={0.01}
+        currency='USD'
+        commit={true}
+      />
         <button
           onClick={checkout(this.props.cartProducts)}
           disabled={hasProducts ? "" : "disabled"}
         >
-          Checkout
+          Paypal
         </button>
         <Notification
           msg={this.state.messageInfo}
