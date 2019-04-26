@@ -171,6 +171,7 @@ class Cart extends Component {
       </Grid>
     );
 
+    /* Agrego paypal button */
     return (
       <div>
         <Typography component="h2" variant="h5">
