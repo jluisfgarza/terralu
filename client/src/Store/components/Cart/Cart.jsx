@@ -5,6 +5,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Hidden from "@material-ui/core/Hidden";
+import Fab from "@material-ui/core/Fab";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Notification from "../Notification/Notification";
@@ -12,19 +13,22 @@ import { withStyles } from "@material-ui/core/styles";
 // Icons
 import AddIcon from "@material-ui/icons/Add";
 import Remove from "@material-ui/icons/Remove";
+import Clear from "@material-ui/icons/Clear";
 // Redux
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {
   checkout,
   addToCart,
-  removeFromCart
+  removeFromCart,
+  removeProductFromCart
 } from "../../../actions/cartActions";
 import { getVisibleProducts } from "../../../reducers/Cart/productsReducer";
 import { getTotal, getCartProducts } from "../../../reducers";
 
 const styles = theme => ({
   card: {
+    position: "relative",
     display: "flex"
   },
   cardDetails: {
@@ -35,6 +39,10 @@ const styles = theme => ({
   },
   button: {
     margin: theme.spacing.unit
+  },
+  cancel: {
+    position: "absolute",
+    right: 15
   }
 });
 
@@ -49,6 +57,12 @@ class Cart extends Component {
     // console.log(item);
     this.handleClick(item.title, "a");
     this.props.addToCart(item._id);
+  };
+
+  removeProduct = item => {
+    // console.log(item);
+    this.handleClick(item.title, "r");
+    // this.props.removeFromCart(item._id);
   };
 
   removeCart = item => {
@@ -100,14 +114,21 @@ class Cart extends Component {
           <Card className={classes.card}>
             <div className={classes.cardDetails}>
               <CardContent>
+                <Fab
+                  size="small"
+                  color="primary"
+                  aria-label="Add"
+                  className={classes.cancel}
+                  onClick={this.removeProduct.bind(this, product)}
+                >
+                  <Clear />
+                </Fab>
+                <br />
                 <Typography component="h2" variant="h5">
                   {product.title}
                 </Typography>
-                <Typography variant="subtitle1" paragraph>
-                  {product.description}
-                </Typography>
                 <Typography variant="subtitle1" color="primary">
-                  {product.title} - &#36;{product.price}
+                  &#36;{product.price}
                   {product.quantity ? ` x ${product.quantity}` : null}
                 </Typography>
                 <Button
@@ -127,13 +148,13 @@ class Cart extends Component {
                 </Button>
               </CardContent>
             </div>
-            {/* <Hidden xsDown>
+            <Hidden xsDown>
               <CardMedia
                 className={classes.cardMedia}
                 image={product.image}
                 title={product.title}
               />
-            </Hidden> */}
+            </Hidden>
           </Card>
         </Grid>
       ))
@@ -147,17 +168,35 @@ class Cart extends Component {
 
     return (
       <div>
-        <h3>Your Cart</h3>
+        <Typography component="h2" variant="h5">
+          Your Cart
+        </Typography>
+        <br />
         <Grid container spacing={40}>
+          <Grid item xs={12}>
+            <Button variant="outlined" color="primary">
+              Clear Cart
+            </Button>
+          </Grid>
           {nodes}
+          <br />
+          <Grid item xs={12} md={8} sm={8} lg={8} />
+          <Grid item xs={12} md={4} sm={4} lg={4}>
+            <Typography variant="h4" color="primary" className={classes.button}>
+              Total: &#36;{this.props.total}
+            </Typography>
+            <Button
+              onClick={checkout(this.props.cartProducts)}
+              disabled={hasProducts ? "" : "disabled"}
+              variant="contained"
+              color="primary"
+              className={classes.button}
+            >
+              Checkout
+            </Button>
+          </Grid>
         </Grid>
-        <p>Total: &#36;{this.props.total}</p>
-        <button
-          onClick={checkout(this.props.cartProducts)}
-          disabled={hasProducts ? "" : "disabled"}
-        >
-          Checkout
-        </button>
+
         <Notification
           msg={this.state.messageInfo}
           open={this.state.notif}
@@ -192,7 +231,8 @@ Cart.propTypes = {
   total: PropTypes.string,
   checkout: PropTypes.func.isRequired,
   addToCart: PropTypes.func.isRequired,
-  removeFromCart: PropTypes.func.isRequired
+  removeFromCart: PropTypes.func.isRequired,
+  removeProductFromCart: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -203,5 +243,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { checkout, addToCart, removeFromCart }
+  { checkout, addToCart, removeFromCart, removeProductFromCart }
 )(withStyles(styles, { withTheme: true })(Cart));

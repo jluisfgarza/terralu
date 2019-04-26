@@ -35,17 +35,26 @@ const removeFromCartUnsafe = productId => ({
 })
 
 export const removeFromCart = productId => (dispatch, getState) => {
-  // if (getState().products.byId[productId].inStock > 0) {
     dispatch(removeFromCartUnsafe(productId))
+}
+
+const removeProductFromCartUnsafe = productId => ({
+  type: types.REMOVE_PRODUCT_FROM_CART,
+  productId
+})
+
+export const removeProductFromCart = productId => (dispatch, getState) => {
+  // if (getState().products.byId[productId].inStock > 0) {
+    dispatch(removeProductFromCartUnsafe(productId))
   // }
 }
 
 export const checkout = products => (dispatch, getState) => {
-  const { cart } = getState()
+  // const { cart } = getState()
 
-  dispatch({
-    type: types.CHECKOUT_REQUEST
-  })
+  // dispatch({
+  //   type: types.CHECKOUT_REQUEST
+  // })
 
   // buyProducts: (payload, cb, timeout) => setTimeout(() => cb(), timeout || TIMEOUT)
   // buyProducts(products, () => {

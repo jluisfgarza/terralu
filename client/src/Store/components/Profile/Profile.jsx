@@ -28,7 +28,6 @@ const styles = theme => ({
 class Profile extends Component {
   render() {
     const { classes } = this.props;
-    const bull = <span className={classes.bullet}>•</span>;
     return (
       <div className={classes.root}>
         <Card className={classes.card}>

@@ -74,6 +74,15 @@ class Catalog extends Component {
     this.processQueue();
   };
 
+  componentDidMount = () => {
+    if (this.props.products.length > 0) {
+      this.setState({
+        loading: false
+      });
+      console.log(this.props.products);
+    }
+  };
+
   componentDidUpdate(prevProps) {
     if (prevProps.products !== this.props.products) {
       this.setState({
