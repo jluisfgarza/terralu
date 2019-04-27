@@ -63,18 +63,19 @@ class AddProductDialog extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    let formData = new FormData(); 
+    formData.append("image", this.state.image[0]);
+    axios.post("/uploadfile", formData).then(res => {});
     const product = {
       title: this.state.title,
       description: this.state.description,
       price: this.state.price,
       inStock: this.state.inStock,
       numBought: this.state.inStock,
-      image: this.state.inStock,
+      image: this.state.image[0].name,
       photos: this.state.photos
     };
-    axios.post("/api/products", product).then(res => {
-      // console.log(res);
-    });
+    axios.post("/api/products", product).then(res => {});
     this.props.handleReload();
     this.props.handleCloseAdd();
   };
@@ -170,6 +171,7 @@ class AddProductDialog extends React.Component {
                       image: fileItems.map(fileItem => fileItem.file)
                     });
                   }}
+                  name='image'
                   labelIdle='Drag & Drop your file or <span class="filepond--label-action">Browse</span>'
                 />
               </Grid>

@@ -21,7 +21,7 @@ const products = [
     render: rowData => (
       <img
         style={{ height: 36, borderRadius: "50%" }}
-        src={rowData.image}
+        src={ process.env.PUBLIC_URL + '/images/' + rowData.image}
         alt="Imagen Principal"
       />
     )
