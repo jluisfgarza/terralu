@@ -38,15 +38,23 @@ export const removeFromCart = productId => (dispatch, getState) => {
     dispatch(removeFromCartUnsafe(productId))
 }
 
-const removeProductFromCartUnsafe = productId => ({
+const removeProductFromCartUnsafe = product => ({
   type: types.REMOVE_PRODUCT_FROM_CART,
-  productId
+  product
 })
 
-export const removeProductFromCart = productId => (dispatch, getState) => {
+export const removeProductFromCart = product => (dispatch, getState) => {
   // if (getState().products.byId[productId].inStock > 0) {
-    dispatch(removeProductFromCartUnsafe(productId))
+    dispatch(removeProductFromCartUnsafe(product))
   // }
+}
+
+const clearCartUnsafe = () => ({
+  type: types.CLEAR_CART,
+})
+
+export const clearCart = () => (dispatch, getState) => {
+    dispatch(clearCartUnsafe())
 }
 
 export const checkout = products => (dispatch, getState) => {

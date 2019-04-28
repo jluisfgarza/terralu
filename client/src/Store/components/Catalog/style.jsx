@@ -1,8 +1,8 @@
 const styles = theme => ({
   layout: {
     width: "auto",
-    marginLeft: theme.spacing.unit * 3,
-    marginRight: theme.spacing.unit * 3,
+    // marginLeft: theme.spacing.unit * 3,
+    // marginRight: theme.spacing.unit * 3,
     [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
       width: 1100,
       marginLeft: "auto",
@@ -13,7 +13,10 @@ const styles = theme => ({
     padding: `${theme.spacing.unit * 8}px 0`
   },
   card: {
+    marginLeft: "auto",
+    marginRight: "auto",
     height: "100%",
+    maxWidth: 350,
     display: "flex",
     flexDirection: "column"
   },

@@ -79,7 +79,7 @@ class Catalog extends Component {
       this.setState({
         loading: false
       });
-      console.log(this.props.products);
+      // console.log(this.props.products);
     }
   };
 
@@ -88,8 +88,8 @@ class Catalog extends Component {
       this.setState({
         loading: false
       });
-      console.log(prevProps.products);
-      console.log(this.props.products);
+      // console.log(prevProps.products);
+      // console.log(this.props.products);
     }
   }
 

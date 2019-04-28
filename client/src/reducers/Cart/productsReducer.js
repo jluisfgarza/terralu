@@ -3,7 +3,8 @@ import {
   RECEIVE_PRODUCTS,
   ADD_TO_CART,
   REMOVE_FROM_CART,
-  REMOVE_PRODUCT_FROM_CART
+  REMOVE_PRODUCT_FROM_CART,
+  CLEAR_CART
 } from '../../actions/types'
 
 const products = (state, action) => {
@@ -18,11 +19,14 @@ const products = (state, action) => {
         ...state,
         inStock: state.inStock + 1
       }
-    // case REMOVE_PRODUCT_FROM_CART:
+    // TODO: add stock from removed
+    // case REMOVE_PRODUCT_FROM_CART: 
     //   return {
     //     ...state,
     //     inStock: state.inStock + 1
     //   }
+    case CLEAR_CART:
+      return state
     default:
       return state
   }
@@ -39,7 +43,7 @@ const byId = (state = {}, action) => {
         }, {})
       }
     default:
-      const { productId } = action
+      const { productId } = action;
       if (productId) {
         return {
           ...state,

@@ -19,7 +19,12 @@ class Hero extends Component {
           <Grid item md={6}>
             <div className={classes.mainFeaturedPostContent}>
               <img src={Logo} alt="Logo" className={classes.heroLogo} />
-              <Typography variant="h5" color="inherit" paragraph>
+              <Typography
+                variant="h5"
+                color="inherit"
+                paragraph
+                className={classes.mainFeaturedPostContentText}
+              >
                 Boutique de terrarios y suculentas. Producidas en casa y
                 garantizadas.
               </Typography>

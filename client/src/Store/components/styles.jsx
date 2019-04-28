@@ -31,12 +31,15 @@ const styles = theme => ({
   },
   heroLogo: {
     height: 200,
+    [theme.breakpoints.down("sm")]: {
+      height: 120
+    },
     width: "auto",
     borderRadius: 20
   },
   mainFeaturedPost: {
     backgroundImage: "url('" + HeroImg + "')",
-    backgroundSize: "100%",
+    backgroundSize: "cover",
     backgroundPosition: "center",
     // backgroundColor: theme.palette.grey[800],
     color: theme.palette.common.white,
@@ -46,6 +49,11 @@ const styles = theme => ({
     padding: `${theme.spacing.unit * 6}px`,
     [theme.breakpoints.up("md")]: {
       paddingRight: 0
+    }
+  },
+  mainFeaturedPostContentText: {
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 20
     }
   },
   mainGrid: {

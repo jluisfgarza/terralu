@@ -21,7 +21,8 @@ import {
   checkout,
   addToCart,
   removeFromCart,
-  removeProductFromCart
+  removeProductFromCart,
+  clearCart
 } from "../../../actions/cartActions";
 import { getVisibleProducts } from "../../../reducers/Cart/productsReducer";
 import { getTotal, getCartProducts } from "../../../reducers";
@@ -62,7 +63,7 @@ class Cart extends Component {
   removeProduct = item => {
     // console.log(item);
     this.handleClick(item.title, "r");
-    // this.props.removeFromCart(item._id);
+    this.props.removeProductFromCart(item);
   };
 
   removeCart = item => {
@@ -174,7 +175,11 @@ class Cart extends Component {
         <br />
         <Grid container spacing={40}>
           <Grid item xs={12}>
-            <Button variant="outlined" color="primary">
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={this.props.clearCart}
+            >
               Clear Cart
             </Button>
           </Grid>
@@ -187,7 +192,7 @@ class Cart extends Component {
             </Typography>
             <Button
               onClick={checkout(this.props.cartProducts)}
-              disabled={hasProducts ? "" : "disabled"}
+              disabled={hasProducts ? false : true}
               variant="contained"
               color="primary"
               className={classes.button}
@@ -232,7 +237,8 @@ Cart.propTypes = {
   checkout: PropTypes.func.isRequired,
   addToCart: PropTypes.func.isRequired,
   removeFromCart: PropTypes.func.isRequired,
-  removeProductFromCart: PropTypes.func.isRequired
+  removeProductFromCart: PropTypes.func.isRequired,
+  clearCart: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -243,5 +249,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { checkout, addToCart, removeFromCart, removeProductFromCart }
+  { checkout, addToCart, removeFromCart, removeProductFromCart, clearCart }
 )(withStyles(styles, { withTheme: true })(Cart));
