@@ -25,3 +25,11 @@ Customer:
 user: test@gmail.com
 pw: test123
 ```
+
+### Paypal Sandbox Credentials
+
+```
+Customer:
+user: terralumx-buyer@gmail.com
+pw: terra2019
+```
