@@ -79,8 +79,21 @@ class EditProductDialog extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    let formData = new FormData(); 
+    formData.append("image", this.state.image[0]);
+    axios.post("/uploadfile", formData).then(res => {});
+    const product = {
+      _id: this.state._id,
+      title: this.state.title,
+      description: this.state.description,
+      price: this.state.price,
+      inStock: this.state.inStock,
+      numBought: this.state.inStock,
+      image: this.state.image[0].name,
+      photos: this.state.photos
+    };
     axios
-      .put(`/api/products/${this.props.product["_id"]}`, this.state)
+      .put(`/api/products/${this.props.product["_id"]}`, product)
       .then(res => {
         // console.log(res);
       });
