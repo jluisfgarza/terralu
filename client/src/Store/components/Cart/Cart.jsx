@@ -26,6 +26,8 @@ import {
 } from "../../../actions/cartActions";
 import { getVisibleProducts } from "../../../reducers/Cart/productsReducer";
 import { getTotal, getCartProducts } from "../../../reducers";
+// Paypal
+import PaypalExpressBtn from "react-paypal-express-checkout";
 
 const styles = theme => ({
   card: {
@@ -106,6 +108,10 @@ class Cart extends Component {
     this.processQueue();
   };
 
+  checkout = () => {
+    console.log(this.props.cartProducts);
+  };
+
   render() {
     const { classes } = this.props;
     const hasProducts = this.props.cartProducts.length > 0;
@@ -167,6 +173,34 @@ class Cart extends Component {
       </Grid>
     );
 
+    const client = {
+      sandbox:
+        "AXakxr_puudDtU6zqQn8B3OpoboFMxx7bdjQ8bSLyYtmweGRBz4WtdbZuupXKyM1yF27JCZwDMVCNwMB",
+      production: ""
+    };
+    const onSuccess = payment => {
+      // 1, 2, and ... Poof! You made it, everything's fine and dandy!
+      console.log("Payment successful!", payment);
+
+      console.log(this.props.cartProducts);
+      // You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
+    };
+
+    const onCancel = data => {
+      // The user pressed "cancel" or closed the PayPal popup
+      console.log("Payment cancelled!", data);
+      alert("Pago cancelado");
+      // You can bind the "data" object's value to your state or props or whatever here, please see below for sample returned data
+    };
+
+    const onError = err => {
+      // The main Paypal script could not be loaded or something blocked the script from loading
+      console.log("Error!", err);
+      alert("Error intenta de nuevo!");
+      // Because the Paypal's main script is loaded asynchronously from "https://www.paypalobjects.com/api/checkout.js"
+      // => sometimes it may take about 0.5 second for everything to get set, or for the button to appear
+    };
+
     return (
       <div>
         <Typography component="h2" variant="h5">
@@ -190,18 +224,17 @@ class Cart extends Component {
             <Typography variant="h4" color="primary" className={classes.button}>
               Total: &#36;{this.props.total}
             </Typography>
-            <Button
-              onClick={checkout(this.props.cartProducts)}
-              disabled={hasProducts ? false : true}
-              variant="contained"
-              color="primary"
-              className={classes.button}
-            >
-              Checkout
-            </Button>
+            <PaypalExpressBtn
+              env={"sandbox"}
+              client={client}
+              currency={"MXN"}
+              total={parseFloat(this.props.total)}
+              onError={onError}
+              onSuccess={onSuccess}
+              onCancel={onCancel}
+            />
           </Grid>
         </Grid>
-
         <Notification
           msg={this.state.messageInfo}
           open={this.state.notif}
