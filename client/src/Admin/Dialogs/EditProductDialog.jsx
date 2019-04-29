@@ -65,7 +65,7 @@ class EditProductDialog extends React.Component {
         price: this.props.product.price,
         inStock: this.props.product.inStock,
         numBought: this.props.product.numBought,
-        image: this.props.product.image,
+        image: process.env.PUBLIC_URL + "/images/" + this.props.product.image,
         photos: this.props.product.photos
       });
     }
