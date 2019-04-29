@@ -79,7 +79,7 @@ class EditProductDialog extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    let formData = new FormData(); 
+    let formData = new FormData();
     formData.append("image", this.state.image[0]);
     axios.post("/uploadfile", formData).then(res => {});
     const product = {
@@ -194,7 +194,7 @@ class EditProductDialog extends React.Component {
                   labelIdle='Drag & Drop your file or <span class="filepond--label-action">Browse</span>'
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              {/* <Grid item xs={12} sm={6}>
                 <Typography variant="h6" gutterBottom>
                   Photos
                 </Typography>
@@ -210,7 +210,7 @@ class EditProductDialog extends React.Component {
                   }}
                   labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
                 />
-              </Grid>
+              </Grid> */}
             </Grid>
           </DialogContent>
           <DialogActions>

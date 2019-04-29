@@ -20,8 +20,8 @@ const products = [
     field: "image",
     render: rowData => (
       <img
-        style={{ height: 36, borderRadius: "50%" }}
-        src={ process.env.PUBLIC_URL + '/images/' + rowData.image}
+        style={{ height: 45, width: 45, borderRadius: "50%" }}
+        src={process.env.PUBLIC_URL + "/images/" + rowData.image}
         alt="Imagen Principal"
       />
     )
@@ -184,7 +184,11 @@ class ProductData extends Component {
                       backgroundColor: "#43A047"
                     }}
                   >
-                    {rowData.image} Galería
+                    <img
+                      style={{ height: 200, width: "auto" }}
+                      src={process.env.PUBLIC_URL + "/images/" + rowData.image}
+                      alt="Imagen Principal"
+                    />
                   </div>
                 );
               }
