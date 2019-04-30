@@ -4,9 +4,8 @@ import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-// Orders History
-import axios from "axios";
 import MaterialTable from "material-table";
+import axios from "axios";
 
 const styles = theme => ({
   root: {
@@ -29,7 +28,11 @@ const styles = theme => ({
 });
 
 const orders = [
-  { title: "Price", field: "price", type: "numeric" },
+  { title: "Username", field: "username"},
+  { title: "Address", field: "address"},
+  { title: "Products", field: "products"},
+  { title: "Total", field: "total", type: "numeric" },
+  { title: "Paypal Id", field: "paypalId"},
   { title: "Date", field: "date", type: "date" }
 ];
 
@@ -40,7 +43,7 @@ class Profile extends Component {
   }
   componentDidMount() {
     axios
-      .get("/api/orders")
+      .post("/api/orders/ids", {OrderIds :  this.props.user.orders})
       .then(res => {
         const ordersData = res.data;
         this.setState({ ordersData });
@@ -72,28 +75,11 @@ class Profile extends Component {
             <Typography className={classes.pos} color="textSecondary">
               {"Teléfono: " + this.props.user.telephone}
             </Typography>
-            <Typography variant="p">Ordenes:</Typography>
-            <br />
             <MaterialTable
-              columns={orders}
-              data={this.state.ordersData}
-              title="Orders"
-              options={{ columnsButton: true, exportButton: true }}
-              // editable={{
-              //   onRowUpdate: (newData, oldData) =>
-              //     new Promise((resolve, reject) => {
-              //       setTimeout(() => {
-              //         {
-              //           /* const data = this.state.data;
-              //   const index = data.indexOf(oldData);
-              //   data[index] = newData;
-              //   this.setState({ data }, () => resolve()); */
-              //         }
-              //         resolve();
-              //       }, 1000);
-              //     })
-              // }}
-            />
+                columns={orders}
+                data={this.state.ordersData}
+                title="Orders"
+              />
           </CardContent>
         </Card>
       </div>
