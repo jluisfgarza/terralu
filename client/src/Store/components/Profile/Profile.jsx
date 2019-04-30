@@ -4,6 +4,8 @@ import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+import MaterialTable from "material-table";
+import axios from "axios";
 
 const styles = theme => ({
   root: {
@@ -25,7 +27,27 @@ const styles = theme => ({
   }
 });
 
+const orders = [
+  { title: "Price", field: "price", type: "numeric" },
+  { title: "Date", field: "date", type: "date" }
+];
+
 class Profile extends Component {
+  constructor() {
+    super();
+    this.state = { ordersData: [] };
+  }
+  componentDidMount() {
+    axios
+      .post("/api/orders/ids", {OrderIds :  this.props.user.orders})
+      .then(res => {
+        const ordersData = res.data;
+        this.setState({ ordersData });
+      })
+      .catch(error => {
+        alert("Error could not fetch Orders");
+      });
+  }
   render() {
     const { classes } = this.props;
     return (
@@ -49,7 +71,11 @@ class Profile extends Component {
             <Typography className={classes.pos} color="textSecondary">
               {"Teléfono: " + this.props.user.telephone}
             </Typography>
-            <Typography variant="p">Ordenes:</Typography>
+            <MaterialTable
+                columns={orders}
+                data={this.state.ordersData}
+                title="Orders"
+              />
           </CardContent>
         </Card>
       </div>

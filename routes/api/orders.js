@@ -29,6 +29,18 @@ router.get('/orders/:_id', jsonParser, (req, res) => {
         })
 });
 
+router.post('/orders/ids', jsonParser, (req, res) => {
+    let promise = new Promise(function (resolve, reject) {
+            Orders.getByIds(resolve, reject, req.body.OrderIds);
+        })
+        .then(orders => {
+            res.json(orders);
+        })
+        .catch(err => {
+            return res.status(500).json(err);
+        })
+});
+
 router.post('/orders', jsonParser, (req, res) => {
     const requiredFields = ["products", "price"];
     for (let i = 0; i < requiredFields.length; i++) {

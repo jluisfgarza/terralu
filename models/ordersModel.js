@@ -19,11 +19,20 @@ const Orders = {
                 reject(err);
             });
     },
-
     getOne : function(resolve, reject, OrderId){
         Order.findById(OrderId)
             .then(order => {
                 resolve(order);
+            })
+            .catch(err => {
+                reject(err);
+            });
+    },
+
+    getByIds : function(resolve, reject, OrderIds){
+        Order.find({_id: {$in : OrderIds}})
+            .then(orders => {
+                resolve(orders);
             })
             .catch(err => {
                 reject(err);
