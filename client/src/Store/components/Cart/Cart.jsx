@@ -181,8 +181,9 @@ class Cart extends Component {
     const onSuccess = payment => {
       // 1, 2, and ... Poof! You made it, everything's fine and dandy!
       console.log("Payment successful!", payment);
-
       console.log(this.props.cartProducts);
+      // Clear Cart
+      this.props.clearCart();
       // You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
     };
 
