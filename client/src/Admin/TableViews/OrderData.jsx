@@ -4,7 +4,7 @@ import MaterialTable from "material-table";
 
 const orders = [
   { title: "PaymentID", field: "PaymentID" },
-  { title: "UserName", field: "UserName" },
+  { title: "Client", field: "UserName" },
   { title: "Address", field: "Address" },
   { title: "Products", field: "Product" },
   { title: "Total", field: "price" },
