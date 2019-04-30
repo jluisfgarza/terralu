@@ -42,7 +42,7 @@ router.post('/orders/ids', jsonParser, (req, res) => {
 });
 
 router.post('/orders', jsonParser, (req, res) => {
-    const requiredFields = ["products", "price"];
+    const requiredFields = ["username","address", "products", "total", "paypalId"];
     for (let i = 0; i < requiredFields.length; i++) {
         if (!(requiredFields[i] in req.body)) {
             return res.status(400).send(`Missing field ${requiredFields[i]}`);
@@ -50,9 +50,11 @@ router.post('/orders', jsonParser, (req, res) => {
     }
     let promise = new Promise(function (resolve, reject) {
         Orders.create(resolve, reject, {
-            _id: req.body._id,
+            username: req.body.username,
+            address: req.body.address,
             products: req.body.products,
-            price: req.body.price,
+            total: req.body.total,
+            paypalId: req.body.paypalId,
         });
     }).then(result => {
         res.status(201).json(result);
@@ -68,8 +70,11 @@ router.put('/orders/:_id', jsonParser, (req, res) => {
         let promise = new Promise(function (resolve, reject) {
             let updatedOrder = {
                 _id: idBody,
+                username: req.body.username,
+                address: req.body.address,
                 products: req.body.products,
-                price: req.body.price,
+                total: req.body.total,
+                paypalId: req.body.paypalId,
             }
             Orders.update(resolve, reject, idBody, updatedOrder);
         }).then(result => {

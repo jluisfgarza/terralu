@@ -28,7 +28,11 @@ const styles = theme => ({
 });
 
 const orders = [
-  { title: "Price", field: "price", type: "numeric" },
+  { title: "Username", field: "username"},
+  { title: "Address", field: "address"},
+  { title: "Products", field: "products"},
+  { title: "Total", field: "total", type: "numeric" },
+  { title: "Paypal Id", field: "paypalId"},
   { title: "Date", field: "date", type: "date" }
 ];
 

@@ -2,8 +2,11 @@ const mongoose =  require('mongoose');
 const Schema = mongoose.Schema;
 
 const OrderSchema = new Schema({
+    username: {type: String, required: true},
+    address: {type: String, required: true},
     products: {type: Array, required: true},
-    price : {type : Number, required : true},
+    total : {type : Number, required : true},
+    paypalId: {type: String, required: true},
     date: { type: Date, default: Date.now },
 }, {timestamps: true});
 
