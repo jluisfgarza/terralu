@@ -108,10 +108,6 @@ class Cart extends Component {
     this.processQueue();
   };
 
-  checkout = () => {
-    console.log(this.props.cartProducts);
-  };
-
   render() {
     const { classes } = this.props;
     const hasProducts = this.props.cartProducts.length > 0;
@@ -191,6 +187,7 @@ class Cart extends Component {
       // The user pressed "cancel" or closed the PayPal popup
       console.log("Payment cancelled!", data);
       alert("Pago cancelado");
+      console.log(this.props.cartProducts);
       // You can bind the "data" object's value to your state or props or whatever here, please see below for sample returned data
     };
 

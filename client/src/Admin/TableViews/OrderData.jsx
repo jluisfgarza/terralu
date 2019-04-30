@@ -3,12 +3,12 @@ import axios from "axios";
 import MaterialTable from "material-table";
 
 const orders = [
-  { title: "PaymentID", field: "PaymentID" },
-  { title: "Client", field: "UserName" },
-  { title: "Address", field: "Address" },
-  { title: "Products", field: "Product" },
-  { title: "Total", field: "price" },
-  { title: "PayPal ID", field: "PaymentID" },
+  { title: "Order ID", field: "_id" },
+  { title: "Client", field: "username" },
+  { title: "Address", field: "address" },
+  { title: "Products", field: "products" },
+  { title: "Total", field: "total" },
+  { title: "PayPal ID", field: "paypalId" },
   { title: "Status", field: "Status" },
   { title: "Date", field: "date" }
 ];
@@ -23,7 +23,8 @@ class OrderData extends Component {
       .get("/api/orders")
       .then(res => {
         const ordersData = res.data;
-        this.setState({ ordersData });
+        console.log(res.data);
+        // this.setState({ ordersData });
       })
       .catch(error => {
         alert("Error could not fetch Orders");
