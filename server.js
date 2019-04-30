@@ -6,9 +6,11 @@ const users = require("./routes/api/users");
 const products = require("./routes/api/products");
 const orders = require("./routes/api/orders");
 const multer = require("multer")
+// const cors = require('cors');
 
 const app = express();
 
+// app.use(cors());
 app.use(express.static('client/public/images'));
 
 var upload = multer({
