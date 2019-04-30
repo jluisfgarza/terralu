@@ -3,8 +3,14 @@ import axios from "axios";
 import MaterialTable from "material-table";
 
 const orders = [
-  { title: "Price", field: "price", type: "numeric" },
-  { title: "Date", field: "date", type: "date" }
+  { title: "PaymentID", field: "PaymentID" },
+  { title: "UserName", field: "UserName" },
+  { title: "Address", field: "Address" },
+  { title: "Products", field: "Product" },
+  { title: "Total", field: "price" },
+  { title: "PayPal ID", field: "PaymentID" },
+  { title: "Status", field: "Status" },
+  { title: "Date", field: "date" }
 ];
 
 class OrderData extends Component {
@@ -29,7 +35,30 @@ class OrderData extends Component {
         columns={orders}
         data={this.state.ordersData}
         title="Orders"
-        options={{ columnsButton: true, exportButton: true }}
+        detailPanel={[
+          {
+            tooltip: "Image",
+            render: rowData => {
+              return (
+                <div
+                  style={{
+                    fontSize: 16,
+                    marginLeft: 20
+                  }}
+                >
+                  Lista de productos:
+                </div>
+              );
+            }
+          }
+        ]}
+        options={{
+          actionsColumnIndex: -1,
+          pageSize: 15,
+          doubleHorizontalScroll: false,
+          columnsButton: true,
+          exportButton: true
+        }}
         // editable={{
         //   onRowUpdate: (newData, oldData) =>
         //     new Promise((resolve, reject) => {
