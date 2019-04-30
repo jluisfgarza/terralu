@@ -28,11 +28,11 @@ const styles = theme => ({
 });
 
 const orders = [
-  { title: "Username", field: "username"},
-  { title: "Address", field: "address"},
-  { title: "Products", field: "products"},
+  { title: "Order ID", field: "id" },
+  { title: "Address", field: "address" },
+  { title: "Products", field: "products" },
   { title: "Total", field: "total", type: "numeric" },
-  { title: "Paypal Id", field: "paypalId"},
+  { title: "Paypal ID", field: "paypalId" },
   { title: "Date", field: "date", type: "date" }
 ];
 
@@ -42,15 +42,14 @@ class Profile extends Component {
     this.state = { ordersData: [] };
   }
   componentDidMount() {
-    axios
-      .post("/api/orders/ids", {OrderIds :  this.props.user.orders})
-      .then(res => {
-        const ordersData = res.data;
-        this.setState({ ordersData });
-      })
-      .catch(error => {
-        alert("Error could not fetch Orders");
+    console.log(this.props.user);
+    let data = [];
+    this.props.user.orders.forEach(function(element) {
+      axios.get(`/api/orders/${element.id}`).then(res => {
+        data.push(res.data);
       });
+    });
+    this.setState({ ordersData: data });
   }
   render() {
     const { classes } = this.props;
@@ -76,10 +75,10 @@ class Profile extends Component {
               {"Teléfono: " + this.props.user.telephone}
             </Typography>
             <MaterialTable
-                columns={orders}
-                data={this.state.ordersData}
-                title="Orders"
-              />
+              columns={orders}
+              data={this.state.ordersData}
+              title="Orders"
+            />
           </CardContent>
         </Card>
       </div>

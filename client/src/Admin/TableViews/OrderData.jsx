@@ -9,7 +9,7 @@ const orders = [
   { title: "Products", field: "products" },
   { title: "Total", field: "total" },
   { title: "PayPal ID", field: "paypalId" },
-  { title: "Status", field: "Status" },
+  { title: "Status", field: "Status", hidden: true },
   { title: "Date", field: "date" }
 ];
 
@@ -24,7 +24,7 @@ class OrderData extends Component {
       .then(res => {
         const ordersData = res.data;
         console.log(res.data);
-        // this.setState({ ordersData });
+        this.setState({ ordersData });
       })
       .catch(error => {
         alert("Error could not fetch Orders");
@@ -47,7 +47,7 @@ class OrderData extends Component {
                     marginLeft: 20
                   }}
                 >
-                  Lista de productos:
+                  {JSON.stringify(rowData.products)}
                 </div>
               );
             }

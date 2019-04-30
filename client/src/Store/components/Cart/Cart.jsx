@@ -178,15 +178,34 @@ class Cart extends Component {
     const onSuccess = payment => {
       // 1, 2, and ... Poof! You made it, everything's fine and dandy!
       console.log("Payment successful!", payment);
+      console.log("Cart Products:");
       console.log(this.props.cartProducts);
       const order = {
-        username: " ",
+        username: this.props.user.id,
         address: payment.address,
         products: this.props.cartProducts,
-        total : parseFloat(this.props.total),
-        paypalId: payment.paymentID,
+        total: parseFloat(this.props.total),
+        paypalId: payment.paymentID
       };
-      axios.post("/api/products", order).then(res => {});
+
+      //Post order on orders collection
+      axios
+        .post("/api/orders", order)
+        .then(res => {
+          console.log(res.data);
+          // // Post order id on user.orders collection
+          // let torder = this.props.user.orders;
+          // torder.push(res.data._id);
+          // axios
+          //   .put(`/api/users/${this.props.user.id}`, {
+          //     orders: torder
+          //   })
+          //   .then(res => {});
+        })
+        .catch(error => {
+          console.log(error);
+          alert("Error could save user order");
+        });
       // Clear Cart
       this.props.clearCart();
       // You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
@@ -196,7 +215,6 @@ class Cart extends Component {
       // The user pressed "cancel" or closed the PayPal popup
       console.log("Payment cancelled!", data);
       alert("Pago cancelado");
-      console.log(this.props.cartProducts);
       // You can bind the "data" object's value to your state or props or whatever here, please see below for sample returned data
     };
 

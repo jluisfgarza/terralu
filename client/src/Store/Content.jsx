@@ -56,7 +56,11 @@ class Content extends Component {
               exact
               component={() => <Catalog user={this.props.auth} />}
             />
-            <Route path="/cart" exact component={Cart} />
+            <Route
+              path="/cart"
+              exact
+              component={() => <Cart user={this.props.auth.user} />}
+            />
             <Route path="/payment" exact render={() => <h1>payment</h1>} />
             <Route
               path="/profile"
