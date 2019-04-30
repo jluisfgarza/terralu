@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 // Components
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
@@ -178,6 +179,14 @@ class Cart extends Component {
       // 1, 2, and ... Poof! You made it, everything's fine and dandy!
       console.log("Payment successful!", payment);
       console.log(this.props.cartProducts);
+      const order = {
+        username: " ",
+        address: payment.address,
+        products: this.props.cartProducts,
+        total : parseFloat(this.props.total),
+        paypalId: payment.paymentID,
+      };
+      axios.post("/api/products", order).then(res => {});
       // Clear Cart
       this.props.clearCart();
       // You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
