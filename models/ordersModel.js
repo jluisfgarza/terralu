@@ -2,8 +2,11 @@ const mongoose =  require('mongoose');
 const Schema = mongoose.Schema;
 
 const OrderSchema = new Schema({
+    username: {type: String, required: true},
+    address: {type: String, required: true},
     products: {type: Array, required: true},
-    price : {type : Number, required : true},
+    total : {type : Number, required : true},
+    paypalId: {type: String, required: true},
     date: { type: Date, default: Date.now },
 }, {timestamps: true});
 
@@ -19,11 +22,20 @@ const Orders = {
                 reject(err);
             });
     },
-
     getOne : function(resolve, reject, OrderId){
         Order.findById(OrderId)
             .then(order => {
                 resolve(order);
+            })
+            .catch(err => {
+                reject(err);
+            });
+    },
+
+    getByIds : function(resolve, reject, OrderIds){
+        Order.find({_id: {$in : OrderIds}})
+            .then(orders => {
+                resolve(orders);
             })
             .catch(err => {
                 reject(err);
