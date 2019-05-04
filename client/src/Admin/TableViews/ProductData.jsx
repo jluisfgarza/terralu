@@ -6,6 +6,7 @@ import { withStyles } from "@material-ui/core/styles";
 import AddProductDialog from "../Dialogs/AddProductDialog";
 import EditProductDialog from "../Dialogs/EditProductDialog";
 import DeleteProductDialog from "../Dialogs/DeleteProductDialog";
+import AlertDialog from "../../Store/components/Alert/Alert";
 
 const styles = theme => ({
   button: {
@@ -52,7 +53,10 @@ class ProductData extends Component {
     product: null,
     openEdit: false,
     openDelete: false,
-    openAdd: false
+    openAdd: false,
+    openAlert: false,
+    alertMessage: "",
+    alertTitle: ""
   };
 
   editDialog = product => {
@@ -104,8 +108,16 @@ class ProductData extends Component {
         // console.log(res.data);
       })
       .catch(error => {
-        alert("Error could not fetch Products");
+        this.setState({
+          openAlert: true,
+          alertMessage: "Error could not fetch Products",
+          alertTitle: "Error"
+        });
       });
+  };
+
+  handleCloseAlert = () => {
+    this.setState({ openAlert: false });
   };
 
   componentDidMount() {
@@ -221,6 +233,12 @@ class ProductData extends Component {
           handleClickOpenDelete={this.handleClickOpenDelete}
           handleCloseDelete={this.handleCloseDelete}
           handleReload={this.handleReload}
+        />
+        <AlertDialog
+          openAlert={this.state.openAlert}
+          alertMessage={this.state.alertMessage}
+          alertTitle={this.state.alertTitle}
+          handleCloseAlert={this.handleCloseAlert}
         />
       </Fragment>
     );
