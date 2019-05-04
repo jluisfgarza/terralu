@@ -175,23 +175,6 @@ class AddProductDialog extends React.Component {
                   labelIdle='Drag & Drop your file or <span class="filepond--label-action">Browse</span>'
                 />
               </Grid>
-              {/* <Grid item xs={12} sm={6}>
-                <Typography variant="h6" gutterBottom>
-                  Photos
-                </Typography>
-                <FilePond
-                  ref={ref => (this.pond = ref)}
-                  files={this.state.photos}
-                  allowMultiple={true}
-                  maxFiles={3}
-                  onupdatefiles={fileItems => {
-                    this.setState({
-                      photos: fileItems.map(fileItem => fileItem.file)
-                    });
-                  }}
-                  labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
-                />
-              </Grid> */}
             </Grid>
           </DialogContent>
           <DialogActions>

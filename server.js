@@ -11,11 +11,11 @@ const multer = require("multer")
 const app = express();
 
 // app.use(cors());
-app.use(express.static('client/public/images'));
+app.use(express.static('client/public/images/'));
 
 var upload = multer({
   storage: multer.diskStorage({
-    destination: 'client/public/images',
+    destination: 'client/public/images/products',
     filename: function(req, file, cb) {
         cb(null, file.originalname)
     }
