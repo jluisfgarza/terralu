@@ -6,8 +6,8 @@ const path = require('path');
 
 // API routes
 router.use("/api/users", users);
-router.use("/api/", products);
-router.use("/api/", orders);
+router.use("/api/products", products);
+router.use("/api/orders", orders);
 
 // If no API routes are hit, send the React app
 router.use(function(req, res) {

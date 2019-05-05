@@ -24,7 +24,10 @@ class DeleteProductDialog extends React.Component {
       _id: this.props.product["_id"]
     };
     axios
-      .delete(`/api/products/${this.props.product["_id"]}`, { data: product })
+      .delete(
+        `http://localhost:5000/api/products/${this.props.product["_id"]}`,
+        { data: product }
+      )
       .then(res => {
         // console.log(res);
         // console.log(res.data);

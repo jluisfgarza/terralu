@@ -5,7 +5,7 @@ const Products = require('../../models/productsModel');
 
 let jsonParser = bodyParser.json();
 
-router.get('/products', jsonParser, (req, res) => {
+router.get('', jsonParser, (req, res) => {
     let promise = new Promise(function (resolve, reject) {
             Products.get(resolve, reject);
         })
@@ -18,7 +18,7 @@ router.get('/products', jsonParser, (req, res) => {
         })
 });
 
-router.get('/products/:_id', jsonParser, (req, res) => {
+router.get('/:_id', jsonParser, (req, res) => {
     let promise = new Promise(function (resolve, reject) {
             Products.getOne(resolve, reject, req.params._id);
         })
@@ -30,7 +30,7 @@ router.get('/products/:_id', jsonParser, (req, res) => {
         })
 });
 
-router.post('/products', jsonParser, (req, res) => {
+router.post('', jsonParser, (req, res) => {
     const requiredFields = ["title", "description", "price", "inStock", "numBought", "image", "photos"];
     for (let i = 0; i < requiredFields.length; i++) {
         if (!(requiredFields[i] in req.body)) {
@@ -56,7 +56,7 @@ router.post('/products', jsonParser, (req, res) => {
     });
 });
 
-router.put('/products/:_id', jsonParser, (req, res) => {
+router.put('/:_id', jsonParser, (req, res) => {
     let idParam = req.params._id;
     let idBody = req.body._id;
     if (idParam && idBody && idParam == idBody) {
@@ -85,8 +85,7 @@ router.put('/products/:_id', jsonParser, (req, res) => {
     }
 });
 
-
-router.put('/products/updateStockBought/:_id', jsonParser, (req, res) => {
+router.put('/updateStockBought/:_id', jsonParser, (req, res) => {
     let idParam = req.params._id;
     let idBody = req.body._id;
     if (idParam && idBody && idParam == idBody) {
@@ -110,7 +109,7 @@ router.put('/products/updateStockBought/:_id', jsonParser, (req, res) => {
     }
 });
 
-router.delete('/products/:_id', jsonParser, (req, res) => {
+router.delete('/:_id', jsonParser, (req, res) => {
     if (req.params._id == req.body._id) {
         let promise = new Promise(function (resolve, reject) {
             Products.delete(resolve, reject, req.body._id);

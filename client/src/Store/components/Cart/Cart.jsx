@@ -118,22 +118,22 @@ class Cart extends Component {
     console.log("create order");
     console.log(order);
     axios
-      .post(`/api/orders`, order)
+      .post(`http://localhost:5000/api/orders`, order)
       .then(res => {
         console.log(res.data);
-        let torder = this.props.user.orders;
-        torder.push(res.data._id);
-        axios.put(`/api/users/order`, {
-          _id: this.props.user.id,
-          orders: torder
-        });
-        torder.forEach(function(element) {
-          /*
-            hacer llamada para ctualiza numBought e inStock
-            axios.put(`/products/updateStockBought/{productId}`, {inStock: newVal, numBought: newVal});
-          */
-          console.log(element);
-        });
+        // let torder = this.props.user.orders;
+        // torder.push(res.data._id);
+        // axios.put(`/api/users/order`, {
+        //   _id: this.props.user.id,
+        //   orders: torder
+        // });
+        // torder.forEach(function(element) {
+        //   /*
+        //     hacer llamada para ctualiza numBought e inStock
+        //     axios.put(`/products/updateStockBought/{productId}`, {inStock: newVal, numBought: newVal});
+        //   */
+        //   console.log(element);
+        // });
       })
       .catch(error => {
         console.log(error);
@@ -218,8 +218,8 @@ class Cart extends Component {
     };
     const onSuccess = payment => {
       console.log("Payment successful!", payment);
-      console.log("Cart Products:");
-      console.log(this.props.cartProducts);
+      // console.log("Cart Products:");
+      // console.log(this.props.cartProducts);
       const order = {
         username: this.props.user.id,
         userEmail: this.props.user.email,

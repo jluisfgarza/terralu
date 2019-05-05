@@ -30,7 +30,7 @@ pw: test123
 
 ```
 Customer:
-user: terralumx-buyer@gmail.com
+user: terralumx-buyer1@gmail.com
 pw: terra2019
 ```
 

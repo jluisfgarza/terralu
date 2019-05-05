@@ -96,7 +96,10 @@ class EditProductDialog extends React.Component {
       photos: this.state.photos
     };
     axios
-      .put(`/api/products/${this.props.product["_id"]}`, product)
+      .put(
+        `http://localhost:5000/api/products/${this.props.product["_id"]}`,
+        product
+      )
       .then(res => {
         // console.log(res);
       });

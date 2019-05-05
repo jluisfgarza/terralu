@@ -31,7 +31,7 @@ class OrderData extends Component {
 
   componentDidMount() {
     axios
-      .get("/api/orders")
+      .get("http://localhost:5000/api/orders")
       .then(res => {
         const ordersData = res.data;
         console.log(res.data);

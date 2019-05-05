@@ -42,9 +42,13 @@ class Profile extends Component {
     this.state = { ordersData: [] };
   }
   componentDidMount() {
-    axios.post(`/api/orders/ids`, {OrderIds: this.props.user.orders}).then(res => {
-      this.setState({ordersData: res.data});
-    });
+    axios
+      .post(`http://localhost:5000/api/orders/ids`, {
+        OrderIds: this.props.user.orders
+      })
+      .then(res => {
+        this.setState({ ordersData: res.data });
+      });
   }
   render() {
     const { classes } = this.props;

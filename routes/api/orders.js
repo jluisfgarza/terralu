@@ -25,7 +25,7 @@ transporter.verify((error, success) => {
     }
 });
 
-router.get('/orders', jsonParser, (req, res) => {
+router.get('', jsonParser, (req, res) => {
     let promise = new Promise(function (resolve, reject) {
             Orders.get(resolve, reject);
         })
@@ -37,7 +37,7 @@ router.get('/orders', jsonParser, (req, res) => {
         })
 });
 
-router.get('/orders/:_id', jsonParser, (req, res) => {
+router.get('/:_id', jsonParser, (req, res) => {
     let promise = new Promise(function (resolve, reject) {
             Orders.getOne(resolve, reject, req.params._id);
         })
@@ -49,7 +49,7 @@ router.get('/orders/:_id', jsonParser, (req, res) => {
         })
 });
 
-router.post('/orders/ids', jsonParser, (req, res) => {
+router.post('/ids', jsonParser, (req, res) => {
     let promise = new Promise(function (resolve, reject) {
             Orders.getByIds(resolve, reject, req.body.OrderIds);
         })
@@ -61,8 +61,9 @@ router.post('/orders/ids', jsonParser, (req, res) => {
         })
 });
 
-router.post('/orders', jsonParser, (req, res) => {
-    const requiredFields = ["username", "address", "products", "total", "paypalId"];
+router.post('', jsonParser, (req, res) => {
+    console.log("post order");
+    const requiredFields = ["username", "userEmail", "address", "products", "total", "paypalId"];
     for (let i = 0; i < requiredFields.length; i++) {
         if (!(requiredFields[i] in req.body)) {
             return res.status(400).send(`Missing field ${requiredFields[i]}`);
@@ -71,6 +72,7 @@ router.post('/orders', jsonParser, (req, res) => {
     let promise = new Promise(function (resolve, reject) {
         Orders.create(resolve, reject, {
             username: req.body.username,
+            userEmail: req.body.userEmail,
             address: req.body.address,
             products: req.body.products,
             total: req.body.total,
@@ -85,7 +87,7 @@ router.post('/orders', jsonParser, (req, res) => {
     });
 });
 
-router.put('/orders/:_id', jsonParser, (req, res) => {
+router.put('/:_id', jsonParser, (req, res) => {
     let idParam = req.params._id;
     let idBody = req.body._id;
     if (idParam && idBody && idParam == idBody) {
@@ -113,7 +115,7 @@ router.put('/orders/:_id', jsonParser, (req, res) => {
     }
 });
 
-router.delete('/orders/:_id', jsonParser, (req, res) => {
+router.delete('/:_id', jsonParser, (req, res) => {
     if (req.params._id == req.body._id) {
         let promise = new Promise(function (resolve, reject) {
             Orders.delete(resolve, reject, req.body._id);

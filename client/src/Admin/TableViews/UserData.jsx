@@ -28,7 +28,7 @@ class UserData extends Component {
 
   componentDidMount() {
     axios
-      .get("/api/users")
+      .get("http://localhost:5000/api/users")
       .then(res => {
         const usersData = res.data;
         this.setState({ usersData });
