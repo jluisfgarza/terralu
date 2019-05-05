@@ -85,6 +85,31 @@ router.put('/products/:_id', jsonParser, (req, res) => {
     }
 });
 
+
+router.put('/products/updateStockBought/:_id', jsonParser, (req, res) => {
+    let idParam = req.params._id;
+    let idBody = req.body._id;
+    if (idParam && idBody && idParam == idBody) {
+        let promise = new Promise(function (resolve, reject) {
+            let updatedProduct = {
+                _id: idBody,
+                inStock: req.body.inStock,
+                numBought: req.body.numBought,
+            }
+            Products.update(resolve, reject, idBody, updatedProduct);
+        }).then(result => {
+            res.status(204).end();
+        }).catch(err => {
+            return res.status(500).json(err);
+        });
+
+    } else {
+        return res.status(400).json({
+            err: "Id does not coincide with body"
+        });
+    }
+});
+
 router.delete('/products/:_id', jsonParser, (req, res) => {
     if (req.params._id == req.body._id) {
         let promise = new Promise(function (resolve, reject) {

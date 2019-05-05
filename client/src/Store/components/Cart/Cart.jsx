@@ -128,6 +128,13 @@ class Cart extends Component {
         //     orders: torder
         //   })
         //   .then(res => {});
+        let torder = this.props.user.orders;
+        torder.push(res.data._id);
+        axios.put(`/api/users/order`, {_id: this.props.user.id,  orders: torder});
+        /*
+          hacer llamada para ctualiza numBought e inStock
+          axios.put(`/products/updateStockBought/{productId}`, {inStock: newVal, numBought: newVal});
+        */
       })
       .catch(error => {
         console.log(error);
