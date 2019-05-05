@@ -42,14 +42,9 @@ class Profile extends Component {
     this.state = { ordersData: [] };
   }
   componentDidMount() {
-    console.log(this.props.user);
-    let data = [];
-    this.props.user.orders.forEach(function(element) {
-      axios.get(`/api/orders/${element.id}`).then(res => {
-        data.push(res.data);
-      });
+    axios.post(`/api/orders/ids`, {OrderIds: this.props.user.orders}).then(res => {
+      this.setState({ordersData: res.data});
     });
-    this.setState({ ordersData: data });
   }
   render() {
     const { classes } = this.props;

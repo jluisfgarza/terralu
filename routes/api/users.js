@@ -310,4 +310,16 @@ router.get('', jsonParser, (req, res) => {
       })
 });
 
+router.put('/order', jsonParser, (req, res) => {
+  let idBody = req.body._id;
+  let promise = new Promise(function (resolve, reject) {
+    console.log(idBody,  req.body.orders);
+    User.findByIdAndUpdate(idBody, {$set : {"orders": req.body.orders}}, {new : true}).then(result => {
+      res.status(204).end();
+    }).catch(err => {
+      return res.status(500).json(err);
+    });
+  });
+});
+
 module.exports = router;
