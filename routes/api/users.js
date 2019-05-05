@@ -20,8 +20,8 @@ const trans = {
   service: 'gmail',
   host: 'smtp.gmail.com',
   auth: {
-    user: 'terralumx@gmail.com',
-    pass: process.env.PASSWORD
+    user: process.env.N_EMAIL,
+    pass: process.env.N_PASSWORD
   }
 }
 const transporter = nodemailer.createTransport(trans);  
@@ -30,7 +30,7 @@ transporter.verify((error, success) => {
   if (error) {
     console.log(error);
   } else {
-    console.log('Server is ready to take messages');
+    // console.log('Server is ready send registration emails');
   }
 });
 
@@ -82,8 +82,6 @@ router.post("/register", (req, res) => {
                   from: 'terralumx@gmail.com', // sender address
                   to: user.email, // list of receivers
                   subject: 'Terralu - Usuario Registrado', // Subject line
-                  // html: `<p> Hola ` + user.name + ` esta es una confirmación de tu registro en Terralu.
-                  //   </br> Correo: ` + user.email + `</p>`// plain text body
                   html: `<table bgcolor="#FFFFFF" cellpadding="0" cellspacing="0" class="nl-container" role="presentation"
                   style="table-layout: fixed; vertical-align: top; min-width: 320px; Margin: 0 auto; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #FFFFFF; width: 100%;"
                   valign="top" width="100%">
@@ -311,19 +309,5 @@ router.get('', jsonParser, (req, res) => {
           return res.status(500).json(err);
       })
 });
-
-
-// TODO
-// router.get('', jsonParser, (req, res) => {
-//   let promise = new Promise(function (resolve, reject) {
-//       User.get(resolve, reject);
-//     })
-//     .then(users => {
-//       res.json(users);
-//     })
-//     .catch(err => {
-//       return res.status(500).json(err);
-//     })
-// });
 
 module.exports = router;

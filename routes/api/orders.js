@@ -5,6 +5,26 @@ const Orders = require('../../models/ordersModel');
 
 let jsonParser = bodyParser.json();
 
+// Nodemailer
+const nodemailer = require('nodemailer');
+const trans = {
+    service: 'gmail',
+    host: 'smtp.gmail.com',
+    auth: {
+        user: process.env.N_EMAIL,
+        pass: process.env.N_PASSWORD
+    }
+}
+const transporter = nodemailer.createTransport(trans);
+
+transporter.verify((error, success) => {
+    if (error) {
+        console.log(error);
+    } else {
+        // console.log('Server is ready to send new orders emails');
+    }
+});
+
 router.get('/orders', jsonParser, (req, res) => {
     let promise = new Promise(function (resolve, reject) {
             Orders.get(resolve, reject);
@@ -42,7 +62,7 @@ router.post('/orders/ids', jsonParser, (req, res) => {
 });
 
 router.post('/orders', jsonParser, (req, res) => {
-    const requiredFields = ["username","address", "products", "total", "paypalId"];
+    const requiredFields = ["username", "address", "products", "total", "paypalId"];
     for (let i = 0; i < requiredFields.length; i++) {
         if (!(requiredFields[i] in req.body)) {
             return res.status(400).send(`Missing field ${requiredFields[i]}`);
@@ -57,7 +77,9 @@ router.post('/orders', jsonParser, (req, res) => {
             paypalId: req.body.paypalId,
         });
     }).then(result => {
+        console.log(req.body.userEmail);
         res.status(201).json(result);
+        
     }).catch(err => {
         return res.status(400).send(`Something unexpected occured ${err}`);
     });
@@ -78,6 +100,7 @@ router.put('/orders/:_id', jsonParser, (req, res) => {
             }
             Orders.update(resolve, reject, idBody, updatedOrder);
         }).then(result => {
+            console.log(req.body.userEmail);
             res.status(204).end();
         }).catch(err => {
             return res.status(500).json(err);

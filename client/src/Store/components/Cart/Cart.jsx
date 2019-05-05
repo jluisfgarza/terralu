@@ -204,6 +204,7 @@ class Cart extends Component {
       console.log(this.props.cartProducts);
       const order = {
         username: this.props.user.id,
+        userEmail: this.props.user.email,
         address: payment.address,
         products: this.props.cartProducts,
         total: parseFloat(this.props.total),

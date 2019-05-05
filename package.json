@@ -2,7 +2,7 @@
   "name": "terralu",
   "version": "1.0.0",
   "description": "terralu ecommerce",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
     "start": "node server.js",
@@ -33,7 +33,6 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "concurrently": "^4.1.0",
-    "cors": "^2.8.5",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "http-proxy-middleware": "^0.19.1",

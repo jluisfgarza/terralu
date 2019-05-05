@@ -58,7 +58,7 @@ class App extends Component {
     return (
       <MuiThemeProvider theme={theme}>
       <Provider store={store}>
-        <BrowserRouter basename={"/website/"}>
+        <BrowserRouter>
           <Switch>
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
