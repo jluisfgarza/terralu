@@ -54,6 +54,16 @@ const Products = {
         })
     },
 
+    updateStockBought : function (resolve, reject, ProductId, updatedProduct){
+        Product.findByIdAndUpdate(ProductId, {$set : {"inStock": updatedProduct.inStock, "numBought" : updatedProduct.numBought}}, {new : true})
+        .then(result => {
+            resolve(result);
+        })
+        .catch(err => {
+            reject(err);
+        })
+    },
+
     delete : function (resolve, reject, ProductId){
         Product.findByIdAndRemove(ProductId)
         .then(result => {
