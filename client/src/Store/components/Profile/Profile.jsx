@@ -28,11 +28,12 @@ const styles = theme => ({
 });
 
 const orders = [
-  { title: "Order ID", field: "id" },
+  { title: "Order ID", field: "_id" },
   { title: "Address", field: "address" },
-  { title: "Products", field: "products" },
+  // { title: "Products", field: "products" },
   { title: "Total", field: "total", type: "numeric" },
   { title: "Paypal ID", field: "paypalId" },
+  { title: "Status", field: "Status", hidden: true },
   { title: "Date", field: "date", type: "date" }
 ];
 
@@ -48,7 +49,9 @@ class Profile extends Component {
       })
       .then(res => {
         this.setState({ ordersData: res.data });
+        // console.log(res.data);
       });
+    // console.log(this.props.user);
   }
   render() {
     const { classes } = this.props;
@@ -71,12 +74,51 @@ class Profile extends Component {
               {"Email: " + this.props.user.email} <br />
             </Typography>
             <Typography className={classes.pos} color="textSecondary">
+              {"Address: " + this.props.user.address} <br />
+            </Typography>
+            <Typography className={classes.pos} color="textSecondary">
               {"Teléfono: " + this.props.user.telephone}
             </Typography>
             <MaterialTable
               columns={orders}
               data={this.state.ordersData}
               title="Orders"
+              detailPanel={[
+                {
+                  tooltip: "Order Details",
+                  render: rowData => {
+                    return (
+                      <div
+                        style={{
+                          fontSize: 16,
+                          marginLeft: 20
+                        }}
+                      >
+                        {rowData.products.map(element => (
+                          <div key={element._id}>
+                            <br />
+                            <Typography color="textSecondary">
+                              {"Product: " + element.title} <br />
+                            </Typography>
+                            <Typography color="textSecondary">
+                              {"Quantity: " + element.quantity}
+                            </Typography>
+                            <hr />
+                            <br />
+                          </div>
+                        ))}
+                      </div>
+                    );
+                  }
+                }
+              ]}
+              options={{
+                actionsColumnIndex: -1,
+                pageSize: 5,
+                doubleHorizontalScroll: false,
+                columnsButton: true,
+                exportButton: true
+              }}
             />
           </CardContent>
         </Card>

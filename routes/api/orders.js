@@ -62,7 +62,6 @@ router.post('/ids', jsonParser, (req, res) => {
 });
 
 router.post('', jsonParser, (req, res) => {
-    console.log("post order");
     const requiredFields = ["username", "userEmail", "address", "products", "total", "paypalId"];
     for (let i = 0; i < requiredFields.length; i++) {
         if (!(requiredFields[i] in req.body)) {
@@ -79,9 +78,7 @@ router.post('', jsonParser, (req, res) => {
             paypalId: req.body.paypalId,
         });
     }).then(result => {
-        console.log(req.body.userEmail);
         res.status(201).json(result);
-        
     }).catch(err => {
         return res.status(400).send(`Something unexpected occured ${err}`);
     });

@@ -2,12 +2,14 @@ import React, { Component, Fragment } from "react";
 import axios from "axios";
 import MaterialTable from "material-table";
 import AlertDialog from "../../Store/components/Alert/Alert";
+import Typography from "@material-ui/core/Typography";
 
 const orders = [
   { title: "Order ID", field: "_id" },
-  { title: "Client", field: "username" },
+  { title: "ClientID", field: "username", hidden: true },
+  { title: "Client", field: "userEmail" },
   { title: "Address", field: "address" },
-  { title: "Products", field: "products" },
+  // { title: "Products", field: "products", hidden: true },
   { title: "Total", field: "total" },
   { title: "PayPal ID", field: "paypalId" },
   { title: "Status", field: "Status", hidden: true },
@@ -34,7 +36,7 @@ class OrderData extends Component {
       .get("http://localhost:5000/api/orders")
       .then(res => {
         const ordersData = res.data;
-        console.log(res.data);
+        // console.log(res.data);
         this.setState({ ordersData });
       })
       .catch(error => {
@@ -55,7 +57,7 @@ class OrderData extends Component {
           title="Orders"
           detailPanel={[
             {
-              tooltip: "Image",
+              tooltip: "Order Details",
               render: rowData => {
                 return (
                   <div
@@ -64,7 +66,19 @@ class OrderData extends Component {
                       marginLeft: 20
                     }}
                   >
-                    {JSON.stringify(rowData.products)}
+                    {rowData.products.map(element => (
+                      <div key={element._id}>
+                        <br />
+                        <Typography color="textSecondary">
+                          {"Product: " + element.title} <br />
+                        </Typography>
+                        <Typography color="textSecondary">
+                          {"Quantity: " + element.quantity}
+                        </Typography>
+                        <hr />
+                        <br />
+                      </div>
+                    ))}
                   </div>
                 );
               }

@@ -30,6 +30,9 @@ import { getVisibleProducts } from "../../../reducers/Cart/productsReducer";
 import { getTotal, getCartProducts } from "../../../reducers";
 // Paypal
 import PaypalExpressBtn from "react-paypal-express-checkout";
+// Auth
+import { setCurrentUser } from "../../../actions/authActions";
+import store from "../../../store";
 
 const styles = theme => ({
   card: {
@@ -113,38 +116,6 @@ class Cart extends Component {
     this.processQueue();
   };
 
-  createOrder = order => {
-    //Post order on orders collection
-    console.log("create order");
-    console.log(order);
-    axios
-      .post(`http://localhost:5000/api/orders`, order)
-      .then(res => {
-        console.log(res.data);
-        // let torder = this.props.user.orders;
-        // torder.push(res.data._id);
-        // axios.put(`/api/users/order`, {
-        //   _id: this.props.user.id,
-        //   orders: torder
-        // });
-        // torder.forEach(function(element) {
-        //   /*
-        //     hacer llamada para ctualiza numBought e inStock
-        //     axios.put(`/products/updateStockBought/{productId}`, {inStock: newVal, numBought: newVal});
-        //   */
-        //   console.log(element);
-        // });
-      })
-      .catch(error => {
-        console.log(error);
-        this.setState({
-          openAlert: true,
-          alertMessage: "Error could save user order",
-          alertTitle: "Error"
-        });
-      });
-  };
-
   handleCloseAlert = () => {
     this.setState({ openAlert: false });
   };
@@ -218,17 +189,55 @@ class Cart extends Component {
     };
     const onSuccess = payment => {
       console.log("Payment successful!", payment);
-      // console.log("Cart Products:");
-      // console.log(this.props.cartProducts);
-      const order = {
-        username: this.props.user.id,
-        userEmail: this.props.user.email,
-        address: payment.address,
-        products: this.props.cartProducts,
-        total: parseFloat(this.props.total),
-        paypalId: payment.paymentID
-      };
-      this.createOrder(order);
+      //Post order on orders collection
+      axios
+        .post(`http://localhost:5000/api/orders`, {
+          username: this.props.user.id,
+          userEmail: this.props.user.email,
+          address: this.props.user.address,
+          products: this.props.cartProducts,
+          total: this.props.total,
+          paypalId: payment.paymentID
+        })
+        .then(res => {
+          let torder = this.props.user.orders;
+          torder.push(res.data._id);
+          axios.put(`http://localhost:5000/api/users/order`, {
+            _id: this.props.user.id,
+            orders: torder
+          });
+          // Update current user session
+          if (localStorage.jwtToken) {
+            let userData = this.props.user;
+            store.dispatch(setCurrentUser(userData));
+          }
+          // Update each product stock
+          res.data.products.forEach(function(element) {
+            console.log(element);
+            axios
+              .put(
+                `http://localhost:5000/api/products/updateStockBought/${
+                  element._id
+                }`,
+                {
+                  _id: element._id,
+                  inStock: element.inStock - element.quantity,
+                  numBought: element.numBought + element.quantity
+                }
+              )
+              .catch(error => {
+                console.log(error.response);
+              });
+          });
+        })
+        .catch(error => {
+          console.log(error.response);
+          this.setState({
+            openAlert: true,
+            alertMessage: "Error could save user order",
+            alertTitle: "Error"
+          });
+        });
       this.props.clearCart();
       // You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
     };
