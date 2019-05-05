@@ -14,7 +14,7 @@ export const registerUser = (userData, history) => dispatch => {
     .post("/api/users/register", userData)
     .then(res => {
       history.push("/login");
-      alert("Usuario Registrado!");
+      console.log("Usuario Registrado!");
     })
     .catch(err => {
       dispatch({

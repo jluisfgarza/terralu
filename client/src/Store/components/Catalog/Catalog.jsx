@@ -9,6 +9,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from "@material-ui/core/Grid";
 import Notification from "../Notification/Notification";
 import Typography from "@material-ui/core/Typography";
+import AlertDialog from "../Alert/Alert";
 // Styles
 import styles from "./style";
 import classNames from "classnames";
@@ -26,7 +27,10 @@ class Catalog extends Component {
   state = {
     notif: false,
     messageInfo: {},
-    loading: true
+    loading: true,
+    openAlert: false,
+    alertMessage: "",
+    alertTitle: ""
   };
 
   addCart = item => {
@@ -35,7 +39,11 @@ class Catalog extends Component {
       this.handleClick(item.title, "a");
       this.props.addToCart(item._id);
     } else {
-      alert("Para poder comprar se necesita crear una cuenta!");
+      this.setState({
+        openAlert: true,
+        alertMessage: "Para poder comprar se necesita crear una cuenta!",
+        alertTitle: "Error"
+      });
       window.location.href = "./register";
     }
   };
@@ -72,6 +80,10 @@ class Catalog extends Component {
 
   handleExited = () => {
     this.processQueue();
+  };
+
+  handleCloseAlert = () => {
+    this.setState({ openAlert: false });
   };
 
   componentDidMount = () => {
@@ -149,6 +161,12 @@ class Catalog extends Component {
           open={this.state.notif}
           handleClose={this.handleClose}
           handleExited={this.handleExited}
+        />
+        <AlertDialog
+          openAlert={this.state.openAlert}
+          alertMessage={this.state.alertMessage}
+          alertTitle={this.state.alertTitle}
+          handleCloseAlert={this.handleCloseAlert}
         />
       </div>
     );

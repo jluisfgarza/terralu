@@ -33,3 +33,13 @@ Customer:
 user: terralumx-buyer@gmail.com
 pw: terra2019
 ```
+
+## Project Config
+
+create a `.env` file at root with the following structure.
+
+```
+MONGO_URI=
+N_EMAIL=
+N_PASSWORD=
+```

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import axios from "axios";
 // Components
 import Grid from "@material-ui/core/Grid";
@@ -10,6 +10,7 @@ import Fab from "@material-ui/core/Fab";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Notification from "../Notification/Notification";
+import AlertDialog from "../Alert/Alert";
 import { withStyles } from "@material-ui/core/styles";
 // Icons
 import AddIcon from "@material-ui/icons/Add";
@@ -54,7 +55,10 @@ class Cart extends Component {
   queue = [];
   state = {
     notif: false,
-    messageInfo: {}
+    messageInfo: {},
+    openAlert: false,
+    alertMessage: "",
+    alertTitle: ""
   };
 
   addCart = item => {
@@ -127,8 +131,16 @@ class Cart extends Component {
       })
       .catch(error => {
         console.log(error);
-        alert("Error could save user order");
+        this.setState({
+          openAlert: true,
+          alertMessage: "Error could save user order",
+          alertTitle: "Error"
+        });
       });
+  };
+
+  handleCloseAlert = () => {
+    this.setState({ openAlert: false });
   };
 
   render() {
@@ -219,20 +231,28 @@ class Cart extends Component {
     const onCancel = data => {
       // The user pressed "cancel" or closed the PayPal popup
       console.log("Payment cancelled!", data);
-      alert("Pago cancelado");
+      this.setState({
+        openAlert: true,
+        alertMessage: "Pago cancelado",
+        alertTitle: "Error"
+      });
       // You can bind the "data" object's value to your state or props or whatever here, please see below for sample returned data
     };
 
     const onError = err => {
       // The main Paypal script could not be loaded or something blocked the script from loading
       console.log("Error!", err);
-      alert("Error intenta de nuevo!");
+      this.setState({
+        openAlert: true,
+        alertMessage: "Error, intenta de nuevo por favor",
+        alertTitle: "Error"
+      });
       // Because the Paypal's main script is loaded asynchronously from "https://www.paypalobjects.com/api/checkout.js"
       // => sometimes it may take about 0.5 second for everything to get set, or for the button to appear
     };
 
     return (
-      <div>
+      <Fragment>
         <Typography component="h2" variant="h5">
           Your Cart
         </Typography>
@@ -271,7 +291,13 @@ class Cart extends Component {
           handleClose={this.handleClose}
           handleExited={this.handleExited}
         />
-      </div>
+        <AlertDialog
+          openAlert={this.state.openAlert}
+          alertMessage={this.state.alertMessage}
+          alertTitle={this.state.alertTitle}
+          handleCloseAlert={this.handleCloseAlert}
+        />
+      </Fragment>
     );
   }
 }
