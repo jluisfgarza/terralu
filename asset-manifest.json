@@ -1,17 +1,20 @@
 {
-  "main.css": "/website/static/css/main.9e17fdcb.chunk.css",
-  "main.js": "/website/static/js/main.615b4816.chunk.js",
-  "main.js.map": "/website/static/js/main.615b4816.chunk.js.map",
-  "runtime~main.js": "/website/static/js/runtime~main.de462641.js",
-  "runtime~main.js.map": "/website/static/js/runtime~main.de462641.js.map",
-  "static/js/2.85a70a4a.chunk.js": "/website/static/js/2.85a70a4a.chunk.js",
-  "static/js/2.85a70a4a.chunk.js.map": "/website/static/js/2.85a70a4a.chunk.js.map",
-  "index.html": "/website/index.html",
-  "precache-manifest.b03c48d94ef337b979e43051ca60c908.js": "/website/precache-manifest.b03c48d94ef337b979e43051ca60c908.js",
-  "service-worker.js": "/website/service-worker.js",
-  "static/css/main.9e17fdcb.chunk.css.map": "/website/static/css/main.9e17fdcb.chunk.css.map",
-  "static/media/blog-post.1.md": "/website/static/media/blog-post.1.3fac8294.md",
-  "static/media/hero2.jpg": "/website/static/media/hero2.79cabd8e.jpg",
-  "static/media/hero3.jpg": "/website/static/media/hero3.fac30b22.jpg",
-  "static/media/logo.jpg": "/website/static/media/logo.e9886a3f.jpg"
+  "files": {
+    "main.css": "/website/static/css/main.795991f2.chunk.css",
+    "main.js": "/website/static/js/main.6ca9509a.chunk.js",
+    "main.js.map": "/website/static/js/main.6ca9509a.chunk.js.map",
+    "runtime~main.js": "/website/static/js/runtime~main.de462641.js",
+    "runtime~main.js.map": "/website/static/js/runtime~main.de462641.js.map",
+    "static/css/2.becd5271.chunk.css": "/website/static/css/2.becd5271.chunk.css",
+    "static/js/2.9ec3c59b.chunk.js": "/website/static/js/2.9ec3c59b.chunk.js",
+    "static/js/2.9ec3c59b.chunk.js.map": "/website/static/js/2.9ec3c59b.chunk.js.map",
+    "index.html": "/website/index.html",
+    "precache-manifest.76072aa3da813b89de6149776ebe8f5e.js": "/website/precache-manifest.76072aa3da813b89de6149776ebe8f5e.js",
+    "service-worker.js": "/website/service-worker.js",
+    "static/css/2.becd5271.chunk.css.map": "/website/static/css/2.becd5271.chunk.css.map",
+    "static/css/main.795991f2.chunk.css.map": "/website/static/css/main.795991f2.chunk.css.map",
+    "static/media/hero2.jpg": "/website/static/media/hero2.79cabd8e.jpg",
+    "static/media/hero3.jpg": "/website/static/media/hero3.fac30b22.jpg",
+    "static/media/logo.jpg": "/website/static/media/logo.e9886a3f.jpg"
+  }
 }
