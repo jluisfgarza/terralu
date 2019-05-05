@@ -127,10 +127,13 @@ class Cart extends Component {
           _id: this.props.user.id,
           orders: torder
         });
-        /*
-          hacer llamada para ctualiza numBought e inStock
-          axios.put(`/products/updateStockBought/{productId}`, {inStock: newVal, numBought: newVal});
-        */
+        torder.forEach(function(element) {
+          /*
+            hacer llamada para ctualiza numBought e inStock
+            axios.put(`/products/updateStockBought/{productId}`, {inStock: newVal, numBought: newVal});
+          */
+          console.log(element);
+        });
       })
       .catch(error => {
         console.log(error);
