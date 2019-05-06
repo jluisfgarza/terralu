@@ -8,7 +8,7 @@ const receiveProducts = products => ({
 
 export const getAllProducts = () => dispatch => {
   axios
-    .get("http://localhost:5000/api/products")
+    .get("/api/products")
     .then(res => { 
       // products = res.data
       dispatch(receiveProducts(res.data))

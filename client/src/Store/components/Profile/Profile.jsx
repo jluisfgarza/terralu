@@ -44,7 +44,7 @@ class Profile extends Component {
   }
   componentDidMount() {
     axios
-      .post(`http://localhost:5000/api/orders/ids`, {
+      .post(`/api/orders/ids`, {
         OrderIds: this.props.user.orders
       })
       .then(res => {

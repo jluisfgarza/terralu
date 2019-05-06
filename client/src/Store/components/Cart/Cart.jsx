@@ -190,7 +190,7 @@ class Cart extends Component {
       console.log("Payment successful!", payment);
       //Post order on orders collection
       axios
-        .post(`http://localhost:5000/api/orders`, {
+        .post(`/api/orders`, {
           username: this.props.user.id,
           userEmail: this.props.user.email,
           address: this.props.user.address,
@@ -201,7 +201,7 @@ class Cart extends Component {
         .then(res => {
           let torder = this.props.user.orders;
           torder.push(res.data._id);
-          axios.put(`http://localhost:5000/api/users/order`, {
+          axios.put(`/api/users/order`, {
             _id: this.props.user.id,
             orders: torder
           });
@@ -214,16 +214,11 @@ class Cart extends Component {
           res.data.products.forEach(function(element) {
             console.log(element);
             axios
-              .put(
-                `http://localhost:5000/api/products/updateStockBought/${
-                  element._id
-                }`,
-                {
-                  _id: element._id,
-                  inStock: element.inStock - element.quantity,
-                  numBought: element.numBought + element.quantity
-                }
-              )
+              .put(`/api/products/updateStockBought/${element._id}`, {
+                _id: element._id,
+                inStock: element.inStock - element.quantity,
+                numBought: element.numBought + element.quantity
+              })
               .catch(error => {
                 console.log(error.response);
               });

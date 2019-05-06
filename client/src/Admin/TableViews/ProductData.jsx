@@ -101,7 +101,7 @@ class ProductData extends Component {
 
   handleReload = () => {
     axios
-      .get("http://localhost:5000/api/products")
+      .get("/api/products")
       .then(res => {
         const productsData = res.data;
         this.setState({ productsData });
