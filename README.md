@@ -43,3 +43,9 @@ MONGO_URI=
 N_EMAIL=
 N_PASSWORD=
 ```
+
+create a `.env` file at client dir root with the following structure.
+
+```
+REACT_APP_PS_TOKEN="PAYPAL_SANDBOX_CODE"
+```

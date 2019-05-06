@@ -183,8 +183,7 @@ class Cart extends Component {
       </Grid>
     );
     const client = {
-      sandbox:
-        "AXakxr_puudDtU6zqQn8B3OpoboFMxx7bdjQ8bSLyYtmweGRBz4WtdbZuupXKyM1yF27JCZwDMVCNwMB",
+      sandbox: process.env.REACT_APP_PS_TOKEN,
       production: ""
     };
     const onSuccess = payment => {
