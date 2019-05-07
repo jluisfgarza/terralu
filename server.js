@@ -1,39 +1,21 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require("passport");
-const multer = require("multer");
 const app = express();
-const  routes = require('./routes');
+const routes = require('./routes');
 const PORT = process.env.PORT || 5000;
 const cors = require('cors');
+const path = require("path");
 
 app.use(cors());
 // configure body parser for AJAX requests, Body Parser Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// Client app folders
-app.use(express.static('client/public/images/'));
-
-var upload = multer({
-  storage: multer.diskStorage({
-    destination: 'client/public/images/products',
-    filename: function(req, file, cb) {
-        cb(null, file.originalname)
-    }
-  })
-})
-
-app.post('/uploadfile', upload.single('image'), (req, res, next) => {
-  const file = req.file
-  console.log(file);
-  if (!file) {
-    const error = new Error('Please upload a file')
-    error.httpStatusCode = 400
-    return next(error)
-  }
-  res.send(file)
-})
+app.use('/files', express.static(path.join(__dirname, 'public/files')))
+app.get("files/:image_path", (req, res) => {
+  res.sendFile(req.image_path);
+});
 
 // require db connection
 require('./models');

@@ -65,17 +65,19 @@ class AddProductDialog extends React.Component {
     event.preventDefault();
     let formData = new FormData();
     formData.append("image", this.state.image[0]);
-    axios.post("/uploadfile", formData).then(res => {});
-    const product = {
-      title: this.state.title,
-      description: this.state.description,
-      price: this.state.price,
-      inStock: this.state.inStock,
-      numBought: this.state.inStock,
-      image: this.state.image[0].name,
-      photos: this.state.photos
-    };
-    axios.post("http://localhost:5000/api/products", product).then(res => {});
+    axios.post("http://localhost:5000/api/upload", formData).then(res => {
+      console.log(res);
+      const product = {
+        title: this.state.title,
+        description: this.state.description,
+        price: this.state.price,
+        inStock: this.state.inStock,
+        numBought: this.state.inStock,
+        image: res.data.path,
+        photos: this.state.photos
+      };
+      axios.post("http://localhost:5000/api/products", product).then(res => {});
+    });
     this.props.handleReload();
     this.props.handleCloseAdd();
   };
