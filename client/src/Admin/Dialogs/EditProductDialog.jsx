@@ -65,10 +65,7 @@ class EditProductDialog extends React.Component {
         price: this.props.product.price,
         inStock: this.props.product.inStock,
         numBought: this.props.product.numBought,
-        image:
-          process.env.PUBLIC_URL +
-          "/images/products/" +
-          this.props.product.image,
+        image: this.props.product.image,
         photos: this.props.product.photos
       });
     }
@@ -84,22 +81,19 @@ class EditProductDialog extends React.Component {
     event.preventDefault();
     let formData = new FormData();
     formData.append("image", this.state.image[0]);
-    axios.post("/uploadfile", formData).then(res => {});
-    const product = {
-      _id: this.state._id,
-      title: this.state.title,
-      description: this.state.description,
-      price: this.state.price,
-      inStock: this.state.inStock,
-      numBought: this.state.inStock,
-      image: this.state.image[0].name,
-      photos: this.state.photos
-    };
-    axios
-      .put(`/api/products/${this.props.product["_id"]}`, product)
-      .then(res => {
-        // console.log(res);
-      });
+    axios.post("/api/upload", formData).then(res => {
+      const product = {
+        _id: this.state._id,
+        title: this.state.title,
+        description: this.state.description,
+        price: this.state.price,
+        inStock: this.state.inStock,
+        numBought: this.state.inStock,
+        image: '/' + res.data.path,
+        photos: this.state.photos
+      };
+      axios.put(`/api/products/${this.props.product["_id"]}`, product).then(res => {});
+    });
     this.props.handleReload();
     this.props.handleCloseEdit();
   };
