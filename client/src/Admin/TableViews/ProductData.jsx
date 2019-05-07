@@ -22,7 +22,7 @@ const products = [
     render: rowData => (
       <img
         style={{ height: 45, width: 45, borderRadius: "50%" }}
-        src={process.env.PUBLIC_URL + "/images/products/" + rowData.image}
+        src={'http://localhost:5000/' + rowData.image}
         alt="Imagen Principal"
       />
     )
@@ -198,11 +198,7 @@ class ProductData extends Component {
                   >
                     <img
                       style={{ height: 200, width: "auto" }}
-                      src={
-                        process.env.PUBLIC_URL +
-                        "/images/products/" +
-                        rowData.image
-                      }
+                      src={'http://localhost:5000/' + rowData.image}
                       alt="Imagen Principal"
                     />
                   </div>
