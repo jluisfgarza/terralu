@@ -2,10 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const router = express.Router();
 const Products = require('../../models/productsModel');
+const cors = require('cors')
 
 let jsonParser = bodyParser.json();
 
-router.get('', jsonParser, (req, res) => {
+router.get('', cors(), jsonParser, (req, res) => {
     let promise = new Promise(function (resolve, reject) {
             Products.get(resolve, reject);
         })
