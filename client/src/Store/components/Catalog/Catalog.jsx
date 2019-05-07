@@ -117,7 +117,7 @@ class Catalog extends Component {
           <Card className={classes.card}>
             <CardMedia
               className={classes.cardMedia}
-              image={'http://localhost:5000/' + node.image}
+              image={node.image}
               title={node.title}
             />
             <CardContent className={classes.cardContent}>

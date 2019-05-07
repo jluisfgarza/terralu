@@ -166,7 +166,7 @@ class Cart extends Component {
             <Hidden xsDown>
               <CardMedia
                 className={classes.cardMedia}
-                image={'http://localhost:5000/' + product.image}
+                image={product.image}
                 title={product.title}
               />
             </Hidden>

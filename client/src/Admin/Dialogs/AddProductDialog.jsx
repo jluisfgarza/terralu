@@ -73,7 +73,7 @@ class AddProductDialog extends React.Component {
         price: this.state.price,
         inStock: this.state.inStock,
         numBought: this.state.inStock,
-        image: res.data.path,
+        image: '/' + res.data.path,
         photos: this.state.photos
       };
       axios.post("/api/products", product).then(res => {});
