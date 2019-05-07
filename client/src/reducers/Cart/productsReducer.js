@@ -3,7 +3,7 @@ import {
   RECEIVE_PRODUCTS,
   ADD_TO_CART,
   REMOVE_FROM_CART,
-  REMOVE_PRODUCT_FROM_CART,
+  // REMOVE_PRODUCT_FROM_CART,
   CLEAR_CART
 } from '../../actions/types'
 

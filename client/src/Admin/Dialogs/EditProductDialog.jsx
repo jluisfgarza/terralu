@@ -89,13 +89,16 @@ class EditProductDialog extends React.Component {
         price: this.state.price,
         inStock: this.state.inStock,
         numBought: this.state.inStock,
-        image: '/' + res.data.path,
+        image: "/" + res.data.path,
         photos: this.state.photos
       };
-      axios.put(`/api/products/${this.props.product["_id"]}`, product).then(res => {});
+      axios
+        .put(`/api/products/${this.props.product["_id"]}`, product)
+        .then(res => {
+          this.props.handleReload();
+          this.props.handleCloseEdit();
+        });
     });
-    this.props.handleReload();
-    this.props.handleCloseEdit();
   };
 
   render() {
