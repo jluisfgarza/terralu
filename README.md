@@ -1,5 +1,6 @@
 # Terralú
 
+![img](TERRALUPPT.png)
 ## Run project
 
 ```
