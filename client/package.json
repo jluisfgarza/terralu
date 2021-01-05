@@ -10,7 +10,7 @@
     "@material-ui/lab": "^4.0.0-alpha.28",
     "@mdi/js": "^3.9.97",
     "@mdi/react": "^1.2.1",
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "filepond": "^4.7.2",
     "filepond-plugin-image-exif-orientation": "^1.0.6",
